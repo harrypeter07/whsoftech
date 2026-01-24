@@ -2,60 +2,92 @@
 
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function Footer() {
+  const footerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.footer-column', {
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+        },
+        duration: 0.6,
+        opacity: 0,
+        y: 20,
+        stagger: 0.1,
+        ease: 'power2.out',
+      });
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer className="bg-foreground text-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer ref={footerRef} className="bg-foreground text-background relative overflow-hidden">
+      {/* Background gradient effects */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary rounded-full blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-accent rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
-          <div>
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg" />
+          <div className="footer-column group">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-300">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300 group-hover:scale-110" />
               TechSolutions
             </h3>
-            <p className="text-sm opacity-80">
+            <p className="text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">
               Building innovative software solutions that transform businesses and drive growth.
             </p>
           </div>
 
           {/* Services */}
-          <div>
-            <h4 className="font-semibold mb-4">Services</h4>
+          <div className="footer-column">
+            <h4 className="font-semibold mb-4 group-hover:text-primary transition-colors duration-300">Services</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/services#software" className="opacity-80 hover:opacity-100 transition-opacity">Software Development</Link></li>
-              <li><Link href="/services#ai" className="opacity-80 hover:opacity-100 transition-opacity">AI Solutions</Link></li>
-              <li><Link href="/services#web" className="opacity-80 hover:opacity-100 transition-opacity">Web Applications</Link></li>
-              <li><Link href="/services#mobile" className="opacity-80 hover:opacity-100 transition-opacity">Mobile Apps</Link></li>
+              <li><Link href="/services#software" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Software Development</Link></li>
+              <li><Link href="/services#ai" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">AI Solutions</Link></li>
+              <li><Link href="/services#web" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Web Applications</Link></li>
+              <li><Link href="/services#mobile" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Mobile Apps</Link></li>
             </ul>
           </div>
 
           {/* Company */}
-          <div>
-            <h4 className="font-semibold mb-4">Company</h4>
+          <div className="footer-column">
+            <h4 className="font-semibold mb-4 group-hover:text-primary transition-colors duration-300">Company</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="opacity-80 hover:opacity-100 transition-opacity">About Us</Link></li>
-              <li><Link href="/projects" className="opacity-80 hover:opacity-100 transition-opacity">Portfolio</Link></li>
-              <li><Link href="/contact" className="opacity-80 hover:opacity-100 transition-opacity">Contact</Link></li>
-              <li><Link href="#" className="opacity-80 hover:opacity-100 transition-opacity">Blog</Link></li>
+              <li><Link href="/about" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">About Us</Link></li>
+              <li><Link href="/projects" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Portfolio</Link></li>
+              <li><Link href="/contact" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Contact</Link></li>
+              <li><Link href="#" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Blog</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="footer-column">
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">
-                <Mail size={16} />
-                <a href="mailto:hello@techsolutions.com" className="opacity-80 hover:opacity-100 transition-opacity">hello@techsolutions.com</a>
+              <li className="flex items-center gap-2 group/item">
+                <Mail size={16} className="group-hover/item:text-primary transition-colors duration-300" />
+                <a href="mailto:hello@techsolutions.com" className="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300">hello@techsolutions.com</a>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone size={16} />
-                <a href="tel:+1234567890" className="opacity-80 hover:opacity-100 transition-opacity">+1 (234) 567-890</a>
+              <li className="flex items-center gap-2 group/item">
+                <Phone size={16} className="group-hover/item:text-primary transition-colors duration-300" />
+                <a href="tel:+1234567890" className="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300">+1 (234) 567-890</a>
               </li>
-              <li className="flex items-start gap-2">
-                <MapPin size={16} className="mt-1" />
-                <span className="opacity-80">San Francisco, CA</span>
+              <li className="flex items-start gap-2 group/item">
+                <MapPin size={16} className="mt-1 group-hover/item:text-primary transition-colors duration-300" />
+                <span className="opacity-80 group-hover/item:opacity-100 transition-opacity duration-300">San Francisco, CA</span>
               </li>
             </ul>
           </div>
@@ -67,13 +99,13 @@ export function Footer() {
               &copy; 2024 TechSolutions. All rights reserved.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-background/70 hover:text-background transition-colors">
+              <a href="#" className="text-background/70 hover:text-primary hover:bg-primary/20 p-2 rounded-lg transition-all duration-300 hover:scale-110">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="text-background/70 hover:text-background transition-colors">
+              <a href="#" className="text-background/70 hover:text-primary hover:bg-primary/20 p-2 rounded-lg transition-all duration-300 hover:scale-110">
                 <Github size={20} />
               </a>
-              <a href="#" className="text-background/70 hover:text-background transition-colors">
+              <a href="#" className="text-background/70 hover:text-primary hover:bg-primary/20 p-2 rounded-lg transition-all duration-300 hover:scale-110">
                 <Twitter size={20} />
               </a>
             </div>

@@ -20,13 +20,16 @@ export default function Home() {
       <Hero />
 
       {/* Services Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-muted/30 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance">
+          <div className="text-center mb-16 group">
+            <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance group-hover:text-primary transition-colors duration-300">
               Our Services
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto group-hover:text-foreground/80 transition-colors duration-300">
               Comprehensive software solutions tailored to your business needs
             </p>
           </div>
@@ -73,9 +76,12 @@ export default function Home() {
           <div className="text-center mt-12">
             <Link
               href="/services"
-              className="inline-flex px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
+              className="inline-flex px-8 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 group"
             >
               Explore All Services
+              <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </Link>
           </div>
         </div>
