@@ -43,8 +43,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="footer-column group">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="relative w-14 h-14 group-hover:scale-110 transition-transform duration-300">
                 <Image
                   src="/logo.png"
                   alt="whsofttech Logo"

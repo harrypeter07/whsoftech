@@ -39,12 +39,12 @@ export function Navbar() {
   }, [isOpen]);
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-background/80 border-b border-border backdrop-blur-xl transition-all duration-300 hover:bg-background/90 hover:border-border/50">
+    <nav className="sticky top-0 z-50 w-full bg-white/30 dark:bg-white/20 backdrop-blur-2xl border-b border-white/40 dark:border-white/30 shadow-lg shadow-black/10  duration-300 h-22">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo with hover effect */}
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold text-primary group">
-            <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
+          <Link href="/" className="flex items-center gap-4 text-xl font-bold text-primary group">
+            <div className="relative w-28 h-28  transition-transform duration-300 scale-200 absolute left-0 top-0 mt-10 ml-[-100px]">
               <Image
                 src="/logo.png"
                 alt="whsofttech Logo"
@@ -53,7 +53,7 @@ export function Navbar() {
                 priority
               />
             </div>
-            <span className="hidden sm:inline group-hover:text-accent transition-colors duration-300">whsofttech</span>
+          
           </Link>
 
           {/* Desktop Navigation */}
@@ -79,7 +79,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary hover:bg-muted rounded-lg transition-all duration-300"
+            className="md:hidden p-2 text-foreground hover:text-primary hover:bg-white/20 dark:hover:bg-white/15 rounded-lg transition-all duration-300 backdrop-blur-sm"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -88,12 +88,12 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div ref={mobileMenuRef} className="md:hidden pb-4 space-y-2">
+          <div ref={mobileMenuRef} className="md:hidden pb-4 space-y-2 bg-white/20 dark:bg-white/15 backdrop-blur-xl rounded-lg mt-2 p-2 border border-white/30 dark:border-white/20">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block px-4 py-2 text-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 border border-transparent hover:border-primary/30"
+                className="block px-4 py-2 text-foreground hover:text-primary hover:bg-white/20 dark:hover:bg-white/15 rounded-lg transition-all duration-300 border border-transparent hover:border-white/30 dark:hover:border-white/20"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
