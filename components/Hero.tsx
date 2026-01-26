@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Button } from '@/components/ui/button';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,20 +26,13 @@ export function Hero() {
         ease: 'power2.out',
       });
 
-      // Split title into words and animate
+      // Animate title
       if (titleRef.current) {
-        const titleText = titleRef.current.innerHTML;
-        titleRef.current.innerHTML = titleText
-          .split(' ')
-          .map((word) => `<span class="inline-block overflow-hidden"><span class="hero-word">${word}</span></span>`)
-          .join(' ');
-
-        gsap.from('.hero-word', {
-          duration: 0.8,
+        gsap.from(titleRef.current, {
+          duration: 1,
           delay: 0.2,
           opacity: 0,
-          y: 40,
-          stagger: 0.1,
+          y: 30,
           ease: 'power3.out',
         });
       }
@@ -83,10 +77,12 @@ export function Hero() {
   return (
     <section className="min-h-screen pt-20 pb-20 relative overflow-hidden" ref={heroRef}>
       {/* Animated gradient background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-blob-slow" />
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-blob-delayed" />
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/30 rounded-full blur-[120px] animate-blob" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/30 rounded-full blur-[120px] animate-blob-slow" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[100px] animate-blob-delayed" />
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,9 +94,10 @@ export function Hero() {
           </div>
 
           {/* Main heading with word animation */}
-          <h1 ref={titleRef} className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight text-balance">
+          <h1 ref={titleRef} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight text-balance">
             Transform Your Business With
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"> Innovative Software</span>
+            <br />
+            <span className="gradient-text inline-block">Innovative Software Solutions</span>
           </h1>
 
           {/* Subheading */}
@@ -110,19 +107,15 @@ export function Hero() {
 
           {/* CTA Buttons */}
           <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link
-              href="/contact"
-              className="hero-btn px-8 py-4 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg font-semibold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 group"
-            >
-              <span>Get Started</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/projects"
-              className="hero-btn px-8 py-4 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 hover:shadow-lg transition-all duration-300"
-            >
-              View Our Work
-            </Link>
+            <Button asChild size="lg" className="hero-btn bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 glow-primary">
+              <Link href="/contact" className="flex items-center gap-2">
+                <span>Get Started</span>
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="hero-btn border-primary/50 hover:bg-primary/10 hover:border-primary hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 backdrop-blur-sm">
+              <Link href="/projects">View Our Work</Link>
+            </Button>
           </div>
 
           {/* Stats */}

@@ -3,6 +3,8 @@ import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
 import { ServiceCard } from '@/components/ServiceCard';
 import { TestimonialCard } from '@/components/TestimonialCard';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Code2,
   Brain,
@@ -10,6 +12,7 @@ import {
   Smartphone,
   Palette,
   Zap,
+  ArrowRight,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -22,7 +25,8 @@ export default function Home() {
       {/* Services Section */}
       <section className="py-20 bg-muted/30 relative overflow-hidden">
         {/* Background decoration */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10 animate-blob" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[100px] -z-10 animate-blob-slow" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 group">
@@ -74,15 +78,12 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <Link
-              href="/services"
-              className="inline-flex px-8 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 group"
-            >
-              Explore All Services
-              <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
+            <Button asChild size="lg" className="bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300">
+              <Link href="/services" className="flex items-center gap-2">
+                Explore All Services
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -94,7 +95,7 @@ export default function Home() {
             {/* Left side - Content */}
             <div>
               <h2 className="text-4xl font-bold text-foreground mb-6 text-balance">
-                Why Choose TechSolutions?
+                Why Choose whsofttech?
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 We're more than just a software company. We're your trusted technology partner committed to driving your digital transformation.
@@ -161,12 +162,14 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {['React', 'Next.js', 'TypeScript', 'Python', 'Node.js', 'PostgreSQL', 'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'Tailwind CSS', 'MongoDB'].map((tech) => (
-              <div
+              <Card
                 key={tech}
-                className="p-4 rounded-lg border border-border bg-card hover:border-primary transition-colors text-center font-medium text-foreground"
+                className="hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 cursor-pointer group"
               >
-                {tech}
-              </div>
+                <CardContent className="p-4 text-center">
+                  <p className="font-medium text-foreground group-hover:text-primary transition-colors">{tech}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -186,7 +189,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <TestimonialCard
-              quote="TechSolutions transformed our legacy system into a modern, scalable platform. Their team's expertise was invaluable."
+              quote="whsofttech transformed our legacy system into a modern, scalable platform. Their team's expertise was invaluable."
               author="Sarah Johnson"
               role="CTO"
               company="FinanceFlow"
@@ -222,12 +225,9 @@ export default function Home() {
           <p className="text-lg text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
             Let's discuss how we can help you achieve your digital transformation goals with innovative software solutions.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-          >
-            Start Your Project Today
-          </Link>
+          <Button asChild size="lg" variant="outline" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <Link href="/contact">Start Your Project Today</Link>
+          </Button>
         </div>
       </section>
 

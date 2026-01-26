@@ -1,11 +1,13 @@
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ContactForm } from '@/components/ContactForm';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 
 export const metadata = {
-  title: 'Contact Us - TechSolutions',
-  description: 'Get in touch with TechSolutions. We\'d love to hear about your project.',
+  title: 'Contact Us - whsofttech',
+  description: 'Get in touch with whsofttech. We\'d love to hear about your project.',
 };
 
 export default function ContactPage() {
@@ -13,25 +15,25 @@ export default function ContactPage() {
     {
       icon: <Mail size={24} />,
       title: 'Email',
-      value: 'hello@techsolutions.com',
-      link: 'mailto:hello@techsolutions.com',
+      value: 'whssfottech2026@gmail.com',
+      link: 'mailto:whssfottech2026@gmail.com',
     },
     {
       icon: <Phone size={24} />,
       title: 'Phone',
-      value: '+1 (234) 567-890',
-      link: 'tel:+12345678900',
+      value: '+91 8208065506',
+      link: 'tel:+918208065506',
     },
     {
       icon: <MapPin size={24} />,
-      title: 'Address',
-      value: '123 Tech Street, San Francisco, CA 94105',
+      title: 'Location',
+      value: 'India',
       link: '#',
     },
     {
       icon: <Clock size={24} />,
       title: 'Business Hours',
-      value: 'Mon - Fri: 9am - 6pm PST',
+      value: 'Mon - Sat: 9am - 6pm IST',
       link: '#',
     },
   ];
@@ -66,40 +68,47 @@ export default function ContactPage() {
 
               <div className="space-y-4">
                 {contactInfo.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    className="flex gap-4 p-4 rounded-lg border border-border hover:border-primary transition-colors group"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center text-primary-foreground flex-shrink-0 group-hover:scale-110 transition-transform">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground">{item.title}</p>
-                      <p className="text-sm text-muted-foreground">{item.value}</p>
-                    </div>
-                  </a>
+                  <Card key={index} className="hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 cursor-pointer group">
+                    <CardContent className="p-4">
+                      <a href={item.link} className="flex gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center text-primary-foreground flex-shrink-0 group-hover:scale-110 transition-transform glow-primary">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-foreground group-hover:text-primary transition-colors">{item.title}</p>
+                          <p className="text-sm text-muted-foreground">{item.value}</p>
+                        </div>
+                      </a>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
 
               {/* Quick Info */}
-              <div className="p-6 bg-muted/50 rounded-lg border border-border">
-                <h3 className="font-semibold text-foreground mb-3">Quick Response Time</h3>
-                <p className="text-sm text-muted-foreground mb-3">
-                  We aim to respond to all inquiries within 24 hours.
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  For urgent matters, please call us directly during business hours.
-                </p>
-              </div>
+              <Card className="bg-muted/50 border-border hover:border-primary/50 transition-colors">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-foreground mb-3">Quick Response Time</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    We aim to respond to all inquiries within 24 hours.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    For urgent matters, please call us directly during business hours.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="p-8 rounded-xl border border-border bg-card">
-                <h2 className="text-2xl font-bold text-foreground mb-6">Send us a Message</h2>
-                <ContactForm />
-              </div>
+              <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="text-2xl">Send us a Message</CardTitle>
+                  <CardDescription>Fill out the form below and we'll get back to you as soon as possible.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ContactForm />
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -136,13 +145,12 @@ export default function ContactPage() {
                 description: 'Extend your team with our experienced developers and designers.',
               },
             ].map((service, index) => (
-              <div
-                key={index}
-                className="p-6 bg-card rounded-lg border border-border hover:border-primary transition-colors"
-              >
-                <h3 className="text-lg font-semibold text-foreground mb-2">{service.title}</h3>
-                <p className="text-muted-foreground text-sm">{service.description}</p>
-              </div>
+              <Card key={index} className="hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm">{service.description}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -179,10 +187,12 @@ export default function ContactPage() {
                 a: 'Yes, we can sign NDAs and other agreements to protect your confidentiality. Security and trust are paramount to our business.',
               },
             ].map((faq, index) => (
-              <div key={index} className="p-6 bg-card rounded-lg border border-border">
-                <h3 className="text-lg font-semibold text-foreground mb-3">{faq.q}</h3>
-                <p className="text-muted-foreground">{faq.a}</p>
-              </div>
+              <Card key={index} className="hover:border-primary/50 transition-colors">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold text-foreground mb-3">{faq.q}</h3>
+                  <p className="text-muted-foreground">{faq.a}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -195,12 +205,9 @@ export default function ContactPage() {
           <p className="text-lg text-primary-foreground/90 mb-8">
             Let's discuss your project and how we can help you achieve your goals.
           </p>
-          <a
-            href="#contact"
-            className="inline-flex px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-          >
-            Start Your Project
-          </a>
+          <Button asChild size="lg" variant="outline" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <a href="#contact">Start Your Project</a>
+          </Button>
         </div>
       </section>
 

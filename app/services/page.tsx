@@ -14,7 +14,7 @@ import {
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Services - TechSolutions Software Solutions',
+  title: 'Services - whsofttech Software Solutions',
   description: 'Explore our comprehensive software development, AI solutions, web & mobile apps, and digital services.',
 };
 

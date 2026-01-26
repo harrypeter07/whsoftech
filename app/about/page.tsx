@@ -4,8 +4,8 @@ import { TeamMember } from '@/components/TeamMember';
 import { CheckCircle2 } from 'lucide-react';
 
 export const metadata = {
-  title: 'About TechSolutions - Our Story & Team',
-  description: 'Learn about TechSolutions, our mission, values, and the talented team behind our software solutions.',
+  title: 'About whsofttech - Our Story & Team',
+  description: 'Learn about whsofttech, our mission, values, and the talented team behind our software solutions.',
 };
 
 export default function AboutPage() {
@@ -17,8 +17,8 @@ export default function AboutPage() {
       <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl sm:text-6xl font-bold text-foreground mb-6 text-balance">
-            Transforming Ideas Into
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"> Reality</span>
+            Transform Your Business With
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"> Innovative Software</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Since 2012, we've been helping businesses unlock their digital potential through innovative software solutions and cutting-edge technology.
@@ -34,7 +34,7 @@ export default function AboutPage() {
             <div>
               <h2 className="text-4xl font-bold text-foreground mb-6">Our Story</h2>
               <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-                TechSolutions was founded with a simple vision: to be the trusted technology partner for businesses seeking digital transformation. What started as a small team of passionate developers has grown into a powerhouse of 50+ industry experts.
+                whsofttech was founded with a simple vision: to be the trusted technology partner for businesses seeking digital transformation. What started as a small team of passionate developers has grown into a powerhouse of 50+ industry experts.
               </p>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Over the past 12 years, we've delivered 500+ successful projects across various industries, from fintech and healthcare to e-commerce and enterprise software. Our commitment to excellence, innovation, and client success has earned us recognition as a leader in the software development industry.

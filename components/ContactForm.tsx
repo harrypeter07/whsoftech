@@ -3,13 +3,26 @@
 import React from "react"
 
 import { useState, useEffect, useRef } from 'react';
-import { Send } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import gsap from 'gsap';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Card, CardContent } from '@/components/ui/card';
 
 export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -47,10 +60,24 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
+    setIsSuccess(false);
 
     try {
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
       setIsSuccess(true);
       setFormData({
         name: '',
@@ -62,6 +89,8 @@ export function ContactForm() {
 
       // Reset success message after 5 seconds
       setTimeout(() => setIsSuccess(false), 5000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -70,120 +99,125 @@ export function ContactForm() {
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
       {isSuccess && (
-        <div className="p-4 bg-primary/10 border border-primary rounded-lg animate-in fade-in zoom-in">
-          <p className="text-primary font-medium">
-            Thank you! We've received your message and will get back to you soon.
-          </p>
-        </div>
+        <Card className="border-primary/50 bg-primary/5">
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3">
+              <CheckCircle2 className="h-5 w-5 text-primary" />
+              <p className="text-primary font-medium">
+                Thank you! We've received your message and will get back to you soon.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {error && (
+        <Card className="border-destructive/50 bg-destructive/5">
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3">
+              <AlertCircle className="h-5 w-5 text-destructive" />
+              <p className="text-destructive font-medium">{error}</p>
+            </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* Name */}
-      <div className="form-field group">
-        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-          Full Name
-        </label>
-        <input
-          type="text"
+      <div className="form-field space-y-2">
+        <Label htmlFor="name">Full Name</Label>
+        <Input
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 group-hover:border-primary/50 group-focus-within:shadow-lg group-focus-within:shadow-primary/20"
           placeholder="John Doe"
+          className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary"
         />
       </div>
 
       {/* Email */}
-      <div className="form-field group">
-        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors">
-          Email Address
-        </label>
-        <input
+      <div className="form-field space-y-2">
+        <Label htmlFor="email">Email Address</Label>
+        <Input
           type="email"
           id="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 group-hover:border-primary/50 group-focus-within:shadow-lg group-focus-within:shadow-primary/20"
           placeholder="john@example.com"
+          className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary"
         />
       </div>
 
       {/* Company */}
-      <div className="form-field group">
-        <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors">
-          Company
-        </label>
-        <input
+      <div className="form-field space-y-2">
+        <Label htmlFor="company">Company (Optional)</Label>
+        <Input
           type="text"
           id="company"
           name="company"
           value={formData.company}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 group-hover:border-primary/50 group-focus-within:shadow-lg group-focus-within:shadow-primary/20"
           placeholder="Your Company"
+          className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary"
         />
       </div>
 
       {/* Service Type */}
-      <div className="form-field group">
-        <label htmlFor="service" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors">
-          Service of Interest
-        </label>
-        <select
-          id="service"
-          name="service"
-          value={formData.service}
-          onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 group-hover:border-primary/50 group-focus-within:shadow-lg group-focus-within:shadow-primary/20"
-        >
-          <option value="general">General Inquiry</option>
-          <option value="software">Software Development</option>
-          <option value="ai">AI Solutions</option>
-          <option value="web">Web Applications</option>
-          <option value="mobile">Mobile Apps</option>
-          <option value="design">UI/UX Design</option>
-          <option value="automation">Business Automation</option>
-        </select>
+      <div className="form-field space-y-2">
+        <Label htmlFor="service">Service of Interest</Label>
+        <Select value={formData.service} onValueChange={(value) => setFormData({ ...formData, service: value })}>
+          <SelectTrigger className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary">
+            <SelectValue placeholder="Select a service" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="general">General Inquiry</SelectItem>
+            <SelectItem value="software">Software Development</SelectItem>
+            <SelectItem value="ai">AI Solutions</SelectItem>
+            <SelectItem value="web">Web Applications</SelectItem>
+            <SelectItem value="mobile">Mobile Apps</SelectItem>
+            <SelectItem value="design">UI/UX Design</SelectItem>
+            <SelectItem value="automation">Business Automation</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Message */}
-      <div className="form-field group">
-        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors">
-          Message
-        </label>
-        <textarea
+      <div className="form-field space-y-2">
+        <Label htmlFor="message">Message</Label>
+        <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
           required
           rows={5}
-          className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 group-hover:border-primary/50 group-focus-within:shadow-lg group-focus-within:shadow-primary/20 resize-none"
           placeholder="Tell us about your project..."
+          className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary resize-none"
         />
       </div>
 
       {/* Submit Button */}
-      <button
+      <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg font-semibold hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-1 disabled:opacity-50 disabled:hover:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 group"
+        className="w-full bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 text-primary-foreground hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300"
+        size="lg"
       >
         {isSubmitting ? (
           <>
-            <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2" />
             Sending...
           </>
         ) : (
           <>
             Send Message
-            <Send size={18} />
+            <Send className="ml-2 h-4 w-4" />
           </>
         )}
-      </button>
+      </Button>
 
       {/* Additional Info */}
       <p className="text-sm text-muted-foreground text-center">

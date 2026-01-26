@@ -9,7 +9,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 const _inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'TechSolutions - Custom Software & AI Apps',
+  title: 'whsofttech - Custom Software & AI Apps',
   description: 'Award-winning software solutions company specializing in custom development, AI applications, web/mobile apps, and digital services.',
   generator: 'v0.app',
   icons: {
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />

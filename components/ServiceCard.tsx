@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Card, CardContent } from '@/components/ui/card';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,9 +39,9 @@ export function ServiceCard({ icon, title, description, delay = 0 }: ServiceCard
   }, [delay]);
 
   return (
-    <div
+    <Card
       ref={cardRef}
-      className="group relative p-6 bg-card rounded-xl border border-border hover:border-primary transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer overflow-hidden"
+      className="group relative hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 cursor-pointer overflow-hidden bg-card/50 backdrop-blur-sm"
     >
       {/* Gradient background on hover with animated gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/3 to-secondary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -48,9 +49,9 @@ export function ServiceCard({ icon, title, description, delay = 0 }: ServiceCard
       {/* Hover light effect */}
       <div className="absolute -inset-full opacity-0 group-hover:opacity-30 bg-gradient-to-r from-primary via-transparent to-accent transition-opacity duration-500 -z-10" />
 
-      <div className="relative z-10">
+      <CardContent className="relative z-10 p-6">
         {/* Icon with 3D effect */}
-        <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center text-primary-foreground mb-4 group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300 shadow-lg group-hover:shadow-primary/50">
+        <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center text-primary-foreground mb-4 group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300 shadow-lg group-hover:shadow-primary/50 glow-primary">
           {icon}
         </div>
 
@@ -69,7 +70,7 @@ export function ServiceCard({ icon, title, description, delay = 0 }: ServiceCard
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

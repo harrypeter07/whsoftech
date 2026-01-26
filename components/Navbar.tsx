@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import gsap from 'gsap';
+import { Button } from '@/components/ui/button';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +45,7 @@ export function Navbar() {
           {/* Logo with hover effect */}
           <Link href="/" className="flex items-center gap-2 text-xl font-bold text-primary group">
             <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110" />
-            <span className="hidden sm:inline group-hover:text-accent transition-colors duration-300">TechSolutions</span>
+            <span className="hidden sm:inline group-hover:text-accent transition-colors duration-300">whsofttech</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -62,12 +64,9 @@ export function Navbar() {
           </div>
 
           {/* Desktop CTA Button */}
-          <Link
-            href="/contact"
-            className="hidden md:inline-flex px-6 py-2 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg font-medium hover:shadow-lg hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300 group"
-          >
-            <span className="group-hover:text-primary-foreground">Get Started</span>
-          </Link>
+          <Button asChild className="hidden md:inline-flex bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-lg hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300">
+            <Link href="/contact">Get Started</Link>
+          </Button>
 
           {/* Mobile Menu Button */}
           <button
@@ -92,13 +91,9 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
-              className="block px-4 py-2 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg font-medium text-center hover:shadow-lg transition-all duration-300 mt-2"
-              onClick={() => setIsOpen(false)}
-            >
-              Get Started
-            </Link>
+            <Button asChild className="w-full mt-2 bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-lg transition-all duration-300" onClick={() => setIsOpen(false)}>
+              <Link href="/contact">Get Started</Link>
+            </Button>
           </div>
         )}
       </div>

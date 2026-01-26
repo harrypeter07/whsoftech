@@ -44,7 +44,7 @@ export function Footer() {
           <div className="footer-column group">
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-300">
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300 group-hover:scale-110" />
-              TechSolutions
+              whsofttech
             </h3>
             <p className="text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">
               Building innovative software solutions that transform businesses and drive growth.
@@ -79,11 +79,11 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 group/item">
                 <Mail size={16} className="group-hover/item:text-primary transition-colors duration-300" />
-                <a href="mailto:hello@techsolutions.com" className="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300">hello@techsolutions.com</a>
+                <a href="mailto:whssfottech2026@gmail.com" className="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300">whssfottech2026@gmail.com</a>
               </li>
               <li className="flex items-center gap-2 group/item">
                 <Phone size={16} className="group-hover/item:text-primary transition-colors duration-300" />
-                <a href="tel:+1234567890" className="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300">+1 (234) 567-890</a>
+                <a href="tel:+918208065506" className="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300">+91 8208065506</a>
               </li>
               <li className="flex items-start gap-2 group/item">
                 <MapPin size={16} className="mt-1 group-hover/item:text-primary transition-colors duration-300" />
@@ -96,7 +96,7 @@ export function Footer() {
         <div className="border-t border-background/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm opacity-70">
-              &copy; 2024 TechSolutions. All rights reserved.
+              &copy; 2024 whsofttech. All rights reserved.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-background/70 hover:text-primary hover:bg-primary/20 p-2 rounded-lg transition-all duration-300 hover:scale-110">
