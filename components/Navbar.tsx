@@ -44,7 +44,15 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo with hover effect */}
           <Link href="/" className="flex items-center gap-2 text-xl font-bold text-primary group">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110" />
+            <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
+              <Image
+                src="/logo.png"
+                alt="whsofttech Logo"
+                fill
+                className="object-contain group-hover:drop-shadow-lg group-hover:drop-shadow-primary/50 transition-all duration-300"
+                priority
+              />
+            </div>
             <span className="hidden sm:inline group-hover:text-accent transition-colors duration-300">whsofttech</span>
           </Link>
 

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -42,10 +43,19 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="footer-column group">
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-300">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300 group-hover:scale-110" />
-              whsofttech
-            </h3>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
+                <Image
+                  src="/logo.png"
+                  alt="whsofttech Logo"
+                  fill
+                  className="object-contain group-hover:drop-shadow-lg group-hover:drop-shadow-primary/30 transition-all duration-300"
+                />
+              </div>
+              <h3 className="font-bold text-lg group-hover:text-primary transition-colors duration-300">
+                whsofttech
+              </h3>
+            </div>
             <p className="text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">
               Building innovative software solutions that transform businesses and drive growth.
             </p>
