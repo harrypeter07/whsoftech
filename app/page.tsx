@@ -23,151 +23,74 @@ export default function Home() {
       <Hero />
 
       {/* Services Section */}
-      <section className="py-20 bg-muted/30 relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10 animate-blob" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[100px] -z-10 animate-blob-slow" />
-        
+      <section className="py-14 bg-muted/30 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] -z-10 animate-blob" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 group">
-            <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance group-hover:text-primary transition-colors duration-300">
-              Our Services
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto group-hover:text-foreground/80 transition-colors duration-300">
-              Comprehensive software solutions tailored to your business needs
-            </p>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2 text-balance">Our Services</h2>
+            <p className="text-muted-foreground max-w-xl mx-auto text-sm">Tailored software solutions for your business.</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <ServiceCard
-              icon={<Code2 size={24} />}
-              title="Software Development"
-              description="Custom-built enterprise software solutions designed for scalability, performance, and your unique business requirements."
-              delay={0}
-            />
-            <ServiceCard
-              icon={<Brain size={24} />}
-              title="AI Solutions"
-              description="Cutting-edge AI and machine learning applications that automate processes and drive intelligent decision-making."
-              delay={1}
-            />
-            <ServiceCard
-              icon={<Globe size={24} />}
-              title="Web Applications"
-              description="Modern, responsive web applications built with latest technologies for optimal user experience and conversion."
-              delay={2}
-            />
-            <ServiceCard
-              icon={<Smartphone size={24} />}
-              title="Mobile Apps"
-              description="Native and cross-platform mobile applications for iOS and Android that engage users and drive business growth."
-              delay={3}
-            />
-            <ServiceCard
-              icon={<Palette size={24} />}
-              title="UI/UX Design"
-              description="Award-winning design services that create intuitive, beautiful interfaces that users love to interact with."
-              delay={4}
-            />
-            <ServiceCard
-              icon={<Zap size={24} />}
-              title="Automation"
-              description="Business process automation solutions that streamline operations, reduce costs, and improve efficiency."
-              delay={5}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <ServiceCard icon={<Code2 size={22} />} title="Software Development" description="Custom enterprise software—scalable and built for your requirements." delay={0} />
+            <ServiceCard icon={<Brain size={22} />} title="AI Solutions" description="AI and ML applications that automate and drive decisions." delay={1} />
+            <ServiceCard icon={<Globe size={22} />} title="Web Applications" description="Modern, responsive web apps for great UX and conversion." delay={2} />
+            <ServiceCard icon={<Smartphone size={22} />} title="Mobile Apps" description="iOS and Android apps that engage users and grow business." delay={3} />
+            <ServiceCard icon={<Palette size={22} />} title="UI/UX Design" description="Intuitive, beautiful interfaces users love." delay={4} />
+            <ServiceCard icon={<Zap size={22} />} title="Automation" description="Process automation to streamline ops and cut costs." delay={5} />
           </div>
-
-          <div className="text-center mt-12">
-            <Button asChild size="lg" className="bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300">
-              <Link href="/services" className="flex items-center gap-2">
-                Explore All Services
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </Link>
+          <div className="text-center mt-8">
+            <Button asChild size="lg" className="bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300">
+              <Link href="/services" className="flex items-center gap-2">Explore All Services <ArrowRight className="w-4 h-4" /></Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20">
+      {/* Why Choose Us */}
+      <section className="py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left side - Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-foreground mb-6 text-balance">
-                Why Choose whsofttech?
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                We're more than just a software company. We're your trusted technology partner committed to driving your digital transformation.
-              </p>
-
-              <div className="space-y-4">
+              <h2 className="text-3xl font-bold text-foreground mb-4 text-balance">Why Choose whsofttech?</h2>
+              <p className="text-muted-foreground mb-6 text-sm leading-relaxed">Your trusted technology partner for digital transformation.</p>
+              <div className="space-y-3">
                 {[
-                  {
-                    title: 'Industry Expertise',
-                    desc: 'Over 12 years serving diverse industries with deep domain knowledge',
-                  },
-                  {
-                    title: 'Proven Track Record',
-                    desc: '500+ successful projects delivered with measurable ROI',
-                  },
-                  {
-                    title: 'Agile Approach',
-                    desc: 'Fast iterations, continuous delivery, and client collaboration',
-                  },
-                  {
-                    title: 'Quality Assurance',
-                    desc: 'Rigorous testing and quality standards for enterprise-grade solutions',
-                  },
-                  {
-                    title: 'Dedicated Support',
-                    desc: '24/7 support and maintenance for all our deployments',
-                  },
-                  {
-                    title: 'Innovation First',
-                    desc: 'Cutting-edge technologies and continuous learning culture',
-                  },
+                  { title: 'Industry expertise', desc: '12+ years across diverse industries.' },
+                  { title: 'Proven track record', desc: '500+ projects delivered with ROI.' },
+                  { title: 'Agile & collaborative', desc: 'Fast iterations and clear communication.' },
+                  { title: 'Quality & support', desc: 'Rigorous QA and ongoing support.' },
                 ].map((item, index) => (
-                  <div key={index} className="flex gap-4">
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-white text-sm">✓</span>
+                  <div key={index} className="flex gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-primary-foreground text-xs">✓</span>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
-                      <p className="text-muted-foreground text-sm">{item.desc}</p>
+                      <h4 className="font-semibold text-foreground text-sm">{item.title}</h4>
+                      <p className="text-muted-foreground text-xs">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* Right side - Visual */}
             <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30" />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary/10 to-accent/10" />
+              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/15 to-accent/15 border border-primary/20" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Tech Stack Section */}
-      <section className="py-20 bg-muted/30">
+      {/* Tech Stack */}
+      <section className="py-14 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Technologies We Use</h2>
-            <p className="text-lg text-muted-foreground">
-              Leveraging modern, battle-tested technologies
-            </p>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-1">Technologies We Use</h2>
+            <p className="text-muted-foreground text-sm">Modern, battle-tested stack.</p>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {['React', 'Next.js', 'TypeScript', 'Python', 'Node.js', 'PostgreSQL', 'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'Tailwind CSS', 'MongoDB'].map((tech) => (
-              <Card
-                key={tech}
-                className="hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 cursor-pointer group"
-              >
-                <CardContent className="p-4 text-center">
-                  <p className="font-medium text-foreground group-hover:text-primary transition-colors">{tech}</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {['React', 'Next.js', 'TypeScript', 'Python', 'Node.js', 'PostgreSQL', 'AWS', 'Docker', 'GraphQL', 'Tailwind', 'MongoDB'].map((tech) => (
+              <Card key={tech} className="hover:border-primary/50 hover:shadow-md transition-all duration-300 cursor-pointer group">
+                <CardContent className="p-3 text-center">
+                  <p className="font-medium text-foreground text-sm group-hover:text-primary transition-colors">{tech}</p>
                 </CardContent>
               </Card>
             ))}
@@ -175,58 +98,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20">
+      {/* Testimonials */}
+      <section className="py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4 text-balance">
-              What Our Clients Say
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Real feedback from companies we've helped transform
-            </p>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-1">What Our Clients Say</h2>
+            <p className="text-muted-foreground text-sm">Feedback from companies we've helped.</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <TestimonialCard
-              quote="whsofttech transformed our legacy system into a modern, scalable platform. Their team's expertise was invaluable."
-              author="Sarah Johnson"
-              role="CTO"
-              company="FinanceFlow"
-              image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
-              rating={5}
-            />
-            <TestimonialCard
-              quote="The AI solution they built reduced our operational costs by 40%. Highly professional and innovative team."
-              author="Michael Chen"
-              role="CEO"
-              company="DataViz Inc"
-              image="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
-              rating={5}
-            />
-            <TestimonialCard
-              quote="Best decision we made for our digital transformation. On-time delivery and beyond expectations."
-              author="Emma Rodriguez"
-              role="Product Lead"
-              company="RetailPro"
-              image="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
-              rating={5}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <TestimonialCard quote="Transformed our legacy system into a modern, scalable platform. Invaluable expertise." author="Sarah J." role="CTO" company="FinanceFlow" image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" rating={5} />
+            <TestimonialCard quote="AI solution cut our operational costs by 40%. Professional and innovative." author="Michael C." role="CEO" company="DataViz" image="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" rating={5} />
+            <TestimonialCard quote="Best decision for our digital transformation. On-time and beyond expectations." author="Emma R." role="Product Lead" company="RetailPro" image="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop" rating={5} />
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-accent">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-primary-foreground mb-6 text-balance">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-lg text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can help you achieve your digital transformation goals with innovative software solutions.
-          </p>
-          <Button asChild size="lg" variant="outline" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <Link href="/contact">Start Your Project Today</Link>
+      {/* CTA */}
+      <section className="py-14 bg-gradient-to-r from-primary to-accent">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-primary-foreground mb-3 text-balance">Ready to transform your business?</h2>
+          <p className="text-primary-foreground/90 mb-6 text-sm">Let's discuss your project.</p>
+          <Button asChild size="lg" variant="outline" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 hover:shadow-lg transition-all duration-300">
+            <Link href="/contact">Start Your Project</Link>
           </Button>
         </div>
       </section>

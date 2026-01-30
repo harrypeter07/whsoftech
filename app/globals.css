@@ -4,40 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Futuristic Dark Theme - Default */
-  --background: oklch(0.08 0.01 240);
-  --foreground: oklch(0.98 0.01 0);
-  --card: oklch(0.12 0.02 250);
-  --card-foreground: oklch(0.98 0.01 0);
-  --popover: oklch(0.12 0.02 250);
-  --popover-foreground: oklch(0.98 0.01 0);
-  --primary: oklch(0.7 0.2 260);
-  --primary-foreground: oklch(0.08 0.01 240);
-  --secondary: oklch(0.6 0.18 290);
-  --secondary-foreground: oklch(0.08 0.01 240);
-  --muted: oklch(0.2 0.02 250);
-  --muted-foreground: oklch(0.7 0.02 250);
-  --accent: oklch(0.75 0.22 280);
-  --accent-foreground: oklch(0.08 0.01 240);
-  --destructive: oklch(0.65 0.25 25);
-  --destructive-foreground: oklch(0.98 0.01 0);
-  --border: oklch(0.25 0.03 250);
-  --input: oklch(0.15 0.02 250);
-  --ring: oklch(0.7 0.2 260);
-  --chart-1: oklch(0.7 0.2 260);
-  --chart-2: oklch(0.75 0.22 280);
-  --chart-3: oklch(0.65 0.18 270);
-  --chart-4: oklch(0.6 0.2 250);
-  --chart-5: oklch(0.8 0.15 290);
+  /* Light mode – Royal Red & Cream */
+  --background: oklch(0.98 0.015 85);
+  --foreground: oklch(0.22 0.02 25);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.02 25);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.02 25);
+  --primary: oklch(0.42 0.18 25);
+  --primary-foreground: oklch(0.99 0.01 85);
+  --secondary: oklch(0.95 0.02 85);
+  --secondary-foreground: oklch(0.25 0.02 25);
+  --muted: oklch(0.96 0.01 85);
+  --muted-foreground: oklch(0.45 0.02 25);
+  --accent: oklch(0.5 0.16 25);
+  --accent-foreground: oklch(0.99 0.01 85);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.99 0.01 0);
+  --border: oklch(0.9 0.02 85);
+  --input: oklch(0.95 0.01 85);
+  --ring: oklch(0.42 0.18 25);
+  --chart-1: oklch(0.42 0.18 25);
+  --chart-2: oklch(0.5 0.16 25);
+  --chart-3: oklch(0.6 0.12 25);
+  --chart-4: oklch(0.45 0.14 25);
+  --chart-5: oklch(0.55 0.1 25);
   --radius: 0.75rem;
-  --sidebar: oklch(0.1 0.01 240);
-  --sidebar-foreground: oklch(0.98 0.01 0);
-  --sidebar-primary: oklch(0.7 0.2 260);
-  --sidebar-primary-foreground: oklch(0.08 0.01 240);
-  --sidebar-accent: oklch(0.75 0.22 280);
-  --sidebar-accent-foreground: oklch(0.08 0.01 240);
-  --sidebar-border: oklch(0.25 0.03 250);
-  --sidebar-ring: oklch(0.7 0.2 260);
+  --sidebar: oklch(0.98 0.01 85);
+  --sidebar-foreground: oklch(0.2 0.02 25);
+  --sidebar-primary: oklch(0.42 0.18 25);
+  --sidebar-primary-foreground: oklch(0.99 0.01 85);
+  --sidebar-accent: oklch(0.95 0.03 25);
+  --sidebar-accent-foreground: oklch(0.25 0.02 25);
+  --sidebar-border: oklch(0.9 0.02 85);
+  --sidebar-ring: oklch(0.42 0.18 25);
 }
 
 .dark {
@@ -122,24 +122,20 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: 
-      radial-gradient(at 0% 0%, oklch(0.15 0.05 260 / 0.3) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, oklch(0.15 0.05 280 / 0.3) 0px, transparent 50%);
+    background-image: radial-gradient(at 50% 0%, oklch(1 0.02 85 / 0.6) 0px, transparent 50%);
     background-attachment: fixed;
   }
   
-  /* Futuristic glow effects */
   .glow-primary {
-    box-shadow: 0 0 20px oklch(0.7 0.2 260 / 0.5), 0 0 40px oklch(0.7 0.2 260 / 0.3);
+    box-shadow: 0 0 20px oklch(0.42 0.18 25 / 0.25);
   }
   
   .glow-accent {
-    box-shadow: 0 0 20px oklch(0.75 0.22 280 / 0.5), 0 0 40px oklch(0.75 0.22 280 / 0.3);
+    box-shadow: 0 0 20px oklch(0.5 0.16 25 / 0.25);
   }
   
-  /* Gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, oklch(0.7 0.2 260), oklch(0.75 0.22 280), oklch(0.8 0.2 270));
+    background: linear-gradient(135deg, oklch(0.42 0.18 25), oklch(0.5 0.16 25), oklch(0.55 0.14 25));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

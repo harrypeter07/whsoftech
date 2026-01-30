@@ -32,92 +32,75 @@ export function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-foreground text-background relative overflow-hidden">
-      {/* Background gradient effects */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary rounded-full blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-accent rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+    <footer ref={footerRef} className="bg-primary text-primary-foreground relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="footer-column group">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-14 h-14 group-hover:scale-110 transition-transform duration-300">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="relative w-10 h-10 flex-shrink-0">
                 <Image
                   src="/logo.png"
-                  alt="whsofttech Logo"
+                  alt="whsofttech"
                   fill
-                  className="object-contain group-hover:drop-shadow-lg group-hover:drop-shadow-primary/30 transition-all duration-300"
+                  className="object-contain opacity-95"
                 />
               </div>
-              <h3 className="font-bold text-lg group-hover:text-primary transition-colors duration-300">
-                whsofttech
-              </h3>
+              <h3 className="font-bold text-lg">whsofttech</h3>
             </div>
-            <p className="text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-              Building innovative software solutions that transform businesses and drive growth.
+            <p className="text-sm opacity-90">
+              Software solutions that scale.
             </p>
           </div>
 
           {/* Services */}
           <div className="footer-column">
-            <h4 className="font-semibold mb-4 group-hover:text-primary transition-colors duration-300">Services</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/services#software" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Software Development</Link></li>
-              <li><Link href="/services#ai" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">AI Solutions</Link></li>
-              <li><Link href="/services#web" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Web Applications</Link></li>
-              <li><Link href="/services#mobile" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Mobile Apps</Link></li>
+            <h4 className="font-semibold mb-3">Services</h4>
+            <ul className="space-y-1.5 text-sm opacity-90">
+              <li><Link href="/services#software" className="hover:opacity-100 transition-opacity">Software</Link></li>
+              <li><Link href="/services#ai" className="hover:opacity-100 transition-opacity">AI</Link></li>
+              <li><Link href="/services#web" className="hover:opacity-100 transition-opacity">Web</Link></li>
+              <li><Link href="/services#mobile" className="hover:opacity-100 transition-opacity">Mobile</Link></li>
             </ul>
           </div>
 
           {/* Company */}
           <div className="footer-column">
-            <h4 className="font-semibold mb-4 group-hover:text-primary transition-colors duration-300">Company</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">About Us</Link></li>
-              <li><Link href="/projects" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Portfolio</Link></li>
-              <li><Link href="/contact" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Contact</Link></li>
-              <li><Link href="#" className="opacity-80 hover:opacity-100 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block">Blog</Link></li>
+            <h4 className="font-semibold mb-3">Company</h4>
+            <ul className="space-y-1.5 text-sm opacity-90">
+              <li><Link href="/about" className="hover:opacity-100 transition-opacity">About</Link></li>
+              <li><Link href="/projects" className="hover:opacity-100 transition-opacity">Portfolio</Link></li>
+              <li><Link href="/contact" className="hover:opacity-100 transition-opacity">Contact</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div className="footer-column">
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2 group/item">
-                <Mail size={16} className="group-hover/item:text-primary transition-colors duration-300" />
-                <a href="mailto:whssfottech2026@gmail.com" className="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300">whssfottech2026@gmail.com</a>
+            <h4 className="font-semibold mb-3">Contact</h4>
+            <ul className="space-y-2 text-sm opacity-90">
+              <li className="flex items-center gap-2">
+                <Mail size={14} />
+                <a href="mailto:whssfottech2026@gmail.com" className="hover:underline">whssfottech2026@gmail.com</a>
               </li>
-              <li className="flex items-center gap-2 group/item">
-                <Phone size={16} className="group-hover/item:text-primary transition-colors duration-300" />
-                <a href="tel:+918208065506" className="opacity-80 hover:opacity-100 hover:text-primary transition-all duration-300">+91 8208065506</a>
+              <li className="flex items-center gap-2">
+                <Phone size={14} />
+                <a href="tel:+918208065506" className="hover:underline">+91 8208065506</a>
               </li>
-              <li className="flex items-start gap-2 group/item">
-                <MapPin size={16} className="mt-1 group-hover/item:text-primary transition-colors duration-300" />
-                <span className="opacity-80 group-hover/item:opacity-100 transition-opacity duration-300">San Francisco, CA</span>
+              <li className="flex items-center gap-2">
+                <MapPin size={14} />
+                <span>India</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-background/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm opacity-70">
-              &copy; 2024 whsofttech. All rights reserved.
-            </p>
-            <div className="flex gap-4">
-              <a href="#" className="text-background/70 hover:text-primary hover:bg-primary/20 p-2 rounded-lg transition-all duration-300 hover:scale-110">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-background/70 hover:text-primary hover:bg-primary/20 p-2 rounded-lg transition-all duration-300 hover:scale-110">
-                <Github size={20} />
-              </a>
-              <a href="#" className="text-background/70 hover:text-primary hover:bg-primary/20 p-2 rounded-lg transition-all duration-300 hover:scale-110">
-                <Twitter size={20} />
-              </a>
+        <div className="border-t border-primary-foreground/20 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+            <p className="text-sm opacity-90">&copy; {new Date().getFullYear()} whsofttech</p>
+            <div className="flex gap-3">
+              <a href="#" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="LinkedIn"><Linkedin size={18} /></a>
+              <a href="#" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="GitHub"><Github size={18} /></a>
+              <a href="#" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="Twitter"><Twitter size={18} /></a>
             </div>
           </div>
         </div>
