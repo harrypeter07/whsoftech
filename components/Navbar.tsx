@@ -138,7 +138,7 @@ export function Navbar() {
 							variants={menuVariants}
 							className="absolute top-0 right-0 w-[480px] h-[650px] bg-[#c9fd74] rounded-[25px] z-40"
 						>
-							<div className="flex flex-col justify-between h-full p-[100px_40px_50px_40px]">
+							<div className="flex flex-col justify-between h-full p-[60px_30px_30px_80px]">
 								{/* Logo + Company name */}
 								<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
 									<div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -163,14 +163,14 @@ export function Navbar() {
 												animate="enter"
 												exit="exit"
 											>
-												<a className="text-decoration-none text-black text-[46px]">
+													<a className="text-decoration-none text-black text-[36px]">
 													{link.label}
 												</a>
 											</motion.div>
 										))}
 									</div>
 								</div>
-								<motion.div className="flex flex-wrap" variants={slideIn}>
+								<motion.div className="flex flex-wrap gap-2" variants={slideIn}>
 									{[
 										{ title: "Facebook", href: "/" },
 										{ title: "LinkedIn", href: "/" },
@@ -184,6 +184,7 @@ export function Navbar() {
 											animate="enter"
 											exit="exit"
 											key={`f_${i}`}
+											className="text-black text-sm hover:text-primary transition-colors"
 										>
 											{link.title}
 										</motion.a>
