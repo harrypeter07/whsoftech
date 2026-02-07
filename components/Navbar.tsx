@@ -149,16 +149,16 @@ export function Navbar() {
 							animate="open"
 							exit="closed"
 							variants={menuVariants}
-							className="absolute top-0 right-0 w-[320px] h-[450px] bg-[#c9fd74] rounded-[25px] z-40"
+							className="absolute top-0 right-0 w-[320px] h-[450px] bg-white/10 backdrop-blur-xl backdrop-saturate-150 border border-white/20 shadow-2xl rounded-[25px] z-40"
 						>
 							<div className="flex flex-col justify-between h-full p-[60px_30px_30px_120px] relative">
 							{/* Close Button */}
-							<button
+								<button
 								onClick={() => setIsOpen(false)}
-								className="absolute top-4 right-4 p-2 text-black hover:text-primary transition-colors z-50"
+								className="absolute top-6 right-6 px-3 py-1 bg-white/80 hover:bg-white text-black hover:text-primary rounded-lg transition-all duration-200 text-sm font-medium z-50"
 								aria-label="Close menu"
 							>
-								<X size={24} />
+								Close
 							</button>
 								{/* Logo + Company name */}
 								<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
@@ -184,14 +184,14 @@ export function Navbar() {
 												animate="enter"
 												exit="exit"
 											>
-													<a className="text-decoration-none text-black text-[36px]">
+												<Link href={link.href} className="text-decoration-none text-black text-[28px] font-medium hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
 													{link.label}
-												</a>
+												</Link>
 											</motion.div>
 										))}
 									</div>
 								</div>
-								<motion.div className="flex flex-wrap gap-2" variants={slideIn}>
+								<motion.div className="flex flex-wrap gap-3" variants={slideIn}>
 									{[
 										{ title: "Facebook", href: "/" },
 										{ title: "LinkedIn", href: "/" },
@@ -205,7 +205,7 @@ export function Navbar() {
 											animate="enter"
 											exit="exit"
 											key={`f_${i}`}
-											className="text-black text-sm hover:text-primary transition-colors"
+											className="text-black text-xs hover:text-primary transition-colors bg-white/50 px-2 py-1 rounded"
 										>
 											{link.title}
 										</motion.a>
