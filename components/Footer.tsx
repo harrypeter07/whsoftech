@@ -104,7 +104,7 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-3">
             <p className="text-sm opacity-90">&copy; {new Date().getFullYear()} whsofttech</p>
             <div className="flex gap-3">
-              <a href="#" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="LinkedIn"><Linkedin size={18} /></a>
+              <a href="https://linkedin.com/in/whsofttech" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="LinkedIn"><Linkedin size={18} /></a>
               <a href="#" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="GitHub"><Github size={18} /></a>
               <a href="#" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="Twitter"><Twitter size={18} /></a>
             </div>

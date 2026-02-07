@@ -43,8 +43,8 @@ export function Navbar() {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-14 min-h-[3.5rem]">
 					{/* Logo + Company name */}
-					<Link href="/" className="flex items-center gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
-						<div className="relative w-8 h-8 flex-shrink-0 group-hover:scale-110 transition-transform">
+					<Link href="/" className="flex items-center gap-2 text-primary font-semibold group" aria-label="whsofttech Home">
+						<div className="relative w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 group-hover:scale-110 transition-transform">
 							<Image
 								src="/logo.png"
 								alt="whsofttech"
@@ -52,7 +52,7 @@ export function Navbar() {
 								className="object-contain"
 							/>
 						</div>
-						<span className="hidden sm:inline text-lg group-hover:text-accent transition-colors duration-300">whsofttech</span>
+						<span className="text-sm sm:text-lg group-hover:text-accent transition-colors duration-300">whsofttech</span>
 					</Link>
 
 					{/* Desktop Navigation */}

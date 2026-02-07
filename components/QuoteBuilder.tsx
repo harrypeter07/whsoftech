@@ -171,15 +171,15 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
       case 1:
         return (
           <Card className="w-full max-w-2xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-2xl text-center">Tell us about yourself</CardTitle>
+            <CardHeader className="px-4 sm:px-6">
+              <CardTitle className="text-xl sm:text-2xl text-center">Tell us about yourself</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 px-4 sm:px-6">
               <div>
                 <label className="block text-sm font-medium mb-2">Your Name *</label>
                 <input
                   type="text"
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                   value={projectDetails.name}
                   onChange={(e) => setProjectDetails({...projectDetails, name: e.target.value})}
                   placeholder="John Doe"
@@ -189,7 +189,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                 <label className="block text-sm font-medium mb-2">Email Address *</label>
                 <input
                   type="email"
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                   value={projectDetails.email}
                   onChange={(e) => setProjectDetails({...projectDetails, email: e.target.value})}
                   placeholder="john@example.com"
@@ -199,7 +199,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                 <label className="block text-sm font-medium mb-2">Phone Number *</label>
                 <input
                   type="tel"
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                   value={projectDetails.phone}
                   onChange={(e) => setProjectDetails({...projectDetails, phone: e.target.value})}
                   placeholder="+91 98765 43210"
@@ -209,7 +209,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                 <label className="block text-sm font-medium mb-2">Company Name</label>
                 <input
                   type="text"
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                   value={projectDetails.company}
                   onChange={(e) => setProjectDetails({...projectDetails, company: e.target.value})}
                   placeholder="Acme Corporation"
@@ -222,15 +222,15 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
       case 2:
         return (
           <Card className="w-full max-w-4xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-2xl text-center">What services do you need?</CardTitle>
+            <CardHeader className="px-4 sm:px-6">
+              <CardTitle className="text-xl sm:text-2xl text-center">What services do you need?</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <CardContent className="px-4 sm:px-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {Object.entries(servicePackages).map(([service, info]) => (
                   <div
                     key={service}
-                    className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                    className={`p-3 sm:p-4 border-2 rounded-lg cursor-pointer transition-all ${
                       projectDetails.services.includes(service)
                         ? 'border-primary bg-primary/5'
                         : 'border-border hover:border-primary/50'
@@ -242,23 +242,25 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                       setProjectDetails({...projectDetails, services: newServices});
                     }}
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                        {info.icon}
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                      <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg text-primary">
+                        <div className="w-4 h-4 sm:w-6 sm:h-6">
+                          {info.icon}
+                        </div>
                       </div>
-                      <h3 className="font-semibold">{service}</h3>
+                      <h3 className="font-semibold text-sm sm:text-base leading-tight">{service}</h3>
                     </div>
-                    <div className="text-sm text-muted-foreground mb-2">
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-2">
                       {info.timeline}
                     </div>
-                    <div className="text-lg font-bold text-primary">
+                    <div className="text-sm sm:text-lg font-bold text-primary">
                       ₹{info.basePrice.toLocaleString('en-IN')}
                     </div>
                     <div className="mt-2 space-y-1">
                       {info.features.slice(0, 2).map((feature, idx) => (
                         <div key={idx} className="text-xs text-muted-foreground flex items-center gap-1">
-                          <Check size={12} className="text-primary" />
-                          {feature}
+                          <Check size={10} className="text-primary flex-shrink-0" />
+                          <span className="line-clamp-1">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -272,15 +274,15 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
       case 3:
         return (
           <Card className="w-full max-w-4xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-2xl text-center">Additional Features</CardTitle>
+            <CardHeader className="px-4 sm:px-6">
+              <CardTitle className="text-xl sm:text-2xl text-center">Additional Features</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="px-4 sm:px-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {additionalFeatures.map((feature) => (
                   <div
                     key={feature.name}
-                    className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                    className={`p-3 sm:p-4 border-2 rounded-lg cursor-pointer transition-all ${
                       projectDetails.features.includes(feature.name)
                         ? 'border-primary bg-primary/5'
                         : 'border-border hover:border-primary/50'
@@ -292,9 +294,9 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                       setProjectDetails({...projectDetails, features: newFeatures});
                     }}
                   >
-                    <div className="flex justify-between items-center">
-                      <h3 className="font-semibold">{feature.name}</h3>
-                      <div className="text-lg font-bold text-primary">
+                    <div className="flex justify-between items-start gap-2">
+                      <h3 className="font-semibold text-sm sm:text-base leading-tight flex-1">{feature.name}</h3>
+                      <div className="text-sm sm:text-lg font-bold text-primary flex-shrink-0">
                         ₹{feature.price.toLocaleString('en-IN')}
                       </div>
                     </div>
@@ -308,14 +310,14 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
       case 4:
         return (
           <Card className="w-full max-w-2xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-2xl text-center">Project Details</CardTitle>
+            <CardHeader className="px-4 sm:px-6">
+              <CardTitle className="text-xl sm:text-2xl text-center">Project Details</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 px-4 sm:px-6">
               <div>
                 <label className="block text-sm font-medium mb-2">Project Type *</label>
                 <select
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                   value={projectDetails.projectType}
                   onChange={(e) => setProjectDetails({...projectDetails, projectType: e.target.value})}
                 >
@@ -329,7 +331,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
               <div>
                 <label className="block text-sm font-medium mb-2">Expected Timeline *</label>
                 <select
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                   value={projectDetails.timeline}
                   onChange={(e) => setProjectDetails({...projectDetails, timeline: e.target.value})}
                 >
@@ -345,7 +347,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
               <div>
                 <label className="block text-sm font-medium mb-2">Budget Range *</label>
                 <select
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                   value={projectDetails.budget}
                   onChange={(e) => setProjectDetails({...projectDetails, budget: e.target.value})}
                 >
@@ -360,7 +362,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
               <div>
                 <label className="block text-sm font-medium mb-2">Project Description *</label>
                 <textarea
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent h-32"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent h-32 text-sm resize-none"
                   value={projectDetails.description}
                   onChange={(e) => setProjectDetails({...projectDetails, description: e.target.value})}
                   placeholder="Tell us more about your project requirements..."
@@ -396,17 +398,17 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
     
     return (
       <Card className="w-full max-w-2xl mx-auto">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center flex items-center justify-center gap-2">
-            <Calculator size={28} />
+        <CardHeader className="px-4 sm:px-6">
+          <CardTitle className="text-xl sm:text-2xl text-center flex items-center justify-center gap-2">
+            <Calculator size={20} className="sm:size-28" />
             Project Summary
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6">
           {/* Client Info */}
           <div>
-            <h3 className="font-semibold mb-2">Client Information</h3>
-            <div className="space-y-1 text-sm">
+            <h3 className="font-semibold mb-2 text-sm sm:text-base">Client Information</h3>
+            <div className="space-y-1 text-xs sm:text-sm">
               <p><span className="font-medium">Name:</span> {projectDetails.name}</p>
               <p><span className="font-medium">Email:</span> {projectDetails.email}</p>
               <p><span className="font-medium">Phone:</span> {projectDetails.phone}</p>
@@ -418,14 +420,14 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
 
           {/* Selected Services */}
           <div>
-            <h3 className="font-semibold mb-2">Selected Services</h3>
+            <h3 className="font-semibold mb-2 text-sm sm:text-base">Selected Services</h3>
             <div className="space-y-2">
               {projectDetails.services.map(service => {
                 const pkg = servicePackages[service as keyof typeof servicePackages];
                 return (
-                  <div key={service} className="flex justify-between items-center">
-                    <span>{service}</span>
-                    <span className="font-medium">₹{pkg.basePrice.toLocaleString('en-IN')}</span>
+                  <div key={service} className="flex justify-between items-center gap-2">
+                    <span className="text-xs sm:text-sm flex-1">{service}</span>
+                    <span className="font-medium text-xs sm:text-sm">₹{pkg.basePrice.toLocaleString('en-IN')}</span>
                   </div>
                 );
               })}
@@ -437,14 +439,14 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
             <>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Additional Features</h3>
+                <h3 className="font-semibold mb-2 text-sm sm:text-base">Additional Features</h3>
                 <div className="space-y-2">
                   {projectDetails.features.map(feature => {
                     const featureInfo = additionalFeatures.find(f => f.name === feature);
                     return (
-                      <div key={feature} className="flex justify-between items-center">
-                        <span>{feature}</span>
-                        <span className="font-medium">₹{featureInfo?.price.toLocaleString('en-IN')}</span>
+                      <div key={feature} className="flex justify-between items-center gap-2">
+                        <span className="text-xs sm:text-sm flex-1">{feature}</span>
+                        <span className="font-medium text-xs sm:text-sm">₹{featureInfo?.price.toLocaleString('en-IN')}</span>
                       </div>
                     );
                   })}
@@ -457,8 +459,8 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
 
           {/* Project Details */}
           <div>
-            <h3 className="font-semibold mb-2">Project Details</h3>
-            <div className="space-y-1 text-sm">
+            <h3 className="font-semibold mb-2 text-sm sm:text-base">Project Details</h3>
+            <div className="space-y-1 text-xs sm:text-sm">
               <p><span className="font-medium">Type:</span> {projectDetails.projectType}</p>
               <p><span className="font-medium">Timeline:</span> {projectDetails.timeline}</p>
               <p><span className="font-medium">Budget:</span> {projectDetails.budget}</p>
@@ -468,26 +470,26 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
           <Separator />
 
           {/* Total */}
-          <div className="bg-primary/5 p-4 rounded-lg">
-            <div className="flex justify-between items-center text-xl font-bold">
-              <span>Total Estimated Cost:</span>
-              <span className="text-primary">₹{total.toLocaleString('en-IN')}</span>
+          <div className="bg-primary/5 p-3 sm:p-4 rounded-lg">
+            <div className="flex justify-between items-center text-lg sm:text-xl font-bold">
+              <span className="text-sm sm:text-base">Total Estimated Cost:</span>
+              <span className="text-primary text-sm sm:text-base">₹{total.toLocaleString('en-IN')}</span>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Button
               variant="outline"
               onClick={() => setStep(4)}
-              className="flex-1"
+              className="flex items-center justify-center w-full sm:w-auto order-2 sm:order-1"
             >
               <ArrowLeft size={16} className="mr-2" />
               Back to Edit
             </Button>
             <Button
               asChild
-              className="flex-1 bg-green-600 hover:bg-green-700"
+              className="flex items-center justify-center w-full sm:w-auto order-1 sm:order-2 bg-green-600 hover:bg-green-700"
             >
               <a
                 href={generateWhatsAppMessage()}
@@ -506,77 +508,75 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
   };
 
   return (
-    <div className="min-h-screen bg-background py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Progress Bar */}
-        <div className="mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="flex items-center space-x-2">
-              {Array.from({ length: totalSteps }, (_, i) => (
-                <div key={i} className="flex items-center">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
-                      i < step
-                        ? 'bg-primary text-primary-foreground'
-                        : i === step
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-muted-foreground'
-                    }`}
-                  >
-                    {i < step ? <Check size={16} /> : i + 1}
-                  </div>
-                  {i < totalSteps - 1 && (
-                    <div
-                      className={`w-8 h-1 mx-2 transition-colors ${
-                        i < step ? 'bg-primary' : 'bg-muted'
-                      }`}
-                    />
-                  )}
+    <div className="w-full">
+      {/* Progress Bar */}
+      <div className="mb-4 sm:mb-6">
+        <div className="flex items-center justify-center mb-3">
+          <div className="flex items-center space-x-1 sm:space-x-2">
+            {Array.from({ length: totalSteps }, (_, i) => (
+              <div key={i} className="flex items-center">
+                <div
+                  className={`w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs sm:text-sm font-medium transition-colors ${
+                    i < step
+                      ? 'bg-primary text-primary-foreground'
+                      : i === step
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground'
+                  }`}
+                >
+                  {i < step ? <Check size={10} className="sm:size-14" /> : i + 1}
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className="text-center">
-            <h2 className="text-lg font-medium">
-              {step === 1 && "Client Information"}
-              {step === 2 && "Select Services"}
-              {step === 3 && "Additional Features"}
-              {step === 4 && "Project Details"}
-              {step === 5 && "Review & Send"}
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Step {step} of {step === 5 ? totalSteps + 1 : totalSteps}
-            </p>
+                {i < totalSteps - 1 && (
+                  <div
+                    className={`w-3 sm:w-6 h-1 mx-1 sm:mx-2 transition-colors ${
+                      i < step ? 'bg-primary' : 'bg-muted'
+                    }`}
+                  />
+                )}
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Step Content */}
-        {step <= 4 ? renderStep() : renderSummary()}
-
-        {/* Navigation Buttons */}
-        {step <= 4 && (
-          <div className="flex justify-center mt-8 gap-4">
-            {step > 1 && (
-              <Button
-                variant="outline"
-                onClick={() => setStep(step - 1)}
-                className="flex items-center"
-              >
-                <ArrowLeft size={16} className="mr-2" />
-                Previous
-              </Button>
-            )}
-            <Button
-              onClick={() => setStep(step + 1)}
-              disabled={!canProceed()}
-              className="flex items-center"
-            >
-              {step === 4 ? 'Review Quote' : 'Next'}
-              <ArrowRight size={16} className="ml-2" />
-            </Button>
-          </div>
-        )}
+        <div className="text-center px-2">
+          <h2 className="text-sm sm:text-base font-medium">
+            {step === 1 && "Client Information"}
+            {step === 2 && "Select Services"}
+            {step === 3 && "Additional Features"}
+            {step === 4 && "Project Details"}
+            {step === 5 && "Review & Send"}
+          </h2>
+          <p className="text-xs text-muted-foreground">
+            Step {step} of {step === 5 ? totalSteps + 1 : totalSteps}
+          </p>
+        </div>
       </div>
+
+      {/* Step Content */}
+      {step <= 4 ? renderStep() : renderSummary()}
+
+      {/* Navigation Buttons */}
+      {step <= 4 && (
+        <div className="flex flex-col sm:flex-row justify-center mt-4 sm:mt-6 gap-2 sm:gap-3 px-2">
+          {step > 1 && (
+            <Button
+              variant="outline"
+              onClick={() => setStep(step - 1)}
+              className="flex items-center w-full sm:w-auto order-2 sm:order-1"
+            >
+              <ArrowLeft size={14} className="mr-2" />
+              Previous
+            </Button>
+          )}
+          <Button
+            onClick={() => setStep(step + 1)}
+            disabled={!canProceed()}
+            className="flex items-center w-full sm:w-auto order-1 sm:order-2"
+          >
+            {step === 4 ? 'Review Quote' : 'Next'}
+            <ArrowRight size={14} className="ml-2" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
