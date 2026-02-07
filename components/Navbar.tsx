@@ -30,8 +30,8 @@ export function Navbar() {
 			transition: { duration: 0.75, delay: 0.35, type: "tween" as const, ease: [0.76, 0, 0.24, 1] as const }
 		},
 		open: {
-			width: "480px",
-			height: "650px",
+			width: "320px",
+			height: "450px",
 			top: "-25px",
 			right: "-25px",
 			transition: { duration: 0.75, type: "tween" as const, ease: [0.76, 0, 0.24, 1] as const }
@@ -101,6 +101,19 @@ export function Navbar() {
 		}
 	}, [isOpen]);
 
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (isOpen && mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isOpen]);
+
 	return (
 		<nav className="fixed top-0 right-0 z-50">
 			<div className="relative">
@@ -136,9 +149,17 @@ export function Navbar() {
 							animate="open"
 							exit="closed"
 							variants={menuVariants}
-							className="absolute top-0 right-0 w-[480px] h-[650px] bg-[#c9fd74] rounded-[25px] z-40"
+							className="absolute top-0 right-0 w-[320px] h-[450px] bg-[#c9fd74] rounded-[25px] z-40"
 						>
-							<div className="flex flex-col justify-between h-full p-[60px_30px_30px_80px]">
+							<div className="flex flex-col justify-between h-full p-[60px_30px_30px_120px] relative">
+							{/* Close Button */}
+							<button
+								onClick={() => setIsOpen(false)}
+								className="absolute top-4 right-4 p-2 text-black hover:text-primary transition-colors z-50"
+								aria-label="Close menu"
+							>
+								<X size={24} />
+							</button>
 								{/* Logo + Company name */}
 								<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
 									<div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 group-hover:scale-110 transition-transform">
