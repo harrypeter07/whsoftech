@@ -115,107 +115,136 @@ export function Navbar() {
 	}, [isOpen]);
 
 	return (
-		<nav className="fixed top-0 right-0 z-50">
-			<div className="relative">
-				{/* Mobile Menu Button */}
-				<motion.button
-					whileHover={{ scale: 1.05 }}
-					whileTap={{ scale: 0.95 }}
-					onClick={() => setIsOpen(!isOpen)}
-					className="md:hidden p-3 text-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 relative overflow-hidden"
-					aria-label="Toggle menu"
-				>
-					<motion.div
-						className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20"
-						initial={false}
-						animate={isOpen ? "open" : "closed"}
-						variants={{
-							open: { rotate: 45 },
-							closed: { rotate: 0 }
-						}}
-						transition={{ duration: 0.2 }}
-					>
-						<div className="relative z-10">
-							{isOpen ? <X size={24} /> : <Menu size={24} />}
+		<nav className="fixed top-0 right-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="flex justify-between items-center h-16">
+					{/* Logo */}
+					<Link href="/" className="flex items-center gap-2 text-primary font-semibold group" aria-label="whsofttech Home">
+						<div className="relative w-8 h-8 flex-shrink-0 group-hover:scale-110 transition-transform">
+							<Image
+								src="/logo.png"
+								alt="whsofttech"
+								fill
+								className="object-contain"
+							/>
 						</div>
-					</motion.div>
-				</motion.button>
-				{/* Mobile Navigation */}
-				<AnimatePresence>
-					{isOpen && (
+						<span className="text-lg font-bold group-hover:text-accent transition-colors duration-300">whsofttech</span>
+					</Link>
+
+					{/* Desktop Navigation */}
+					<div className="hidden md:flex items-center space-x-8">
+						{navLinks.map((link) => (
+							<Link
+								key={link.href}
+								href={link.href}
+								className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+							>
+								{link.label}
+							</Link>
+						))}
+					</div>
+
+					{/* Mobile Menu Button */}
+					<motion.button
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+						onClick={() => setIsOpen(!isOpen)}
+						className="md:hidden p-3 text-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 relative overflow-hidden"
+						aria-label="Toggle menu"
+					>
 						<motion.div
-							ref={mobileMenuRef}
-							initial="closed"
-							animate="open"
-							exit="closed"
-							variants={menuVariants}
-							className="absolute top-0 right-0 w-[320px] h-[450px] bg-white/10 backdrop-blur-xl backdrop-saturate-150 border border-white/20 shadow-2xl rounded-[25px] z-40"
+							className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20"
+							initial={false}
+							animate={isOpen ? "open" : "closed"}
+							variants={{
+								open: { rotate: 45 },
+								closed: { rotate: 0 }
+							}}
+							transition={{ duration: 0.2 }}
 						>
-							<div className="flex flex-col justify-between h-full p-[60px_30px_30px_120px] relative">
+							<div className="relative z-10">
+								{isOpen ? <X size={24} /> : <Menu size={24} />}
+							</div>
+						</motion.div>
+					</motion.button>
+				</div>
+			</div>
+
+			{/* Mobile Navigation */}
+			<AnimatePresence>
+				{isOpen && (
+					<motion.div
+						ref={mobileMenuRef}
+						initial="closed"
+						animate="open"
+						exit="closed"
+						variants={menuVariants}
+						className="absolute top-0 right-0 w-[320px] h-[450px] bg-white/10 backdrop-blur-xl backdrop-saturate-150 border border-white/20 shadow-2xl rounded-[25px] z-40"
+					>
+						<div className="flex flex-col justify-between h-full p-[60px_30px_30px_120px] relative">
 							{/* Close Button */}
-								<button
+							<button
 								onClick={() => setIsOpen(false)}
 								className="absolute top-6 right-6 px-3 py-1 bg-white/80 hover:bg-white text-black hover:text-primary rounded-lg transition-all duration-200 text-sm font-medium z-50"
 								aria-label="Close menu"
 							>
 								Close
 							</button>
-								{/* Logo + Company name */}
-								<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
-									<div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 group-hover:scale-110 transition-transform">
-										<Image
-											src="/logo.png"
-											alt="whsofttech"
-											fill
-											className="object-contain"
-										/>
-									</div>
-									<span className="text-base sm:text-lg font-bold group-hover:text-accent transition-colors duration-300">whsofttech</span>
-								</Link>
-								<div className="flex-1 overflow-y-auto">
-									<div className="flex gap-[10px] flex-col">
-										{navLinks.map((link, i) => (
-											<motion.div
-												key={`b_${i}`}
-												className="relative"
-												custom={i}
-												variants={perspective}
-												initial="initial"
-												animate="enter"
-												exit="exit"
-											>
-												<Link href={link.href} className="text-decoration-none text-black text-[28px] font-medium hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
-													{link.label}
-												</Link>
-											</motion.div>
-										))}
-									</div>
+							{/* Logo + Company name */}
+							<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
+								<div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 group-hover:scale-110 transition-transform">
+									<Image
+										src="/logo.png"
+										alt="whsofttech"
+										fill
+										className="object-contain"
+									/>
 								</div>
-								<motion.div className="flex flex-wrap gap-3" variants={slideIn}>
-									{[
-										{ title: "Facebook", href: "/" },
-										{ title: "LinkedIn", href: "/" },
-										{ title: "Instagram", href: "/" },
-										{ title: "Twitter", href: "/" }
-									].map((link, i) => (
-										<motion.a
-											variants={slideIn}
-											custom={i} 
+								<span className="text-base sm:text-lg font-bold group-hover:text-accent transition-colors duration-300">whsofttech</span>
+							</Link>
+							<div className="flex-1 overflow-y-auto">
+								<div className="flex gap-[10px] flex-col">
+									{navLinks.map((link, i) => (
+										<motion.div
+											key={`b_${i}`}
+											className="relative"
+											custom={i}
+											variants={perspective}
 											initial="initial"
 											animate="enter"
 											exit="exit"
-											key={`f_${i}`}
-											className="text-black text-xs hover:text-primary transition-colors bg-white/50 px-2 py-1 rounded"
 										>
-											{link.title}
-										</motion.a>
+											<Link href={link.href} className="text-decoration-none text-black text-[28px] font-medium hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
+												{link.label}
+											</Link>
+										</motion.div>
 									))}
-								</motion.div>
+								</div>
 							</div>
-						</motion.div>
-					)}
-				</AnimatePresence>
-			</div>
+							<motion.div className="flex flex-wrap gap-3" variants={slideIn}>
+								{[
+									{ title: "Facebook", href: "/" },
+									{ title: "LinkedIn", href: "/" },
+									{ title: "Instagram", href: "/" },
+									{ title: "Twitter", href: "/" }
+								].map((link, i) => (
+									<motion.a
+										variants={slideIn}
+										custom={i} 
+										initial="initial"
+										animate="enter"
+										exit="exit"
+										key={`f_${i}`}
+										className="text-black text-xs hover:text-primary transition-colors bg-white/50 px-2 py-1 rounded"
+									>
+										{link.title}
+									</motion.a>
+								))}
+							</motion.div>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</nav>
 	);
 }
