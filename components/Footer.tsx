@@ -32,12 +32,18 @@ export function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-primary text-primary-foreground relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer ref={footerRef} className="bg-gradient-to-br from-primary to-accent text-primary-foreground relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 right-20 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-80 h-80 bg-white/3 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
           <div className="footer-column group">
-            <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-3 mb-4">
               <div className="relative w-10 h-10 flex-shrink-0">
                 <Image
                   src="/logo.png"
@@ -48,7 +54,7 @@ export function Footer() {
               </div>
               <h3 className="font-bold text-lg">whsofttech</h3>
             </div>
-            <p className="text-sm opacity-90">
+            <p className="text-sm opacity-90 leading-relaxed">
               Software solutions that scale.
             </p>
           </div>

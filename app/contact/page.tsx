@@ -1,17 +1,22 @@
+"use client";
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ContactForm } from '@/components/ContactForm';
+import { QuoteBuilder } from '@/components/QuoteBuilder';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
-
-export const metadata = {
-  title: 'Contact Us - whsofttech',
-  description: 'Get in touch with whsofttech. We\'d love to hear about your project.',
-};
+import { Mail, Phone, MapPin, Clock, MessageCircle, Calculator } from 'lucide-react';
 
 export default function ContactPage() {
+  const [showQuoteBuilder, setShowQuoteBuilder] = useState(false);
+  
+  if (showQuoteBuilder) {
+    return <QuoteBuilder />;
+  }
+
   const contactInfo = [
     {
       icon: <Mail size={24} />,
@@ -24,6 +29,12 @@ export default function ContactPage() {
       title: 'Phone',
       value: '+91 8208065506',
       link: 'tel:+918208065506',
+    },
+    {
+      icon: <MessageCircle size={24} />,
+      title: 'WhatsApp',
+      value: '+91 9096539177',
+      link: 'https://wa.me/919096539177?text=Hi%20whsofttech!%20I%20would%20like%20to%20discuss%20a%20project%20with%20you.',
     },
     {
       icon: <MapPin size={24} />,
@@ -80,6 +91,28 @@ export default function ContactPage() {
                   </Card>
                 ))}
               </div>
+
+              {/* Quote Builder Button */}
+              <Card className="bg-gradient-to-r from-primary to-accent text-primary-foreground border-0">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                      <Calculator size={24} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg mb-1">Get Instant Quote</h3>
+                      <p className="text-sm opacity-90">Build your custom project quote and send via WhatsApp</p>
+                    </div>
+                    <Button
+                      onClick={() => setShowQuoteBuilder(true)}
+                      variant="secondary"
+                      className="bg-white/20 hover:bg-white/30 text-white border-white/30"
+                    >
+                      Build Quote
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
 
             </div>
 

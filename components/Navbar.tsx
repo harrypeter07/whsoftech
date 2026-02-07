@@ -39,21 +39,20 @@ export function Navbar() {
 	}, [isOpen]);
 
 	return (
-		<nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+		<nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-md shadow-sm transition-all duration-300">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-14 min-h-[3.5rem]">
 					{/* Logo + Company name */}
-					<Link href="/" className="flex items-center gap-2 text-primary font-semibold group" aria-label="whsofttech Home">
-						<div className="relative w-8 h-8 flex-shrink-0 group-hover:opacity-90 transition-opacity">
+					<Link href="/" className="flex items-center gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
+						<div className="relative w-8 h-8 flex-shrink-0 group-hover:scale-110 transition-transform">
 							<Image
 								src="/logo.png"
 								alt="whsofttech"
 								fill
 								className="object-contain"
-								priority
 							/>
 						</div>
-						<span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors hidden sm:inline">whsofttech</span>
+						<span className="hidden sm:inline text-lg group-hover:text-accent transition-colors duration-300">whsofttech</span>
 					</Link>
 
 					{/* Desktop Navigation */}
