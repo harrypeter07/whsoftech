@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import gsap from "gsap";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +20,68 @@ export function Navbar() {
 		{ href: "/projects", label: "Portfolio" },
 		{ href: "/contact", label: "Contact" },
 	];
+
+	const menuVariants = {
+		closed: {
+			width: "100px",
+			height: "40px",
+			top: "0px",
+			right: "0px",
+			transition: { duration: 0.75, delay: 0.35, type: "tween", ease: [0.76, 0, 0.24, 1] }
+		},
+		open: {
+			width: "480px",
+			height: "650px",
+			top: "-25px",
+			right: "-25px",
+			transition: { duration: 0.75, type: "tween", ease: [0.76, 0, 0.24, 1] }
+		}
+	};
+
+	const perspective = {
+		initial: {
+			opacity: 0,
+			rotateX: 90,
+			translateY: 80,
+			translateX: -20,
+		},
+		enter: (i: number) => ({
+			opacity: 1,
+			rotateX: 0,
+			translateY: 0,
+			translateX: 0,
+			transition: {
+				duration: 0.65, 
+				delay: 0.5 + (i * 0.1), 
+				ease: [.215,.61,.355,1],
+				opacity: { duration: 0.35 }
+			}
+		}),
+		exit: {
+			opacity: 0,
+			transition: { duration: 0.5, type: "linear", ease: [0.76, 0, 0.24, 1] }
+		}
+	};
+
+	const slideIn = {
+		initial: {
+			opacity: 0,
+			y: 20
+		},
+		enter: (i: number) => ({
+			opacity: 1,
+			y: 0,
+			transition: { 
+				duration: 0.5,
+				delay: 0.75 + (i * 0.1), 
+				ease: [.215,.61,.355,1]
+			}
+		}),
+		exit: {
+			opacity: 0,
+			transition: { duration: 0.5, type: "tween", ease: "easeInOut" }
+		}
+	};
 
 	useEffect(() => {
 		if (isOpen && mobileMenuRef.current) {
@@ -39,81 +102,106 @@ export function Navbar() {
 	}, [isOpen]);
 
 	return (
-		<nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-md shadow-sm transition-all duration-300">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="flex justify-between items-center h-14 min-h-[3.5rem]">
-					{/* Logo + Company name */}
-					<Link href="/" className="flex items-center gap-2 text-primary font-semibold group" aria-label="whsofttech Home">
-						<div className="relative w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 group-hover:scale-110 transition-transform">
-							<Image
-								src="/logo.png"
-								alt="whsofttech"
-								fill
-								className="object-contain"
-							/>
+		<nav className="fixed top-0 right-0 z-50">
+			<div className="relative">
+				{/* Menu Button */}
+				<motion.div 
+					className="relative"
+					variants={menuVariants}
+					animate={isOpen ? "open" : "closed"}
+					initial="closed"
+				>
+					<div className="relative z-10">
+						<motion.div 
+						className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20"
+						initial={false}
+						animate={isOpen ? "open" : "closed"}
+						variants={{
+							open: { rotate: 45 },
+							closed: { rotate: 0 }
+						}}
+						transition={{ duration: 0.2 }}
+					>
+						<div className="relative z-10">
+							{isOpen ? <X size={20} /> : <Menu size={20} />}
 						</div>
-						<span className="text-sm sm:text-lg group-hover:text-accent transition-colors duration-300">whsofttech</span>
-					</Link>
-
-					{/* Desktop Navigation */}
-					<div className="hidden md:flex gap-8" ref={navRef}>
-						{navLinks.map((link, index) => (
-							<Link
-								key={link.href}
-								href={link.href}
-								className="relative text-sm font-medium text-foreground hover:text-primary transition-colors duration-300 group"
-								style={{ transitionDelay: `${index * 10}ms` }}
-							>
-								{link.label}
-								<span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300" />
-							</Link>
-						))}
+					</motion.div>
+					<div 
+						className="absolute inset-0 flex items-center justify-center"
+						style={{ transformStyle: "preserve-3d", perspective: "120px", perspectiveOrigin: "bottom" }}
+					>
+						<motion.div
+							className="relative"
+						custom={0}
+						variants={perspective}
+						initial="initial"
+						animate="enter"
+						exit="exit"
+					>
+						<a>
+							<Menu />
+						</a>
+						</motion.div>
 					</div>
-
-					{/* Desktop CTA Button */}
-					<Button
-						asChild
-						className="hidden md:inline-flex bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-lg hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300"
-					>
-						<Link href="/contact">Get Started</Link>
-					</Button>
-
-					{/* Mobile Menu Button */}
-					<button
-						onClick={() => setIsOpen(!isOpen)}
-						className="md:hidden p-2 text-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300"
-						aria-label="Toggle menu"
-					>
-						{isOpen ? <X size={24} /> : <Menu size={24} />}
-					</button>
 				</div>
+				</motion.div>
 
 				{/* Mobile Navigation */}
-				{isOpen && (
-					<div
-						ref={mobileMenuRef}
-						className="md:hidden pb-3 space-y-1 rounded-lg mt-2 p-2 border border-border bg-muted/50"
+				<AnimatePresence>
+					{isOpen && (
+						<motion.div
+							ref={mobileMenuRef}
+						initial="closed"
+						animate="open"
+						exit="closed"
+						variants={menuVariants}
+						className="absolute top-0 right-0 w-[480px] h-[650px] bg-[#c9fd74] rounded-[25px] z-40"
 					>
-						{navLinks.map((link) => (
-							<Link
-								key={link.href}
-								href={link.href}
-								className="block px-4 py-2 text-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300"
-								onClick={() => setIsOpen(false)}
+						<div className="flex flex-col justify-between h-full p-[100px_40px_50px_40px]">
+							<div className="flex-1 overflow-y-auto">
+								<div className="flex gap-[10px] flex-col">
+								{navLinks.map((link, i) => (
+									<motion.div
+									key={`b_${i}`}
+									className="relative"
+								custom={i}
+								variants={perspective}
+								initial="initial"
+								animate="enter"
+								exit="exit"
 							>
-								{link.label}
-							</Link>
+								<a className="text-decoration-none text-black text-[46px]">
+									{link.label}
+								</a>
+							</motion.div>
 						))}
-						<Button
-							asChild
-							className="w-full mt-2 bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-lg transition-all duration-300"
-							onClick={() => setIsOpen(false)}
-						>
-							<Link href="/contact">Get Started</Link>
-						</Button>
+						</div>
 					</div>
+						<motion.div className="flex flex-wrap" variants={slideIn}>
+							{[
+								{ title: "Facebook", href: "/" },
+							{ title: "LinkedIn", href: "/" },
+							{ title: "Instagram", href: "/" },
+						{ title: "Twitter", href: "/" }
+						].map((link, i) => (
+								<motion.a
+								variants={slideIn}
+								custom={i} 
+								initial="initial"
+							animate="enter"
+							exit="exit"
+							key={`f_${i}`}
+							>
+							{link.title}
+							</motion.a>
+						))}
+					</motion.div>
+					</div>
+				</motion.div>
 				)}
+				</AnimatePresence>
 			</div>
+		</div>
 		</nav>
 	);
 }
