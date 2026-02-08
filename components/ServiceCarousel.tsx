@@ -320,8 +320,8 @@ const ThreeDImageCarousel: FC<ThreeDImageCarouselProps> = ({
                 {/* Caption Display */}
                 {slides[activeIndex]?.caption && (
                     <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center z-10 px-4">
-                        <div className="bg-black/80 backdrop-blur-sm rounded-lg px-4 py-2 max-w-[90vw]">
-                            <p className="text-white font-semibold text-sm sm:text-base md:text-lg">{slides[activeIndex].caption}</p>
+                        <div className="bg-black/90 backdrop-blur-sm rounded-lg px-6 py-4 max-w-[90vw] md:max-w-[400px]">
+                            <p className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl">{slides[activeIndex].caption}</p>
                         </div>
                     </div>
                 )}
