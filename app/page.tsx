@@ -78,9 +78,9 @@ export default function Home() {
             pauseOnHover={true}
             className="bg-gradient-to-b from-background to-muted/20 rounded-2xl py-8"
           />
-          <div className="text-center mt-6">
-            <Button asChild size="lg" className="bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300">
-              <Link href="/services" className="flex items-center gap-2">View All Services <ArrowRight className="w-4 h-4" /></Link>
+          <div className="text-center mt-8">
+            <Button asChild size="lg" className="bg-primary text-white hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300 px-8 py-6 text-lg font-semibold">
+              <Link href="/services" className="flex items-center gap-2">View All Services <ArrowRight className="w-5 h-5" /></Link>
             </Button>
           </div>
         </div>
