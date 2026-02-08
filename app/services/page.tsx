@@ -4,7 +4,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ParallaxServices } from '@/components/ParallaxServices';
 import { useEffect } from 'react';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 export default function ServicesPage() {
   useEffect(() => {
