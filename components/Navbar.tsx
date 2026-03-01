@@ -120,7 +120,7 @@ export function Navbar() {
 				<div className="flex justify-between items-center h-16">
 					{/* Logo */}
 					<Link href="/" className="flex items-center gap-2 text-primary font-semibold group" aria-label="whsofttech Home">
-						<div className="relative w-8 h-8 flex-shrink-0 group-hover:scale-110 transition-transform">
+						<div className="relative w-16 h-16 flex-shrink-0 group-hover:scale-110 transition-transform">
 							<Image
 								src="/logo.png"
 								alt="whsofttech"
@@ -128,7 +128,7 @@ export function Navbar() {
 								className="object-contain"
 							/>
 						</div>
-						<span className="text-lg font-bold group-hover:text-accent transition-colors duration-300">whsofttech</span>
+						<span className="text-base sm:text-lg font-bold group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>whsofttech</span>
 					</Link>
 
 					{/* Desktop Navigation */}
@@ -137,7 +137,8 @@ export function Navbar() {
 							<Link
 								key={link.href}
 								href={link.href}
-								className="text-foreground hover:text-primary transition-colors duration-200 font-medium relative"
+								className="text-foreground hover:text-primary transition-colors duration-200 font-medium relative text-sm sm:text-base"
+								style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}
 							>
 								{link.label}
 							</Link>
@@ -192,7 +193,7 @@ export function Navbar() {
 							</button>
 							{/* Logo + Company name */}
 							<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
-								<div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 group-hover:scale-110 transition-transform">
+								<div className="relative w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 group-hover:scale-110 transition-transform">
 									<Image
 										src="/logo.png"
 										alt="whsofttech"
@@ -214,7 +215,7 @@ export function Navbar() {
 											animate="enter"
 											exit="exit"
 										>
-											<Link href={link.href} className="text-decoration-none text-black text-[28px] font-medium hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
+											<Link href={link.href} className="text-decoration-none text-black text-2xl sm:text-[28px] font-medium hover:text-primary transition-colors" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }} onClick={() => setIsOpen(false)}>
 												{link.label}
 											</Link>
 										</motion.div>

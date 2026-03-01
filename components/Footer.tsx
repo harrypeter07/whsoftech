@@ -32,15 +32,15 @@ export function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-gradient-to-br from-primary to-accent text-primary-foreground relative overflow-hidden">
+    <footer ref={footerRef} className="bg-[#212529] text-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-20 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-20 w-80 h-80 bg-white/3 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-10 sm:mb-12">
           {/* Company Info */}
           <div className="footer-column group">
             <div className="flex items-center gap-3 mb-4">
@@ -52,17 +52,17 @@ export function Footer() {
                   className="object-contain opacity-95"
                 />
               </div>
-              <h3 className="font-bold text-lg">whsofttech</h3>
+              <h3 className="font-bold text-base sm:text-lg" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>whsofttech</h3>
             </div>
-            <p className="text-sm opacity-90 leading-relaxed">
+            <p className="text-xs sm:text-sm opacity-90 leading-relaxed" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
               Software solutions that scale.
             </p>
           </div>
 
           {/* Services */}
           <div className="footer-column">
-            <h4 className="font-semibold mb-3">Services</h4>
-            <ul className="space-y-1.5 text-sm opacity-90">
+            <h4 className="font-semibold mb-3 text-sm sm:text-base" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>Services</h4>
+            <ul className="space-y-1.5 text-xs sm:text-sm opacity-90" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
               <li><Link href="/services#software" className="hover:opacity-100 transition-opacity">Software</Link></li>
               <li><Link href="/services#ai" className="hover:opacity-100 transition-opacity">AI</Link></li>
               <li><Link href="/services#web" className="hover:opacity-100 transition-opacity">Web</Link></li>
@@ -72,8 +72,8 @@ export function Footer() {
 
           {/* Company */}
           <div className="footer-column">
-            <h4 className="font-semibold mb-3">Company</h4>
-            <ul className="space-y-1.5 text-sm opacity-90">
+            <h4 className="font-semibold mb-3 text-sm sm:text-base" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>Company</h4>
+            <ul className="space-y-1.5 text-xs sm:text-sm opacity-90" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
               <li><Link href="/about" className="hover:opacity-100 transition-opacity">About</Link></li>
               <li><Link href="/projects" className="hover:opacity-100 transition-opacity">Portfolio</Link></li>
               <li><Link href="/contact" className="hover:opacity-100 transition-opacity">Contact</Link></li>
@@ -82,8 +82,8 @@ export function Footer() {
 
           {/* Contact */}
           <div className="footer-column">
-            <h4 className="font-semibold mb-3">Contact</h4>
-            <ul className="space-y-2 text-sm opacity-90">
+            <h4 className="font-semibold mb-3 text-sm sm:text-base" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>Contact</h4>
+            <ul className="space-y-2 text-xs sm:text-sm opacity-90" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
               <li className="flex items-center gap-2">
                 <Mail size={14} />
                 <a href="mailto:whssfottech2026@gmail.com" className="hover:underline">whssfottech2026@gmail.com</a>
@@ -101,8 +101,8 @@ export function Footer() {
         </div>
 
         <div className="border-t border-primary-foreground/20 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-3">
-            <p className="text-sm opacity-90">&copy; {new Date().getFullYear()} whsofttech</p>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p className="text-xs sm:text-sm opacity-90" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>&copy; {new Date().getFullYear()} whsofttech</p>
             <div className="flex gap-3">
               <a href="https://linkedin.com/in/whsofttech" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="LinkedIn"><Linkedin size={18} /></a>
               <a href="#" className="opacity-80 hover:opacity-100 p-1.5 rounded transition-opacity" aria-label="GitHub"><Github size={18} /></a>

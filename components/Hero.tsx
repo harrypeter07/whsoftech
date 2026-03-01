@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Check } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,172 +10,104 @@ import { Button } from "@/components/ui/button";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const features = [
+  "Custom software development",
+  "AI & machine learning solutions",
+  "Web & mobile app development",
+];
+
 export function Hero() {
-	const heroRef = useRef<HTMLDivElement>(null);
-	const titleRef = useRef<HTMLHeadingElement>(null);
-	const subtitleRef = useRef<HTMLParagraphElement>(null);
-	const buttonsRef = useRef<HTMLDivElement>(null);
-	const statsRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
-		const ctx = gsap.context(() => {
-			// Animate badge
-			gsap.from(".hero-badge", {
-				duration: 0.8,
-				opacity: 0,
-				y: -20,
-				ease: "power2.out",
-			});
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".hero-badge", { duration: 0.6, opacity: 0, y: -10, ease: "power2.out" });
+      if (titleRef.current) {
+        gsap.from(titleRef.current, { duration: 0.8, delay: 0.1, opacity: 0, y: 20, ease: "power3.out" });
+      }
+      gsap.from(subtitleRef.current, { duration: 0.6, delay: 0.3, opacity: 0, y: 15, ease: "power2.out" });
+      gsap.from(".hero-feature", { duration: 0.5, delay: 0.5, opacity: 0, x: -10, stagger: 0.1, ease: "power2.out" });
+      gsap.from(".hero-btn", { duration: 0.5, delay: 0.7, opacity: 0, y: 10, stagger: 0.1, ease: "power2.out" });
+      gsap.from(".hero-image", { duration: 0.8, delay: 0.2, opacity: 0, x: 30, ease: "power3.out" });
+    }, heroRef);
+    return () => ctx.revert();
+  }, []);
 
-			// Animate title
-			if (titleRef.current) {
-				gsap.from(titleRef.current, {
-					duration: 1,
-					delay: 0.2,
-					opacity: 0,
-					y: 30,
-					ease: "power3.out",
-				});
-			}
+  return (
+    <section ref={heroRef} className="min-h-screen pt-24 pb-16 md:pt-28 md:pb-20 bg-[#F5F7FA]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left - Text */}
+          <div className="text-center lg:text-left order-2 lg:order-1">
+            <span className="hero-badge inline-block px-3 py-1 rounded-md bg-[#E9ECEF] text-[#212529] text-sm font-medium mb-6">
+              whsofttech
+            </span>
+            <h1
+              ref={titleRef}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#212529] leading-tight mb-6"
+            >
+              Transform your business with
+              <br />
+              <span className="text-[#fd7e14]">innovative software</span>
+            </h1>
+            <p
+              ref={subtitleRef}
+              className="text-lg text-[#6c757d] max-w-xl mx-auto lg:mx-0 mb-8"
+            >
+              Custom development, AI, web & mobile. We build solutions that scale.
+            </p>
+            <ul className="space-y-3 mb-8 text-left max-w-md mx-auto lg:mx-0">
+              {features.map((f, i) => (
+                <li key={i} className="hero-feature flex items-center gap-3 text-[#212529]">
+                  <span className="shrink-0 w-5 h-5 rounded-full bg-[#fd7e14] flex items-center justify-center">
+                    <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                  </span>
+                  <span className="font-medium capitalize">{f}</span>
+                </li>
+              ))}
+            </ul>
+            <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Button
+                asChild
+                size="lg"
+                className="hero-btn bg-[#fd7e14] hover:bg-[#e96d0a] text-white rounded-lg px-8 py-6 text-base font-semibold shadow-md hover:shadow-lg transition-all"
+              >
+                <Link href="/contact" className="flex items-center gap-2">
+                  Get started
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="hero-btn border-[#212529] text-[#212529] hover:bg-[#212529] hover:text-white rounded-lg px-8 py-6"
+              >
+                <Link href="/projects">View our work</Link>
+              </Button>
+            </div>
+          </div>
 
-			// Animate subtitle
-			gsap.from(subtitleRef.current, {
-				duration: 0.8,
-				delay: 0.6,
-				opacity: 0,
-				y: 20,
-				ease: "power2.out",
-			});
-
-			// Animate buttons with stagger
-			gsap.from(".hero-btn", {
-				duration: 0.6,
-				delay: 0.8,
-				opacity: 0,
-				scale: 0.9,
-				stagger: 0.15,
-				ease: "back.out(1.7)",
-			});
-
-			// Animate stats with scroll trigger
-			gsap.from(".stat-item", {
-				scrollTrigger: {
-					trigger: statsRef.current,
-					start: "top 80%",
-					toggleActions: "play none none none",
-				},
-				duration: 0.6,
-				opacity: 0,
-				y: 30,
-				stagger: 0.15,
-				ease: "power2.out",
-			});
-		}, heroRef);
-
-		return () => ctx.revert();
-	}, []);
-
-	return (
-		<section
-			className="min-h-[85vh] pt-16 pb-16 relative overflow-hidden"
-			ref={heroRef}
-		>
-			{/* Animated gradient background */}
-			<div className="absolute inset-0 -z-10 overflow-hidden">
-				<div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/30 rounded-full blur-[120px] animate-blob" />
-				<div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/30 rounded-full blur-[120px] animate-blob-slow" />
-				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[100px] animate-blob-delayed" />
-				{/* Grid pattern overlay */}
-				<div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
-			</div>
-
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="flex flex-col items-center text-center">
-					{/* Company name */}
-					<p className="hero-badge text-sm font-semibold text-primary uppercase tracking-widest mb-3">
-						whsofttech
-					</p>
-
-					{/* Main heading */}
-					<h1
-						ref={titleRef}
-						className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-5 leading-tight text-balance"
-					>
-						Transform Your Business With
-						<br />
-						<span className="gradient-text inline-block">
-							Innovative Software
-						</span>
-					</h1>
-
-					{/* Subheading */}
-					<p
-						ref={subtitleRef}
-						className="text-lg text-muted-foreground max-w-2xl mb-8"
-					>
-						Custom development, AI, web & mobile. We build solutions that scale.
-					</p>
-
-					{/* CTA Buttons */}
-					<div
-						ref={buttonsRef}
-						className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
-					>
-						<Button
-							asChild
-							size="lg"
-							className="hero-btn bg-gradient-to-r from-primary via-accent to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 hover:shadow-xl hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 glow-primary"
-						>
-							<Link href="/contact" className="flex items-center gap-2">
-								<span>Get Started</span>
-								<ArrowRight
-									size={20}
-									className="group-hover:translate-x-1 transition-transform"
-								/>
-							</Link>
-						</Button>
-						<Button
-							asChild
-							size="lg"
-							variant="outline"
-							className="hero-btn border-primary/50 hover:bg-primary/10 hover:border-primary hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 backdrop-blur-sm"
-						>
-							<Link href="/projects">View Our Work</Link>
-						</Button>
-					</div>
-
-					{/* Stats */}
-					<div
-						ref={statsRef}
-						className="grid grid-cols-3 gap-6 w-full pt-10 border-t border-border max-w-2xl"
-					>
-						<div className="stat-item group cursor-pointer">
-							<p className="text-3xl sm:text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">
-								500+
-							</p>
-							<p className="text-sm sm:text-base text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-								Projects Delivered
-							</p>
-						</div>
-						<div className="stat-item group cursor-pointer">
-							<p className="text-3xl sm:text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">
-								50+
-							</p>
-							<p className="text-sm sm:text-base text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-								Industry Experts
-							</p>
-						</div>
-						<div className="stat-item group cursor-pointer">
-							<p className="text-3xl sm:text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">
-								12+
-							</p>
-							<p className="text-sm sm:text-base text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-								Years Experience
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+          {/* Right - Image only */}
+          <div className="hero-image order-1 lg:order-2 relative">
+            <div className="relative rounded-lg overflow-hidden shadow-xl">
+              <div className="aspect-4/3 bg-[#E9ECEF] relative min-h-[280px] sm:min-h-[320px]">
+                <Image
+                  src="/heroimage.png"
+                  alt="Software development"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
