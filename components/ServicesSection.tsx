@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   ArrowRight,
   Code2,
@@ -15,7 +15,7 @@ import {
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
-const services = [
+const servicesList = [
   {
     id: 1,
     title: "Custom Software",
@@ -57,6 +57,21 @@ const services = [
     image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=340&fit=crop",
   },
 ];
+
+const services = servicesList;
+const LEN = services.length;
+// Infinite track: [last, ...3x full set, first] so we can seamlessly loop both ways
+const extendedServices = [
+  services[LEN - 1],
+  ...services,
+  ...services,
+  ...services,
+  services[0],
+];
+const START_INDEX = LEN + 1;
+const PREV_JUMP_TO = LEN * 2;
+const NEXT_JUMP_FROM = extendedServices.length - 1;
+const NEXT_JUMP_TO = LEN + 1;
 
 const AUTO_SLIDE_MS = 4000;
 const CARD_WIDTH = 340;
@@ -115,21 +130,45 @@ function ServiceCard({
 }
 
 export function ServicesSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(START_INDEX);
+  const isJumpingRef = useRef(false);
+
+  const logicalIndex = ((activeIndex - 1 + LEN) % LEN);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % services.length);
+      setActiveIndex((prev) => prev + 1);
     }, AUTO_SLIDE_MS);
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    if (activeIndex === NEXT_JUMP_FROM + 1) {
+      isJumpingRef.current = true;
+      setActiveIndex(NEXT_JUMP_TO);
+    } else if (activeIndex === -1) {
+      isJumpingRef.current = true;
+      setActiveIndex(PREV_JUMP_TO);
+    }
+  }, [activeIndex]);
+
+  useEffect(() => {
+    if (isJumpingRef.current) {
+      isJumpingRef.current = false;
+    }
+  });
+
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + services.length) % services.length);
+    setActiveIndex((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % services.length);
+    setActiveIndex((prev) => prev + 1);
+  };
+
+  const goToSlide = (logicalI: number) => {
+    const target = START_INDEX + logicalI;
+    setActiveIndex(target);
   };
 
   return (
@@ -171,14 +210,21 @@ export function ServicesSection() {
               className="flex gap-6 md:overflow-visible"
               style={{ paddingLeft: `calc(50% - ${CARD_WIDTH / 2}px)` }}
               animate={{ x: -activeIndex * (CARD_WIDTH + GAP) }}
-              transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
+              transition={
+                isJumpingRef.current
+                  ? { duration: 0 }
+                  : { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }
+              }
             >
-              {services.map((service, idx) => (
+              {extendedServices.map((service, idx) => (
                 <ServiceCard
-                  key={service.id}
+                  key={`${service.id}-${idx}`}
                   service={service}
                   isActive={idx === activeIndex}
-                  onClick={() => setActiveIndex(idx)}
+                  onClick={() => {
+                    const logI = ((idx - 1 + LEN) % LEN + LEN) % LEN;
+                    setActiveIndex(START_INDEX + logI);
+                  }}
                 />
               ))}
             </motion.div>
