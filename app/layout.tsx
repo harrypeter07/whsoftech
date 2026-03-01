@@ -37,21 +37,61 @@ const jockeyOne = Jockey_One({
 });
 
 export const metadata: Metadata = {
-  title: 'whsofttech - Custom Software & AI Apps',
-  description: 'Award-winning software solutions company specializing in custom development, AI applications, web/mobile apps, and digital services.',
-  generator: 'v0.app',
+  metadataBase: new URL('https://whsofttech.com'),
+  title: {
+    default: 'whsofttech - Custom Software & AI Solutions',
+    template: '%s | whsofttech',
+  },
+  description:
+    'whsofttech is a software studio specializing in custom development, AI solutions, and modern web & mobile applications for growing businesses.',
+  keywords: [
+    'whsofttech',
+    'software company',
+    'custom software development',
+    'AI development',
+    'web development',
+    'mobile app development',
+    'IT services',
+  ],
+  creator: 'whsofttech',
+  openGraph: {
+    title: 'whsofttech - Custom Software & AI Solutions',
+    description:
+      'Custom software, AI & machine learning, and web/mobile apps built for modern businesses.',
+    url: '/',
+    siteName: 'whsofttech',
+    images: [
+      {
+        url: '/heroimage.png',
+        width: 1200,
+        height: 630,
+        alt: 'whsofttech - custom software and AI solutions',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'whsofttech - Custom Software & AI Solutions',
+    description:
+      'Custom software, AI & machine learning, and web/mobile apps built for modern businesses.',
+    images: ['/heroimage.png'],
+  },
   icons: {
     icon: [
-      {
-        url: '/logo.png',
-        type: 'image/png',
-      },
       {
         url: '/icon.svg',
         type: 'image/svg+xml',
       },
     ],
-    apple: '/logo.png',
+    apple: [
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+    shortcut: '/icon.svg',
   },
 }
 

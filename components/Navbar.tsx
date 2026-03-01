@@ -122,8 +122,8 @@ export function Navbar() {
 					<Link href="/" className="flex items-center gap-2 text-primary font-semibold group" aria-label="whsofttech Home">
 						<div className="relative w-16 h-16 flex-shrink-0 group-hover:scale-110 transition-transform">
 							<Image
-								src="/logo.png"
-								alt="whsofttech"
+								src="/icon.svg"
+								alt="whsofttech logo"
 								fill
 								className="object-contain"
 							/>
@@ -195,8 +195,8 @@ export function Navbar() {
 							<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
 								<div className="relative w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 group-hover:scale-110 transition-transform">
 									<Image
-										src="/logo.png"
-										alt="whsofttech"
+										src="/icon.svg"
+										alt="whsofttech logo"
 										fill
 										className="object-contain"
 									/>
