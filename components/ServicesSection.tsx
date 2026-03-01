@@ -133,7 +133,7 @@ export function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState(START_INDEX);
   const isJumpingRef = useRef(false);
 
-  const logicalIndex = ((activeIndex - 1 + LEN) % LEN);
+  const logicalIndex = ((activeIndex - 1 + LEN) % LEN + LEN) % LEN;
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -142,7 +142,7 @@ export function ServicesSection() {
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => {
+  const handleJumpIfNeeded = () => {
     if (activeIndex === NEXT_JUMP_FROM + 1) {
       isJumpingRef.current = true;
       setActiveIndex(NEXT_JUMP_TO);
@@ -150,12 +150,10 @@ export function ServicesSection() {
       isJumpingRef.current = true;
       setActiveIndex(PREV_JUMP_TO);
     }
-  }, [activeIndex]);
+  };
 
   useEffect(() => {
-    if (isJumpingRef.current) {
-      isJumpingRef.current = false;
-    }
+    isJumpingRef.current = false;
   });
 
   const handlePrev = () => {
@@ -164,11 +162,6 @@ export function ServicesSection() {
 
   const handleNext = () => {
     setActiveIndex((prev) => prev + 1);
-  };
-
-  const goToSlide = (logicalI: number) => {
-    const target = START_INDEX + logicalI;
-    setActiveIndex(target);
   };
 
   return (
@@ -215,6 +208,7 @@ export function ServicesSection() {
                   ? { duration: 0 }
                   : { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }
               }
+              onAnimationComplete={handleJumpIfNeeded}
             >
               {extendedServices.map((service, idx) => (
                 <ServiceCard
@@ -255,11 +249,9 @@ export function ServicesSection() {
             <button
               key={i}
               type="button"
-              onClick={() => {
-                setActiveIndex(i);
-              }}
+              onClick={() => setActiveIndex(START_INDEX + i)}
               className={`h-2.5 rounded-full transition-all duration-300 ${
-                i === activeIndex ? "w-8 bg-[#fd7e14]" : "w-2.5 bg-[#e2e8f0] hover:bg-[#cbd5e1]"
+                i === logicalIndex ? "w-8 bg-[#fd7e14]" : "w-2.5 bg-[#e2e8f0] hover:bg-[#cbd5e1]"
               }`}
               aria-label={`Go to slide ${i + 1}`}
             />
