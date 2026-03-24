@@ -38,6 +38,7 @@ const jockeyOne = Jockey_One({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://whsofttech.com'),
+  applicationName: 'whsofttech',
   title: {
     default: 'whsofttech - Custom Software & AI Solutions',
     template: '%s | whsofttech',
@@ -54,6 +55,22 @@ export const metadata: Metadata = {
     'IT services',
   ],
   creator: 'whsofttech',
+  publisher: 'whsofttech',
+  category: 'Technology',
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   openGraph: {
     title: 'whsofttech - Custom Software & AI Solutions',
     description:
@@ -95,6 +112,21 @@ export const metadata: Metadata = {
   },
 }
 
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'whsofttech',
+  url: 'https://whsofttech.com',
+  logo: 'https://whsofttech.com/logo.png',
+  description:
+    'whsofttech is a software studio specializing in custom development, AI solutions, and modern web & mobile applications for growing businesses.',
+  sameAs: [
+    'https://www.linkedin.com',
+    'https://www.instagram.com',
+    'https://www.facebook.com',
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -114,6 +146,10 @@ export default function RootLayout({
           // Match the sizes used in the Hero component
           imagesrcset="/heroimage.png 1200w"
           imagesizes="(max-width: 768px) 100vw, 50vw"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
       <body className={`${inter.variable} ${epilogue.variable} ${notoSerif.variable} ${bungee.variable} ${jockeyOne.variable} font-sans antialiased bg-background text-foreground`} style={{ fontFamily: 'var(--font-epilogue), sans-serif' }} suppressHydrationWarning={true}>

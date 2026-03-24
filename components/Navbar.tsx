@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import gsap from "gsap";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 export function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -117,10 +117,10 @@ export function Navbar() {
 	return (
 		<nav className="fixed top-0 right-0 z-[100] w-full bg-background/80 backdrop-blur-md border-b border-border">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="flex justify-between items-center h-16">
+				<div className="flex justify-between items-center h-20 sm:h-24">
 					{/* Logo */}
-					<Link href="/" className="flex items-center gap-2 text-primary font-semibold group" aria-label="whsofttech Home">
-						<div className="relative w-16 h-16 flex-shrink-0 group-hover:scale-110 transition-transform">
+					<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
+						<div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 group-hover:scale-105 transition-transform">
 							<Image
 								src="/logo.png"
 								alt="whsofttech logo"
@@ -128,7 +128,7 @@ export function Navbar() {
 								className="object-contain"
 							/>
 						</div>
-						<span className="text-base sm:text-lg font-bold group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>whsofttech</span>
+						<span className="text-lg sm:text-xl font-bold group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>whsofttech</span>
 					</Link>
 
 					{/* Desktop Navigation */}
@@ -193,7 +193,7 @@ export function Navbar() {
 							</button>
 							{/* Logo + Company name */}
 							<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
-								<div className="relative w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 group-hover:scale-110 transition-transform">
+								<div className="relative w-14 h-14 sm:w-20 sm:h-20 flex-shrink-0 group-hover:scale-105 transition-transform">
 									<Image
 										src="/logo.png"
 										alt="whsofttech logo"
