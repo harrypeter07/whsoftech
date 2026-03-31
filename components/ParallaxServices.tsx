@@ -31,7 +31,7 @@ const services = [
     icon: <Smartphone size={32} />,
     title: 'Mobile Applications',
     shortDesc: 'Native and cross-platform apps for iOS and Android',
-    image: 'https://images.unsplash.com/photo-1512941937309-4a2a8433c3c2?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop',
   },
   {
     id: 'design',

@@ -27,15 +27,24 @@ export function Navbar() {
 			height: "40px",
 			top: "0px",
 			right: "0px",
-			transition: { duration: 0.75, delay: 0.35, type: "tween" as const, ease: [0.76, 0, 0.24, 1] as const }
+			transition: {
+				duration: 0.75,
+				delay: 0.35,
+				type: "tween" as const,
+				ease: [0.76, 0, 0.24, 1] as const,
+			},
 		},
 		open: {
 			width: "320px",
 			height: "450px",
 			top: "-25px",
 			right: "-25px",
-			transition: { duration: 0.75, type: "tween" as const, ease: [0.76, 0, 0.24, 1] as const }
-		}
+			transition: {
+				duration: 0.75,
+				type: "tween" as const,
+				ease: [0.76, 0, 0.24, 1] as const,
+			},
+		},
 	};
 
 	const perspective = {
@@ -51,36 +60,40 @@ export function Navbar() {
 			translateY: 0,
 			translateX: 0,
 			transition: {
-				duration: 0.65, 
-				delay: 0.5 + (i * 0.1), 
-				ease: [.215,.61,.355,1] as const,
-				opacity: { duration: 0.35 }
-			}
+				duration: 0.65,
+				delay: 0.5 + i * 0.1,
+				ease: [0.215, 0.61, 0.355, 1] as const,
+				opacity: { duration: 0.35 },
+			},
 		}),
 		exit: {
 			opacity: 0,
-			transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] as const }
-		}
+			transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] as const },
+		},
 	};
 
 	const slideIn = {
 		initial: {
 			opacity: 0,
-			y: 20
+			y: 20,
 		},
 		enter: (i: number) => ({
 			opacity: 1,
 			y: 0,
-			transition: { 
+			transition: {
 				duration: 0.5,
-				delay: 0.75 + (i * 0.1), 
-				ease: [.215,.61,.355,1] as const
-			}
+				delay: 0.75 + i * 0.1,
+				ease: [0.215, 0.61, 0.355, 1] as const,
+			},
 		}),
 		exit: {
 			opacity: 0,
-			transition: { duration: 0.5, type: "tween" as const, ease: "easeInOut" as const }
-		}
+			transition: {
+				duration: 0.5,
+				type: "tween" as const,
+				ease: "easeInOut" as const,
+			},
+		},
 	};
 
 	useEffect(() => {
@@ -103,46 +116,66 @@ export function Navbar() {
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
-			if (isOpen && mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+			if (
+				isOpen &&
+				mobileMenuRef.current &&
+				!mobileMenuRef.current.contains(event.target as Node)
+			) {
 				setIsOpen(false);
 			}
 		};
 
-		document.addEventListener('mousedown', handleClickOutside);
+		document.addEventListener("mousedown", handleClickOutside);
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
+			document.removeEventListener("mousedown", handleClickOutside);
 		};
 	}, [isOpen]);
 
 	return (
-		<nav className="fixed top-0 right-0 z-[100] w-full bg-background/80 backdrop-blur-md border-b border-border">
+		<nav className="fixed top-0 left-0 right-0 z-[100] w-full bg-[#020617]/60 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-20 sm:h-24">
 					{/* Logo */}
-					<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
-						<div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 group-hover:scale-105 transition-transform">
+					<Link
+						href="/"
+						className="flex items-center gap-2 sm:gap-3 group"
+						aria-label="whsofttech Home"
+					>
+						<div className="relative w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
 							<Image
 								src="/logo.png"
 								alt="whsofttech logo"
 								fill
-								className="object-contain"
+								className="object-contain drop-shadow-[0_0_10px_rgba(11,28,255,0.5)]"
 							/>
 						</div>
-						<span className="text-lg sm:text-xl font-bold group-hover:text-accent transition-colors duration-300" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>whsofttech</span>
+						<span
+							className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 tracking-tight"
+							style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
+						>
+							whsofttech
+						</span>
 					</Link>
 
 					{/* Desktop Navigation */}
-					<div className="hidden md:flex items-center space-x-8 relative z-[101]">
+					<div className="hidden md:flex items-center space-x-10 relative z-[101]">
 						{navLinks.map((link) => (
 							<Link
 								key={link.href}
 								href={link.href}
-								className="text-foreground hover:text-primary transition-colors duration-200 font-medium relative text-sm sm:text-base"
-								style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}
+								className="text-slate-300 hover:text-white transition-all duration-300 font-medium relative text-sm sm:text-base group/nav"
+								style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
 							>
 								{link.label}
+								<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/nav:w-full" />
 							</Link>
 						))}
+						<Button
+							asChild
+							className="premium-gradient hover:glow-soft transition-all duration-300 rounded-xl px-6"
+						>
+							<Link href="/contact">Get Started</Link>
+						</Button>
 					</div>
 
 					{/* Mobile Menu Button */}
@@ -159,7 +192,7 @@ export function Navbar() {
 							animate={isOpen ? "open" : "closed"}
 							variants={{
 								open: { rotate: 45 },
-								closed: { rotate: 0 }
+								closed: { rotate: 0 },
 							}}
 							transition={{ duration: 0.2 }}
 						>
@@ -192,8 +225,12 @@ export function Navbar() {
 								Close
 							</button>
 							{/* Logo + Company name */}
-							<Link href="/" className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group" aria-label="whsofttech Home">
-								<div className="relative w-14 h-14 sm:w-20 sm:h-20 flex-shrink-0 group-hover:scale-105 transition-transform">
+							<Link
+								href="/"
+								className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group"
+								aria-label="whsofttech Home"
+							>
+								<div className="relative w-20 h-20 sm:w-30 sm:h-30 flex-shrink-0 group-hover:scale-105 transition-transform">
 									<Image
 										src="/logo.png"
 										alt="whsofttech logo"
@@ -201,7 +238,12 @@ export function Navbar() {
 										className="object-contain"
 									/>
 								</div>
-								<span className="text-base sm:text-lg font-bold group-hover:text-accent transition-colors duration-300">whsofttech</span>
+								<span
+									className="text-xl sm:text-2xl font-bold group-hover:text-accent transition-colors duration-300"
+									style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
+								>
+									whsofttech
+								</span>
 							</Link>
 							<div className="flex-1 overflow-y-auto">
 								<div className="flex gap-[10px] flex-col">
@@ -215,7 +257,14 @@ export function Navbar() {
 											animate="enter"
 											exit="exit"
 										>
-											<Link href={link.href} className="text-decoration-none text-black text-2xl sm:text-[28px] font-medium hover:text-primary transition-colors" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }} onClick={() => setIsOpen(false)}>
+											<Link
+												href={link.href}
+												className="text-decoration-none text-black text-2xl sm:text-[28px] font-medium hover:text-primary transition-colors"
+												style={{
+													fontFamily: "var(--font-epilogue), sans-serif",
+												}}
+												onClick={() => setIsOpen(false)}
+											>
 												{link.label}
 											</Link>
 										</motion.div>
@@ -227,11 +276,11 @@ export function Navbar() {
 									{ title: "Facebook", href: "/" },
 									{ title: "LinkedIn", href: "/" },
 									{ title: "Instagram", href: "/" },
-									{ title: "Twitter", href: "/" }
+									{ title: "Twitter", href: "/" },
 								].map((link, i) => (
 									<motion.a
 										variants={slideIn}
-										custom={i} 
+										custom={i}
 										initial="initial"
 										animate="enter"
 										exit="exit"

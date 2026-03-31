@@ -66,7 +66,7 @@ const projects = [
     id: 8,
     title: 'Smart City IoT',
     description: 'IoT platform for smart city infrastructure',
-    image: 'https://images.unsplash.com/photo-1518611505867-48a0ce7b0b7e?w=600&h=400&fit=crop',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
     category: 'AI',
     tags: ['Python', 'IoT', 'ML', 'Real-time'],
   },

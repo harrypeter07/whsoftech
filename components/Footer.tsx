@@ -44,7 +44,7 @@ export function Footer() {
           {/* Company Info */}
           <div className="footer-column group">
             <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-10 h-10 flex-shrink-0">
+              <div className="relative w-16 h-16 flex-shrink-0">
                 <Image
                   src="/logo.png"
                   alt="whsofttech"
@@ -52,7 +52,7 @@ export function Footer() {
                   className="object-contain opacity-95"
                 />
               </div>
-              <h3 className="font-bold text-base sm:text-lg" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>whsofttech</h3>
+              <h3 className="font-bold text-lg sm:text-xl" style={{ fontFamily: 'var(--font-epilogue), sans-serif' }}>whsofttech</h3>
             </div>
             <p className="text-xs sm:text-sm opacity-90 leading-relaxed" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
               Software solutions that scale.

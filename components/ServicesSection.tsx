@@ -46,7 +46,7 @@ const servicesList = [
     desc: "Native and cross-platform mobile solutions.",
     icon: Smartphone,
     href: "/services/mobile",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=340&fit=crop",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop",
   },
   {
     id: 5,

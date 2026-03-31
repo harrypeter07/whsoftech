@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Epilogue, Noto_Serif, Inter, Bungee, Jockey_One } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { Preloader } from "@/components/Preloader"
 
 const epilogue = Epilogue({ 
   subsets: ["latin"],
@@ -95,8 +96,8 @@ export default function RootLayout({
           rel="preload"
           as="image"
           href="/heroimage.png"
-          imagesrcset="/heroimage.png 1200w"
-          imagesizes="(max-width: 768px) 100vw, 50vw"
+          imageSrcSet="/heroimage.png 1200w"
+          imageSizes="(max-width: 768px) 100vw, 50vw"
         />
         <script
           type="application/ld+json"
@@ -104,6 +105,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${epilogue.variable} ${notoSerif.variable} ${bungee.variable} ${jockeyOne.variable} font-sans antialiased bg-background text-foreground`} style={{ fontFamily: 'var(--font-epilogue), sans-serif' }} suppressHydrationWarning={true}>
+        <Preloader />
         {children}
         <Analytics />
       </body>
