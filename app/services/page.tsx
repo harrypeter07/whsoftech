@@ -1,33 +1,15 @@
-'use client';
-
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ParallaxServices } from '@/components/ParallaxServices';
-import { useEffect } from 'react';
-import Lenis from 'lenis';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Services | WH SoftTech Web Development & AI Solutions',
+  description:
+    'Explore WH SoftTech services including web development, AI-powered applications, and digital solutions for growing businesses.',
+};
 
 export default function ServicesPage() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
   return (
     <div className="bg-background">
       <Navbar />

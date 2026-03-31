@@ -37,94 +37,46 @@ const jockeyOne = Jockey_One({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://whsofttech.com'),
-  applicationName: 'whsofttech',
-  title: {
-    default: 'whsofttech - Custom Software & AI Solutions',
-    template: '%s | whsofttech',
-  },
+  metadataBase: new URL("https://whsofttech.in"),
+  title: "WH SoftTech | Web Development, AI & Digital Solutions",
   description:
-    'whsofttech is a software studio specializing in custom development, AI solutions, and modern web & mobile applications for growing businesses.',
+    "WH SoftTech provides modern web development, AI-powered applications, and digital solutions to help businesses grow faster.",
   keywords: [
-    'whsofttech',
-    'software company',
-    'custom software development',
-    'AI development',
-    'web development',
-    'mobile app development',
-    'IT services',
+    "WH SoftTech",
+    "web development Nagpur",
+    "AI solutions India",
+    "software company WH SoftTech",
+    "full stack development",
+    "Next.js development",
   ],
-  creator: 'whsofttech',
-  publisher: 'whsofttech',
-  category: 'Technology',
+  authors: [{ name: "WH SoftTech" }],
   alternates: {
-    canonical: '/',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
-    },
+    canonical: "/",
   },
   openGraph: {
-    title: 'whsofttech - Custom Software & AI Solutions',
+    title: "WH SoftTech | Web Development & AI Solutions",
     description:
-      'Custom software, AI & machine learning, and web/mobile apps built for modern businesses.',
-    url: '/',
-    siteName: 'whsofttech',
-    images: [
-      {
-        url: '/heroimage.png',
-        width: 1200,
-        height: 630,
-        alt: 'whsofttech - custom software and AI solutions',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
+      "Build fast, modern and scalable web applications with WH SoftTech",
+    url: "https://whsofttech.in",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'whsofttech - Custom Software & AI Solutions',
-    description:
-      'Custom software, AI & machine learning, and web/mobile apps built for modern businesses.',
-    images: ['/heroimage.png'],
+    card: "summary_large_image",
+    title: "WH SoftTech",
+    description: "Web Development & AI Solutions",
   },
   icons: {
-    icon: [
-      {
-        url: '/logo.png',
-        type: 'image/png',
-      },
-    ],
-    apple: [
-      {
-        url: '/logo.png',
-        type: 'image/png',
-      },
-    ],
-    shortcut: '/logo.png',
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+    shortcut: "/favicon.ico",
   },
 }
 
 const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'whsofttech',
-  url: 'https://whsofttech.com',
-  logo: 'https://whsofttech.com/logo.png',
-  description:
-    'whsofttech is a software studio specializing in custom development, AI solutions, and modern web & mobile applications for growing businesses.',
-  sameAs: [
-    'https://www.linkedin.com',
-    'https://www.instagram.com',
-    'https://www.facebook.com',
-  ],
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "WH SoftTech",
+  url: "https://whsofttech.in",
 };
 
 export default function RootLayout({
@@ -143,7 +95,6 @@ export default function RootLayout({
           rel="preload"
           as="image"
           href="/heroimage.png"
-          // Match the sizes used in the Hero component
           imagesrcset="/heroimage.png 1200w"
           imagesizes="(max-width: 768px) 100vw, 50vw"
         />

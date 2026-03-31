@@ -49,7 +49,8 @@ export function Hero() {
               ref={titleRef}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#212529] leading-tight mb-6"
             >
-              Transform your business with
+              WH SoftTech
+              <span className="block mt-1">Transform your business with</span>
               <br />
               <span className="text-[#fd7e14]">innovative software</span>
             </h1>

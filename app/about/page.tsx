@@ -4,8 +4,9 @@ import { TeamMember } from '@/components/TeamMember';
 import { CheckCircle2 } from 'lucide-react';
 
 export const metadata = {
-  title: 'About whsofttech - Our Story & Team',
-  description: 'Learn about whsofttech, our mission, values, and the talented team behind our software solutions.',
+  title: 'About WH SoftTech | Our Story & Team',
+  description:
+    'WH SoftTech helps businesses grow with custom web development, AI-powered applications, and digital solutions—backed by a talented team and proven delivery.',
 };
 
 export default function AboutPage() {

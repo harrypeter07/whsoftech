@@ -6,6 +6,13 @@ import { TechMarquee } from '@/components/TechMarquee';
 import { BentoGrid } from '@/components/BentoGrid';
 import { PricingSection } from '@/components/PricingSection';
 import { QuoteBuilder } from '@/components/QuoteBuilder';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'WH SoftTech | Web Development, AI & Digital Solutions',
+  description:
+    'WH SoftTech provides modern web development, AI-powered applications, and digital solutions to help businesses grow faster.',
+};
 
 export default function Home() {
   return (
