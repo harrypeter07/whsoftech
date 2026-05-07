@@ -86,12 +86,12 @@ export function Hero() {
 						</span>
 						<h1
 							ref={titleRef}
-							className="mb-6 text-balance text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
+							className="mb-6 text-balance text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl scroll-fade-up"
 						>
 							Transform your business with{" "}
-							<span className="gradient-text">innovative software</span>
+							<span className="gradient-text hover-text-shift">innovative software</span>
 						</h1>
-						<p className="hero-sub mx-auto mb-8 max-w-xl text-lg text-slate-400 lg:mx-0">
+						<p className="hero-sub mx-auto mb-8 max-w-xl text-lg text-slate-400 lg:mx-0 scroll-fade-up">
 							Custom development, AI, web & mobile. We build solutions that scale
 							with clean UX and solid engineering.
 						</p>
@@ -108,7 +108,7 @@ export function Hero() {
 								</li>
 							))}
 						</ul>
-						<div className="hero-btn flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+						<div className="hero-btn flex flex-col justify-center gap-3 sm:flex-row lg:justify-start scroll-fade-up">
 							<Button asChild size="lg" className="rounded-xl px-8">
 								<Link href="/contact" className="flex items-center gap-2">
 									Get started

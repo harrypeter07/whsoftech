@@ -120,7 +120,7 @@ function ServiceCard({
         </div>
       </div>
       <div className="p-5">
-        <h3 className="mb-2 text-lg font-bold text-white">{service.title}</h3>
+        <h3 className="mb-2 text-lg font-bold text-white hover-text-shift">{service.title}</h3>
         <p className="mb-4 line-clamp-2 text-sm text-slate-400">{service.desc}</p>
         <Link
           href={service.href}
@@ -182,7 +182,7 @@ export function ServicesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl"
+            className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl scroll-fade-up"
           >
             Software solutions that drive growth
           </motion.h2>

@@ -49,13 +49,13 @@ export function Navbar() {
 	return (
 		<nav className="fixed top-0 left-0 right-0 z-[100] w-full border-b border-white/20 bg-[#071426]/85 backdrop-blur-xl supports-[backdrop-filter]:bg-[#071426]/75">
 			<div className="section-shell">
-				<div className="flex h-16 sm:h-20 items-center justify-between">
+				<div className="flex h-24 sm:h-28 items-center justify-between">
 					<Link
 						href="/"
-						className="flex items-center gap-2 sm:gap-3 group"
+						className="flex items-center gap-3 sm:gap-4 group"
 						aria-label="whsofttech Home"
 					>
-						<div className="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-xl border border-white/20 bg-white/[0.06] p-1 transition-transform duration-200 group-hover:scale-[1.03]">
+						<div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl border border-white/20 bg-white/[0.06] p-1.5 transition-transform duration-200 group-hover:scale-[1.03]">
 							<Image
 								src="/logo.png"
 								alt=""
@@ -63,7 +63,7 @@ export function Navbar() {
 								className="object-contain p-0.5"
 							/>
 						</div>
-						<span className="text-lg sm:text-xl font-bold tracking-tight text-white">
+						<span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
 							whsofttech
 						</span>
 					</Link>
@@ -73,7 +73,7 @@ export function Navbar() {
 							<Link
 								key={link.href}
 								href={link.href}
-								className="text-sm font-medium text-slate-300 transition-colors hover:text-white relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-sky-400 after:transition-all hover:after:w-full"
+								className="text-sm font-medium text-slate-300 transition-colors hover:text-white relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-sky-400 after:transition-all hover:after:w-full hover:text-glow"
 							>
 								{link.label}
 							</Link>

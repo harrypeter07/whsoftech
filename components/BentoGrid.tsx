@@ -58,31 +58,34 @@ export function BentoGrid() {
             return (
               <div
                 key={i}
-                className={`panel-card flex flex-col transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 ${item.className}`}
+                className={`panel-card group relative overflow-hidden p-5 md:p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 ${item.className}`}
               >
                 {item.image && (
-                  <div className="mb-4 h-32 overflow-hidden rounded-xl border border-white/10 md:h-36">
+                  <>
                     <div
-                      className="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                       style={{ backgroundImage: `url("${item.image}")` }}
                     />
-                  </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/95 via-[#071426]/70 to-[#071426]/35" />
+                  </>
                 )}
-                <div
-                  className={`mb-4 flex shrink-0 items-center justify-center rounded-xl border border-white/15 bg-primary/15 ${isLarge ? "h-14 w-14" : "h-12 w-12"}`}
-                >
-                  <Icon
-                    className={`text-sky-300 ${isLarge ? "h-7 w-7" : "h-6 w-6"}`}
-                  />
+                <div className="relative z-10">
+                  <div
+                    className={`mb-4 flex shrink-0 items-center justify-center rounded-xl border border-white/15 bg-primary/15 ${isLarge ? "h-14 w-14" : "h-12 w-12"}`}
+                  >
+                    <Icon
+                      className={`text-sky-300 ${isLarge ? "h-7 w-7" : "h-6 w-6"}`}
+                    />
+                  </div>
+                  <h3
+                    className={`mb-2 font-bold text-white transition-colors duration-300 group-hover:text-sky-200 hover-text-shift ${isLarge ? "text-xl md:text-2xl" : "text-lg md:text-xl"}`}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-slate-300 md:text-base">
+                    {item.desc}
+                  </p>
                 </div>
-                <h3
-                  className={`mb-2 font-bold text-white ${isLarge ? "text-xl md:text-2xl" : "text-lg md:text-xl"}`}
-                >
-                  {item.title}
-                </h3>
-                <p className="flex-1 text-sm text-slate-400 md:text-base">
-                  {item.desc}
-                </p>
               </div>
             );
           })}
