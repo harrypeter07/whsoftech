@@ -108,6 +108,11 @@ function ServiceCard({
           src={service.image}
           alt={service.title}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "/heroimage.png";
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/90 via-transparent to-transparent" />
         <div className="absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-[#071426]/80 backdrop-blur-sm">

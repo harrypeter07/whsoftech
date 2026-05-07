@@ -8,18 +8,24 @@ const items = [
     desc: "Tailored software built for your exact requirements.",
     icon: Code2,
     className: "md:col-span-2 md:row-span-2",
+    image:
+      "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     title: "Proven Track Record",
     desc: "100+ projects delivered with measurable ROI.",
     icon: TrendingUp,
     className: "",
+    image:
+      "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     title: "Fast Delivery",
     desc: "Agile sprints with clear milestones and communication.",
     icon: Zap,
     className: "",
+    image:
+      "https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     title: "Quality & Support",
@@ -54,6 +60,14 @@ export function BentoGrid() {
                 key={i}
                 className={`panel-card flex flex-col transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 ${item.className}`}
               >
+                {item.image && (
+                  <div className="mb-4 h-32 overflow-hidden rounded-xl border border-white/10 md:h-36">
+                    <div
+                      className="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.03]"
+                      style={{ backgroundImage: `url("${item.image}")` }}
+                    />
+                  </div>
+                )}
                 <div
                   className={`mb-4 flex shrink-0 items-center justify-center rounded-xl border border-white/15 bg-primary/15 ${isLarge ? "h-14 w-14" : "h-12 w-12"}`}
                 >
