@@ -21,42 +21,73 @@ import {
   Clock,
   MessageCircle,
   Calculator,
+  ArrowLeft,
 } from "lucide-react";
 
 export function ContactPageClient() {
   const [showQuoteBuilder, setShowQuoteBuilder] = useState(false);
 
   if (showQuoteBuilder) {
-    return <QuoteBuilder />;
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <section className="border-b border-white/10 px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+          <div className="section-shell max-w-3xl">
+            <Button
+              type="button"
+              variant="ghost"
+              className="mb-8 gap-2 text-slate-300 hover:text-white"
+              onClick={() => setShowQuoteBuilder(false)}
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to contact
+            </Button>
+            <div className="mb-10 text-center">
+              <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
+                Quote builder
+              </span>
+              <h1 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
+                Build your <span className="gradient-text">estimate</span>
+              </h1>
+              <p className="text-slate-400">
+                Select services and features, then send the summary on WhatsApp.
+              </p>
+            </div>
+            <QuoteBuilder />
+          </div>
+        </section>
+        <Footer />
+      </div>
+    );
   }
 
   const contactInfo = [
     {
-      icon: <Mail size={24} />,
+      icon: <Mail size={22} />,
       title: "Email",
       value: "whssfottech2026@gmail.com",
       link: "mailto:whssfottech2026@gmail.com",
     },
     {
-      icon: <Phone size={24} />,
+      icon: <Phone size={22} />,
       title: "Phone",
       value: "+91 8208065506",
       link: "tel:+918208065506",
     },
     {
-      icon: <MessageCircle size={24} />,
+      icon: <MessageCircle size={22} />,
       title: "WhatsApp",
       value: "+91 9096539177",
       link: "https://wa.me/919096539177?text=Hi%20whsofttech!%20I%20would%20like%20to%20discuss%20a%20project%20with%20you.",
     },
     {
-      icon: <MapPin size={24} />,
+      icon: <MapPin size={22} />,
       title: "Location",
       value: "India",
       link: "#",
     },
     {
-      icon: <Clock size={24} />,
+      icon: <Clock size={22} />,
       title: "Business Hours",
       value: "Mon - Sat: 9am - 6pm IST",
       link: "#",
@@ -67,50 +98,45 @@ export function ContactPageClient() {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-12 pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm font-medium text-primary mb-2 uppercase tracking-wider">
-            whsofttech
-          </p>
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 text-balance">
-            Let's Work <span className="gradient-text">Together</span>
+      <section className="border-b border-white/10 px-4 pb-10 pt-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
+            Contact
+          </span>
+          <h1 className="mb-4 text-balance text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            Let&apos;s work <span className="gradient-text">together</span>
           </h1>
-          <p className="text-muted-foreground text-sm max-w-md mx-auto">
-            Have a project in mind? Get in touch.
+          <p className="text-slate-400">
+            Have a project in mind? We typically respond within 24 hours.
           </p>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Contact Information */}
+      <section className="py-12 md:py-16">
+        <div className="section-shell">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-12">
             <div className="space-y-5">
-              <h2 className="text-xl font-bold text-foreground">Get in Touch</h2>
-              <p className="text-muted-foreground text-sm">
-                Email, phone, or form. We respond within 24 hours.
-              </p>
+              <div>
+                <h2 className="text-xl font-bold text-white">Get in touch</h2>
+                <p className="mt-1 text-sm text-slate-400">
+                  Email, phone, WhatsApp, or the form — your choice.
+                </p>
+              </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {contactInfo.map((item, index) => (
                   <Card
                     key={index}
-                    className="hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 cursor-pointer group"
+                    className="transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-lg"
                   >
                     <CardContent className="p-4">
                       <a href={item.link} className="flex gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center text-primary-foreground flex-shrink-0 group-hover:scale-110 transition-transform glow-primary">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-primary/15 text-sky-300">
                           {item.icon}
                         </div>
                         <div>
-                          <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                            {item.title}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {item.value}
-                          </p>
+                          <p className="font-semibold text-white">{item.title}</p>
+                          <p className="text-sm text-slate-400">{item.value}</p>
                         </div>
                       </a>
                     </CardContent>
@@ -118,40 +144,37 @@ export function ContactPageClient() {
                 ))}
               </div>
 
-              {/* Quote Builder Button */}
-              <Card className="bg-gradient-to-r from-primary to-accent text-primary-foreground border-0">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                      <Calculator size={24} />
+              <Card className="overflow-hidden border-primary/30 bg-gradient-to-br from-primary/25 to-sky-500/10">
+                <CardContent className="p-5">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10">
+                      <Calculator size={22} className="text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-lg mb-1">
-                        Get Instant Quote
-                      </h3>
-                      <p className="text-sm opacity-90">
-                        Build your custom project quote and send via WhatsApp
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-white">Instant quote</h3>
+                      <p className="text-sm text-slate-200/90">
+                        Step through options and send a summary on WhatsApp.
                       </p>
                     </div>
                     <Button
+                      type="button"
                       onClick={() => setShowQuoteBuilder(true)}
-                      variant="secondary"
-                      className="bg-white/20 hover:bg-white/30 text-white border-white/30"
+                      variant="outline"
+                      className="shrink-0 border-white/30 bg-white/10 text-white hover:bg-white/20"
                     >
-                      Build Quote
+                      Build quote
                     </Button>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Contact Form */}
             <div className="lg:col-span-2">
-              <Card className="border-border bg-card shadow-sm">
+              <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl">Send a Message</CardTitle>
-                  <CardDescription>
-                    We'll get back within 24 hours.
+                  <CardTitle className="text-white">Send a message</CardTitle>
+                  <CardDescription className="text-slate-400">
+                    We&apos;ll get back within 24 hours.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -163,22 +186,14 @@ export function ContactPageClient() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-12 bg-primary">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-primary-foreground mb-2">
-            Ready to start?
-          </h2>
-          <p className="text-primary-foreground/90 text-sm mb-4">
-            Tell us about your project.
+      <section className="border-t border-white/10 bg-[#050f1c]/80 py-12">
+        <div className="section-shell text-center">
+          <h2 className="mb-2 text-xl font-bold text-white">Ready to start?</h2>
+          <p className="mb-6 text-sm text-slate-400">
+            Tell us about timelines, stack, and goals — we&apos;ll propose a path.
           </p>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 border-0"
-          >
-            <Link href="/contact">Get in Touch</Link>
+          <Button asChild variant="outline" size="lg" className="rounded-xl border-white/25">
+            <Link href="/projects">View portfolio</Link>
           </Button>
         </div>
       </section>
@@ -187,4 +202,3 @@ export function ContactPageClient() {
     </div>
   );
 }
-

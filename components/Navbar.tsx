@@ -4,14 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import gsap from "gsap";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 export function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
-	const navRef = useRef<HTMLDivElement>(null);
-	const mobileMenuRef = useRef<HTMLDivElement>(null);
+	const mobilePanelRef = useRef<HTMLDivElement>(null);
+	const reducedMotion = useReducedMotion();
 
 	const navLinks = [
 		{ href: "/", label: "Home" },
@@ -21,276 +21,106 @@ export function Navbar() {
 		{ href: "/contact", label: "Contact" },
 	];
 
-	const menuVariants: Variants = {
-		closed: {
-			width: "100px",
-			height: "40px",
-			top: "0px",
-			right: "0px",
-			transition: {
-				duration: 0.75,
-				delay: 0.35,
-				type: "tween" as const,
-				ease: [0.76, 0, 0.24, 1] as const,
-			},
-		},
-		open: {
-			width: "320px",
-			height: "450px",
-			top: "-25px",
-			right: "-25px",
-			transition: {
-				duration: 0.75,
-				type: "tween" as const,
-				ease: [0.76, 0, 0.24, 1] as const,
-			},
-		},
-	};
-
-	const perspective = {
-		initial: {
-			opacity: 0,
-			rotateX: 90,
-			translateY: 80,
-			translateX: -20,
-		},
-		enter: (i: number) => ({
-			opacity: 1,
-			rotateX: 0,
-			translateY: 0,
-			translateX: 0,
-			transition: {
-				duration: 0.65,
-				delay: 0.5 + i * 0.1,
-				ease: [0.215, 0.61, 0.355, 1] as const,
-				opacity: { duration: 0.35 },
-			},
-		}),
-		exit: {
-			opacity: 0,
-			transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] as const },
-		},
-	};
-
-	const slideIn = {
-		initial: {
-			opacity: 0,
-			y: 20,
-		},
-		enter: (i: number) => ({
-			opacity: 1,
-			y: 0,
-			transition: {
-				duration: 0.5,
-				delay: 0.75 + i * 0.1,
-				ease: [0.215, 0.61, 0.355, 1] as const,
-			},
-		}),
-		exit: {
-			opacity: 0,
-			transition: {
-				duration: 0.5,
-				type: "tween" as const,
-				ease: "easeInOut" as const,
-			},
-		},
-	};
-
-	useEffect(() => {
-		if (isOpen && mobileMenuRef.current) {
-			gsap.from(mobileMenuRef.current, {
-				duration: 0.3,
-				opacity: 0,
-				y: -10,
-				ease: "power2.out",
-			});
-			gsap.from(mobileMenuRef.current.children, {
-				duration: 0.3,
-				opacity: 0,
-				x: -20,
-				stagger: 0.05,
-				ease: "power2.out",
-			});
-		}
-	}, [isOpen]);
-
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
 				isOpen &&
-				mobileMenuRef.current &&
-				!mobileMenuRef.current.contains(event.target as Node)
+				mobilePanelRef.current &&
+				!mobilePanelRef.current.contains(event.target as Node)
 			) {
 				setIsOpen(false);
 			}
 		};
-
 		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, [isOpen]);
+
+	useEffect(() => {
+		document.body.style.overflow = isOpen ? "hidden" : "";
 		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
+			document.body.style.overflow = "";
 		};
 	}, [isOpen]);
 
+	const transition = reducedMotion
+		? { duration: 0 }
+		: { duration: 0.25, ease: [0.22, 0.61, 0.36, 1] as const };
+
 	return (
-		<nav className="fixed top-0 left-0 right-0 z-[100] w-full bg-[#020617]/60 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="flex justify-between items-center h-20 sm:h-24">
-					{/* Logo */}
+		<nav className="fixed top-0 left-0 right-0 z-[100] w-full border-b border-white/20 bg-[#071426]/85 backdrop-blur-xl supports-[backdrop-filter]:bg-[#071426]/75">
+			<div className="section-shell">
+				<div className="flex h-16 sm:h-20 items-center justify-between">
 					<Link
 						href="/"
 						className="flex items-center gap-2 sm:gap-3 group"
 						aria-label="whsofttech Home"
 					>
-						<div className="relative w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+						<div className="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-xl border border-white/20 bg-white/[0.06] p-1 transition-transform duration-200 group-hover:scale-[1.03]">
 							<Image
 								src="/logo.png"
-								alt="whsofttech logo"
+								alt=""
 								fill
-								className="object-contain drop-shadow-[0_0_10px_rgba(11,28,255,0.5)]"
+								className="object-contain p-0.5"
 							/>
 						</div>
-						<span
-							className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 tracking-tight"
-							style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
-						>
+						<span className="text-lg sm:text-xl font-bold tracking-tight text-white">
 							whsofttech
 						</span>
 					</Link>
 
-					{/* Desktop Navigation */}
-					<div className="hidden md:flex items-center space-x-10 relative z-[101]">
+					<div className="hidden md:flex items-center gap-8">
 						{navLinks.map((link) => (
 							<Link
 								key={link.href}
 								href={link.href}
-								className="text-slate-300 hover:text-white transition-all duration-300 font-medium relative text-sm sm:text-base group/nav"
-								style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
+								className="text-sm font-medium text-slate-300 transition-colors hover:text-white relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-sky-400 after:transition-all hover:after:w-full"
 							>
 								{link.label}
-								<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/nav:w-full" />
 							</Link>
 						))}
-						<Button
-							asChild
-							className="premium-gradient hover:glow-soft transition-all duration-300 rounded-xl px-6"
-						>
+						<Button asChild size="default" className="rounded-xl px-5">
 							<Link href="/contact">Get Started</Link>
 						</Button>
 					</div>
 
-					{/* Mobile Menu Button */}
-					<motion.button
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
+					<button
+						type="button"
 						onClick={() => setIsOpen(!isOpen)}
-						className="md:hidden p-3 text-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 relative overflow-hidden"
-						aria-label="Toggle menu"
+						className="md:hidden flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-white/[0.06] text-white transition-colors hover:border-primary/40 hover:bg-white/[0.1]"
+						aria-expanded={isOpen}
+						aria-label={isOpen ? "Close menu" : "Open menu"}
 					>
-						<motion.div
-							className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20"
-							initial={false}
-							animate={isOpen ? "open" : "closed"}
-							variants={{
-								open: { rotate: 45 },
-								closed: { rotate: 0 },
-							}}
-							transition={{ duration: 0.2 }}
-						>
-							<div className="relative z-10">
-								{isOpen ? <X size={24} /> : <Menu size={24} />}
-							</div>
-						</motion.div>
-					</motion.button>
+						{isOpen ? <X size={22} /> : <Menu size={22} />}
+					</button>
 				</div>
 			</div>
 
-			{/* Mobile Navigation */}
 			<AnimatePresence>
 				{isOpen && (
 					<motion.div
-						ref={mobileMenuRef}
-						initial="closed"
-						animate="open"
-						exit="closed"
-						variants={menuVariants}
-						className="absolute top-0 right-0 w-[320px] h-[450px] bg-white/10 backdrop-blur-xl backdrop-saturate-150 border border-white/20 shadow-2xl rounded-[25px] z-40"
+						ref={mobilePanelRef}
+						initial={reducedMotion ? false : { opacity: 0, y: -8 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={reducedMotion ? undefined : { opacity: 0, y: -8 }}
+						transition={transition}
+						className="md:hidden absolute left-0 right-0 top-full border-b border-white/15 bg-[#0c1e36]/95 backdrop-blur-xl shadow-xl shadow-black/40"
 					>
-						<div className="flex flex-col justify-between h-full p-[60px_30px_30px_120px] relative">
-							{/* Close Button */}
-							<button
-								onClick={() => setIsOpen(false)}
-								className="absolute top-6 right-6 px-3 py-1 bg-white/80 hover:bg-white text-black hover:text-primary rounded-lg transition-all duration-200 text-sm font-medium z-50"
-								aria-label="Close menu"
-							>
-								Close
-							</button>
-							{/* Logo + Company name */}
-							<Link
-								href="/"
-								className="flex items-center gap-2 sm:gap-3 text-primary font-semibold group"
-								aria-label="whsofttech Home"
-							>
-								<div className="relative w-20 h-20 sm:w-30 sm:h-30 flex-shrink-0 group-hover:scale-105 transition-transform">
-									<Image
-										src="/logo.png"
-										alt="whsofttech logo"
-										fill
-										className="object-contain"
-									/>
-								</div>
-								<span
-									className="text-xl sm:text-2xl font-bold group-hover:text-accent transition-colors duration-300"
-									style={{ fontFamily: "var(--font-epilogue), sans-serif" }}
+						<div className="section-shell flex flex-col gap-1 py-4 pb-6">
+							{navLinks.map((link) => (
+								<Link
+									key={link.href}
+									href={link.href}
+									onClick={() => setIsOpen(false)}
+									className="rounded-xl border border-transparent px-4 py-3 text-base font-medium text-slate-200 transition-colors hover:border-white/15 hover:bg-white/[0.06] hover:text-white"
 								>
-									whsofttech
-								</span>
-							</Link>
-							<div className="flex-1 overflow-y-auto">
-								<div className="flex gap-[10px] flex-col">
-									{navLinks.map((link, i) => (
-										<motion.div
-											key={`b_${i}`}
-											className="relative"
-											custom={i}
-											variants={perspective}
-											initial="initial"
-											animate="enter"
-											exit="exit"
-										>
-											<Link
-												href={link.href}
-												className="text-decoration-none text-black text-2xl sm:text-[28px] font-medium hover:text-primary transition-colors"
-												style={{
-													fontFamily: "var(--font-epilogue), sans-serif",
-												}}
-												onClick={() => setIsOpen(false)}
-											>
-												{link.label}
-											</Link>
-										</motion.div>
-									))}
-								</div>
-							</div>
-							<motion.div className="flex flex-wrap gap-3" variants={slideIn}>
-								{[
-									{ title: "Facebook", href: "/" },
-									{ title: "LinkedIn", href: "/" },
-									{ title: "Instagram", href: "/" },
-									{ title: "Twitter", href: "/" },
-								].map((link, i) => (
-									<motion.a
-										variants={slideIn}
-										custom={i}
-										initial="initial"
-										animate="enter"
-										exit="exit"
-										key={`f_${i}`}
-										className="text-black text-xs hover:text-primary transition-colors bg-white/50 px-2 py-1 rounded"
-									>
-										{link.title}
-									</motion.a>
-								))}
-							</motion.div>
+									{link.label}
+								</Link>
+							))}
+							<Button asChild className="mt-3 w-full rounded-xl">
+								<Link href="/contact" onClick={() => setIsOpen(false)}>
+									Get Started
+								</Link>
+							</Button>
 						</div>
 					</motion.div>
 				)}

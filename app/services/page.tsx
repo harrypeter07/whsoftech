@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="bg-background">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <ParallaxServices />
       <Footer />

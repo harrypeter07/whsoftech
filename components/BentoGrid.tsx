@@ -31,36 +31,42 @@ const items = [
 
 export function BentoGrid() {
   return (
-    <section className="py-12 md:py-20 bg-[#F5F7FA]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block px-3 py-1 rounded-md bg-[#E9ECEF] text-[#212529] text-sm font-medium mb-4">
+    <section className="border-t border-white/10 py-14 md:py-20">
+      <div className="section-shell">
+        <div className="mb-12 text-center md:mb-16">
+          <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
             Why choose us
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#212529] mb-3">
+          <h2 className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
             Why choose whsofttech
           </h2>
-          <p className="text-[#6c757d] max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-slate-400">
             Your trusted technology partner for digital transformation.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-fr">
+        <div className="grid auto-rows-fr grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
           {items.map((item, i) => {
             const Icon = item.icon;
             const isLarge = item.className.includes("row-span-2");
             return (
               <div
                 key={i}
-                className={`p-6 md:p-8 rounded-xl bg-white border border-[#E9ECEF] hover:border-[#fd7e14]/20 hover:shadow-md transition-all duration-300 flex flex-col ${item.className}`}
+                className={`panel-card flex flex-col transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 ${item.className}`}
               >
-                <div className={`rounded-lg bg-[#fd7e14]/10 flex items-center justify-center mb-4 shrink-0 ${isLarge ? "w-14 h-14" : "w-12 h-12"}`}>
-                  <Icon className={isLarge ? "w-7 h-7 text-[#fd7e14]" : "w-6 h-6 text-[#fd7e14]"} />
+                <div
+                  className={`mb-4 flex shrink-0 items-center justify-center rounded-xl border border-white/15 bg-primary/15 ${isLarge ? "h-14 w-14" : "h-12 w-12"}`}
+                >
+                  <Icon
+                    className={`text-sky-300 ${isLarge ? "h-7 w-7" : "h-6 w-6"}`}
+                  />
                 </div>
-                <h3 className={`font-bold text-[#212529] mb-2 ${isLarge ? "text-xl md:text-2xl" : "text-lg md:text-xl"}`}>
+                <h3
+                  className={`mb-2 font-bold text-white ${isLarge ? "text-xl md:text-2xl" : "text-lg md:text-xl"}`}
+                >
                   {item.title}
                 </h3>
-                <p className="text-[#6c757d] text-sm md:text-base flex-1">
+                <p className="flex-1 text-sm text-slate-400 md:text-base">
                   {item.desc}
                 </p>
               </div>

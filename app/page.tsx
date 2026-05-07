@@ -16,33 +16,28 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#F5F7FA]">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
 
-      {/* Services */}
       <ServicesSection />
 
-      {/* Technologies marquee */}
       <TechMarquee />
 
-      {/* Why choose us - Bento grid */}
       <BentoGrid />
 
-      {/* Pricing */}
       <PricingSection />
 
-      {/* Quote builder */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-10">
-            <span className="inline-block px-3 py-1 rounded-md bg-[#E9ECEF] text-[#212529] text-sm font-medium mb-4">
+      <section className="border-t border-white/10 py-14 md:py-20">
+        <div className="section-shell">
+          <div className="mb-10 text-center md:mb-12">
+            <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
               Get a quote
             </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#212529] mb-3">
+            <h2 className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
               What do you need?
             </h2>
-            <p className="text-[#6c757d] max-w-xl mx-auto">
+            <p className="mx-auto max-w-xl text-slate-400">
               Tell us about your project and we&apos;ll help you bring it to life.
             </p>
           </div>

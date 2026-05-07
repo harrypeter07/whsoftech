@@ -1,10 +1,7 @@
 "use client";
 
-import React from "react";
-
-import { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
-import gsap from "gsap";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,8 +15,10 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 
+const inputClass =
+	"rounded-xl border-2 border-white/15 bg-white/[0.04] text-foreground placeholder:text-slate-500 focus-visible:border-primary focus-visible:ring-primary/30";
+
 export function ContactForm() {
-	const formRef = useRef<HTMLFormElement>(null);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -30,22 +29,6 @@ export function ContactForm() {
 		message: "",
 		service: "general",
 	});
-
-	useEffect(() => {
-		if (!formRef.current) return;
-
-		const ctx = gsap.context(() => {
-			gsap.from(".form-field", {
-				duration: 0.6,
-				opacity: 0,
-				y: 20,
-				stagger: 0.1,
-				ease: "power2.out",
-			});
-		}, formRef);
-
-		return () => ctx.revert();
-	}, []);
 
 	const handleChange = (
 		e: React.ChangeEvent<
@@ -89,7 +72,6 @@ export function ContactForm() {
 				service: "general",
 			});
 
-			// Reset success message after 5 seconds
 			setTimeout(() => setIsSuccess(false), 5000);
 		} catch (err) {
 			setError(
@@ -103,15 +85,14 @@ export function ContactForm() {
 	};
 
 	return (
-		<form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+		<form onSubmit={handleSubmit} className="space-y-6">
 			{isSuccess && (
-				<Card className="border-primary/50 bg-primary/5">
+				<Card className="border-primary/40 bg-primary/10">
 					<CardContent className="pt-6">
 						<div className="flex items-center gap-3">
-							<CheckCircle2 className="h-5 w-5 text-primary" />
-							<p className="text-primary font-medium">
-								Thank you! We've received your message and will get back to you
-								soon.
+							<CheckCircle2 className="h-5 w-5 text-sky-300" />
+							<p className="font-medium text-slate-200">
+								Thank you! We&apos;ve received your message and will get back to you soon.
 							</p>
 						</div>
 					</CardContent>
@@ -119,19 +100,20 @@ export function ContactForm() {
 			)}
 
 			{error && (
-				<Card className="border-destructive/50 bg-destructive/5">
+				<Card className="border-destructive/50 bg-destructive/10">
 					<CardContent className="pt-6">
 						<div className="flex items-center gap-3">
 							<AlertCircle className="h-5 w-5 text-destructive" />
-							<p className="text-destructive font-medium">{error}</p>
+							<p className="font-medium text-destructive">{error}</p>
 						</div>
 					</CardContent>
 				</Card>
 			)}
 
-			{/* Name */}
-			<div className="form-field space-y-2">
-				<Label htmlFor="name">Full Name</Label>
+			<div className="space-y-2">
+				<Label htmlFor="name" className="text-slate-200">
+					Full Name
+				</Label>
 				<Input
 					id="name"
 					name="name"
@@ -139,13 +121,14 @@ export function ContactForm() {
 					onChange={handleChange}
 					required
 					placeholder="John Doe"
-					className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary"
+					className={inputClass}
 				/>
 			</div>
 
-			{/* Email */}
-			<div className="form-field space-y-2">
-				<Label htmlFor="email">Email Address</Label>
+			<div className="space-y-2">
+				<Label htmlFor="email" className="text-slate-200">
+					Email Address
+				</Label>
 				<Input
 					type="email"
 					id="email"
@@ -154,13 +137,14 @@ export function ContactForm() {
 					onChange={handleChange}
 					required
 					placeholder="john@example.com"
-					className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary"
+					className={inputClass}
 				/>
 			</div>
 
-			{/* Company */}
-			<div className="form-field space-y-2">
-				<Label htmlFor="company">Company (Optional)</Label>
+			<div className="space-y-2">
+				<Label htmlFor="company" className="text-slate-200">
+					Company (Optional)
+				</Label>
 				<Input
 					type="text"
 					id="company"
@@ -168,23 +152,24 @@ export function ContactForm() {
 					value={formData.company}
 					onChange={handleChange}
 					placeholder="Your Company"
-					className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary"
+					className={inputClass}
 				/>
 			</div>
 
-			{/* Service Type */}
-			<div className="form-field space-y-2">
-				<Label htmlFor="service">Service of Interest</Label>
+			<div className="space-y-2">
+				<Label htmlFor="service" className="text-slate-200">
+					Service of Interest
+				</Label>
 				<Select
 					value={formData.service}
 					onValueChange={(value) =>
 						setFormData({ ...formData, service: value })
 					}
 				>
-					<SelectTrigger className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary">
+					<SelectTrigger className={inputClass}>
 						<SelectValue placeholder="Select a service" />
 					</SelectTrigger>
-					<SelectContent>
+					<SelectContent className="border-white/15 bg-[#0c1e36]">
 						<SelectItem value="general">General Inquiry</SelectItem>
 						<SelectItem value="software">Software Development</SelectItem>
 						<SelectItem value="ai">AI Solutions</SelectItem>
@@ -196,9 +181,10 @@ export function ContactForm() {
 				</Select>
 			</div>
 
-			{/* Message */}
-			<div className="form-field space-y-2">
-				<Label htmlFor="message">Message</Label>
+			<div className="space-y-2">
+				<Label htmlFor="message" className="text-slate-200">
+					Message
+				</Label>
 				<Textarea
 					id="message"
 					name="message"
@@ -207,21 +193,15 @@ export function ContactForm() {
 					required
 					rows={5}
 					placeholder="Tell us about your project..."
-					className="bg-card/50 border-border/50 hover:border-primary/50 focus:border-primary resize-none"
+					className={`${inputClass} resize-none`}
 				/>
 			</div>
 
-			{/* Submit Button */}
-			<div className="form-field pt-2">
-				<Button
-					type="submit"
-					disabled={isSubmitting}
-					className="w-full min-h-12 bg-primary text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/50 active:scale-[0.99] border-0"
-					size="lg"
-				>
+			<div className="pt-2">
+				<Button type="submit" disabled={isSubmitting} className="w-full rounded-xl" size="lg">
 					{isSubmitting ? (
 						<>
-							<div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+							<div className="mr-2 h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
 							Sending...
 						</>
 					) : (
@@ -232,7 +212,6 @@ export function ContactForm() {
 					)}
 				</Button>
 			</div>
-
 		</form>
 	);
 }

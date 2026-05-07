@@ -129,13 +129,11 @@ export default function AboutPage() {
               },
             ].map((value, index) => (
               <div key={index} className="group relative">
-                <div className="p-8 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <div className="panel-card hover:border-primary/40 transition-[border-color,box-shadow,transform] duration-300 hover:shadow-xl hover:-translate-y-0.5 p-8 rounded-2xl">
                   <div className="text-4xl mb-4">{value.icon}</div>
                   <h3 className="text-xl font-semibold text-foreground mb-3">{value.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
                 </div>
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
               </div>
             ))}
           </div>
@@ -184,7 +182,7 @@ export default function AboutPage() {
                 description: 'For all our deployments',
               },
             ].map((achievement, index) => (
-              <div key={index} className="group text-center p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <div key={index} className="group panel-card text-center p-8 rounded-2xl hover:border-primary/40 transition-[border-color,box-shadow,transform] duration-300 hover:shadow-xl hover:-translate-y-0.5">
                 <div className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
                   {achievement.number}
                 </div>
@@ -271,8 +269,8 @@ export default function AboutPage() {
               'Quality-first development approach',
               'Long-term partnership mindset',
             ].map((reason, index) => (
-              <div key={index} className="flex gap-4 items-start p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-all duration-300 group">
-                <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+              <div key={index} className="flex gap-4 items-start panel-card p-4 rounded-xl hover:border-primary/40 transition-[border-color] duration-300 group">
+                <CheckCircle2 className="w-6 h-6 text-sky-400 flex-shrink-0 mt-0.5" />
                 <span className="text-foreground font-medium">{reason}</span>
               </div>
             ))}
@@ -281,24 +279,20 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-primary to-accent relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
-        </div>
+      <section className="relative overflow-hidden border-t border-white/10 py-24 premium-gradient">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.08),transparent)]" />
         
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl sm:text-5xl font-bold text-primary-foreground mb-6">Join the Companies We've Transformed</h2>
-          <p className="text-lg text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can become your trusted technology partner.
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">Join the companies we&apos;ve transformed</h2>
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            Let&apos;s discuss how we can become your trusted technology partner.
           </p>
           <a
             href="/contact"
-            className="inline-flex px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
+            className="group inline-flex items-center px-8 py-4 rounded-xl font-semibold border-2 border-white/40 bg-white text-primary hover:bg-white/95 transition-[transform,box-shadow] duration-200 hover:shadow-xl"
           >
             Start a Conversation
-            <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </a>

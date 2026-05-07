@@ -18,37 +18,32 @@ export function TechMarquee() {
   const items = [...techs, ...techs, ...techs];
 
   return (
-    <section className="py-12 md:py-16 bg-[#F5F7FA] overflow-hidden">
-      <p className="text-center text-[#718096] text-sm mb-6 font-medium">
-        Trusted by 100+ businesses
+    <section className="overflow-hidden border-y border-white/10 bg-[#050f1c]/80 py-12 md:py-14">
+      <p className="mb-6 text-center text-sm font-medium text-slate-500">
+        Technologies we work with
       </p>
       <div className="relative">
-        {/* Left blur gradient */}
         <div
-          className="absolute left-0 top-0 bottom-0 w-24 md:w-32 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(to right, #F5F7FA 0%, #F5F7FA 20%, transparent 100%)",
-          }}
+          className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-[#071426] to-transparent md:w-28"
+          aria-hidden
         />
-        {/* Right blur gradient */}
         <div
-          className="absolute right-0 top-0 bottom-0 w-24 md:w-32 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(to left, #F5F7FA 0%, #F5F7FA 20%, transparent 100%)",
-          }}
+          className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-[#071426] to-transparent md:w-28"
+          aria-hidden
         />
-        <div className="flex animate-marquee gap-10 md:gap-14 items-center">
+        <div className="flex animate-marquee items-center gap-10 md:gap-14">
           {items.map((t, i) => (
             <div
               key={`${t.name}-${i}`}
-              className="shrink-0 flex items-center gap-3 whitespace-nowrap"
+              className="flex shrink-0 items-center gap-3 whitespace-nowrap rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={t.icon}
-                alt={t.name}
-                className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                alt=""
+                className="h-9 w-9 object-contain md:h-11 md:w-11"
               />
-              <span className="text-[#1A202C] font-semibold text-base md:text-lg">
+              <span className="text-base font-semibold text-slate-200 md:text-lg">
                 {t.name}
               </span>
             </div>

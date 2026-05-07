@@ -11,15 +11,16 @@ import {
   Globe, 
   Smartphone, 
   Palette, 
-  Zap, 
-  Users, 
-  TrendingUp,
+  Zap,
   Check,
   ArrowRight,
   ArrowLeft,
   Calculator,
   MessageCircle
 } from "lucide-react";
+
+const QB_FIELD =
+  "w-full rounded-xl border-2 border-white/15 bg-white/[0.04] p-3 text-sm text-foreground placeholder:text-slate-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30";
 
 interface ProjectDetails {
   name: string;
@@ -172,44 +173,44 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
         return (
           <Card className="w-full max-w-2xl mx-auto">
             <CardHeader className="px-4 sm:px-6">
-              <CardTitle className="text-xl sm:text-2xl text-center">Tell us about yourself</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl text-center text-white">Tell us about yourself</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 px-4 sm:px-6">
               <div>
-                <label className="block text-sm font-medium mb-2">Your Name *</label>
+                <label className="block text-sm font-medium mb-2 text-slate-200">Your Name *</label>
                 <input
                   type="text"
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  className={QB_FIELD}
                   value={projectDetails.name}
                   onChange={(e) => setProjectDetails({...projectDetails, name: e.target.value})}
                   placeholder="John Doe"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Email Address *</label>
+                <label className="block text-sm font-medium mb-2 text-slate-200">Email Address *</label>
                 <input
                   type="email"
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  className={QB_FIELD}
                   value={projectDetails.email}
                   onChange={(e) => setProjectDetails({...projectDetails, email: e.target.value})}
                   placeholder="john@example.com"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Phone Number *</label>
+                <label className="block text-sm font-medium mb-2 text-slate-200">Phone Number *</label>
                 <input
                   type="tel"
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  className={QB_FIELD}
                   value={projectDetails.phone}
                   onChange={(e) => setProjectDetails({...projectDetails, phone: e.target.value})}
                   placeholder="+91 98765 43210"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Company Name</label>
+                <label className="block text-sm font-medium mb-2 text-slate-200">Company Name</label>
                 <input
                   type="text"
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  className={QB_FIELD}
                   value={projectDetails.company}
                   onChange={(e) => setProjectDetails({...projectDetails, company: e.target.value})}
                   placeholder="Acme Corporation"
@@ -223,17 +224,17 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
         return (
           <Card className="w-full max-w-4xl mx-auto">
             <CardHeader className="px-4 sm:px-6">
-              <CardTitle className="text-xl sm:text-2xl text-center">What services do you need?</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl text-center text-white">What services do you need?</CardTitle>
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {Object.entries(servicePackages).map(([service, info]) => (
                   <div
                     key={service}
-                    className={`p-3 sm:p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                    className={`cursor-pointer rounded-xl border-2 p-3 transition-colors sm:p-4 ${
                       projectDetails.services.includes(service)
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border hover:border-primary/50'
+                        ? 'border-primary bg-primary/15 ring-1 ring-white/10'
+                        : 'border-white/15 bg-white/[0.03] hover:border-primary/40'
                     }`}
                     onClick={() => {
                       const newServices = projectDetails.services.includes(service)
@@ -248,7 +249,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                           {info.icon}
                         </div>
                       </div>
-                      <h3 className="font-semibold text-sm sm:text-base leading-tight">{service}</h3>
+                      <h3 className="font-semibold text-sm sm:text-base leading-tight text-white">{service}</h3>
                     </div>
                     <div className="text-xs sm:text-sm text-muted-foreground mb-2">
                       {info.timeline}
@@ -275,17 +276,17 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
         return (
           <Card className="w-full max-w-4xl mx-auto">
             <CardHeader className="px-4 sm:px-6">
-              <CardTitle className="text-xl sm:text-2xl text-center">Additional Features</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl text-center text-white">Additional Features</CardTitle>
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {additionalFeatures.map((feature) => (
                   <div
                     key={feature.name}
-                    className={`p-3 sm:p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                    className={`cursor-pointer rounded-xl border-2 p-3 transition-colors sm:p-4 ${
                       projectDetails.features.includes(feature.name)
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border hover:border-primary/50'
+                        ? 'border-primary bg-primary/15 ring-1 ring-white/10'
+                        : 'border-white/15 bg-white/[0.03] hover:border-primary/40'
                     }`}
                     onClick={() => {
                       const newFeatures = projectDetails.features.includes(feature.name)
@@ -295,7 +296,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                     }}
                   >
                     <div className="flex justify-between items-start gap-2">
-                      <h3 className="font-semibold text-sm sm:text-base leading-tight flex-1">{feature.name}</h3>
+                      <h3 className="font-semibold text-sm sm:text-base leading-tight flex-1 text-white">{feature.name}</h3>
                       <div className="text-sm sm:text-lg font-bold text-primary flex-shrink-0">
                         ₹{feature.price.toLocaleString('en-IN')}
                       </div>
@@ -311,13 +312,13 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
         return (
           <Card className="w-full max-w-2xl mx-auto">
             <CardHeader className="px-4 sm:px-6">
-              <CardTitle className="text-xl sm:text-2xl text-center">Project Details</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl text-center text-white">Project Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 px-4 sm:px-6">
               <div>
-                <label className="block text-sm font-medium mb-2">Project Type *</label>
+                <label className="block text-sm font-medium mb-2 text-slate-200">Project Type *</label>
                 <select
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  className={QB_FIELD}
                   value={projectDetails.projectType}
                   onChange={(e) => setProjectDetails({...projectDetails, projectType: e.target.value})}
                 >
@@ -329,9 +330,9 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Expected Timeline *</label>
+                <label className="block text-sm font-medium mb-2 text-slate-200">Expected Timeline *</label>
                 <select
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  className={QB_FIELD}
                   value={projectDetails.timeline}
                   onChange={(e) => setProjectDetails({...projectDetails, timeline: e.target.value})}
                 >
@@ -345,9 +346,9 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Budget Range *</label>
+                <label className="block text-sm font-medium mb-2 text-slate-200">Budget Range *</label>
                 <select
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  className={QB_FIELD}
                   value={projectDetails.budget}
                   onChange={(e) => setProjectDetails({...projectDetails, budget: e.target.value})}
                 >
@@ -360,9 +361,9 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Project Description *</label>
+                <label className="block text-sm font-medium mb-2 text-slate-200">Project Description *</label>
                 <textarea
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent h-32 text-sm resize-none"
+                  className={`${QB_FIELD} h-32 resize-none`}
                   value={projectDetails.description}
                   onChange={(e) => setProjectDetails({...projectDetails, description: e.target.value})}
                   placeholder="Tell us more about your project requirements..."
@@ -399,16 +400,16 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
     return (
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader className="px-4 sm:px-6">
-          <CardTitle className="text-xl sm:text-2xl text-center flex items-center justify-center gap-2">
-            <Calculator size={20} className="sm:size-28" />
+          <CardTitle className="text-xl sm:text-2xl text-center flex items-center justify-center gap-2 text-white">
+            <Calculator size={22} className="text-sky-300" />
             Project Summary
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6">
           {/* Client Info */}
           <div>
-            <h3 className="font-semibold mb-2 text-sm sm:text-base">Client Information</h3>
-            <div className="space-y-1 text-xs sm:text-sm">
+            <h3 className="font-semibold mb-2 text-sm sm:text-base text-white">Client Information</h3>
+            <div className="space-y-1 text-xs sm:text-sm text-slate-300">
               <p><span className="font-medium">Name:</span> {projectDetails.name}</p>
               <p><span className="font-medium">Email:</span> {projectDetails.email}</p>
               <p><span className="font-medium">Phone:</span> {projectDetails.phone}</p>
@@ -420,13 +421,13 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
 
           {/* Selected Services */}
           <div>
-            <h3 className="font-semibold mb-2 text-sm sm:text-base">Selected Services</h3>
+            <h3 className="font-semibold mb-2 text-sm sm:text-base text-white">Selected Services</h3>
             <div className="space-y-2">
               {projectDetails.services.map(service => {
                 const pkg = servicePackages[service as keyof typeof servicePackages];
                 return (
                   <div key={service} className="flex justify-between items-center gap-2">
-                    <span className="text-xs sm:text-sm flex-1">{service}</span>
+                    <span className="text-xs sm:text-sm flex-1 text-slate-300">{service}</span>
                     <span className="font-medium text-xs sm:text-sm">₹{pkg.basePrice.toLocaleString('en-IN')}</span>
                   </div>
                 );
@@ -439,13 +440,13 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
             <>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2 text-sm sm:text-base">Additional Features</h3>
+                <h3 className="font-semibold mb-2 text-sm sm:text-base text-white">Additional Features</h3>
                 <div className="space-y-2">
                   {projectDetails.features.map(feature => {
                     const featureInfo = additionalFeatures.find(f => f.name === feature);
                     return (
                       <div key={feature} className="flex justify-between items-center gap-2">
-                        <span className="text-xs sm:text-sm flex-1">{feature}</span>
+                        <span className="text-xs sm:text-sm flex-1 text-slate-300">{feature}</span>
                         <span className="font-medium text-xs sm:text-sm">₹{featureInfo?.price.toLocaleString('en-IN')}</span>
                       </div>
                     );
@@ -459,8 +460,8 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
 
           {/* Project Details */}
           <div>
-            <h3 className="font-semibold mb-2 text-sm sm:text-base">Project Details</h3>
-            <div className="space-y-1 text-xs sm:text-sm">
+            <h3 className="font-semibold mb-2 text-sm sm:text-base text-white">Project Details</h3>
+            <div className="space-y-1 text-xs sm:text-sm text-slate-300">
               <p><span className="font-medium">Type:</span> {projectDetails.projectType}</p>
               <p><span className="font-medium">Timeline:</span> {projectDetails.timeline}</p>
               <p><span className="font-medium">Budget:</span> {projectDetails.budget}</p>
@@ -470,10 +471,10 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
           <Separator />
 
           {/* Total */}
-          <div className="bg-primary/5 p-3 sm:p-4 rounded-lg">
+          <div className="rounded-xl border border-primary/25 bg-primary/10 p-3 sm:p-4">
             <div className="flex justify-between items-center text-lg sm:text-xl font-bold">
-              <span className="text-sm sm:text-base">Total Estimated Cost:</span>
-              <span className="text-primary text-sm sm:text-base">₹{total.toLocaleString('en-IN')}</span>
+              <span className="text-sm sm:text-base text-slate-200">Total Estimated Cost:</span>
+              <span className="text-sky-300 text-sm sm:text-base">₹{total.toLocaleString('en-IN')}</span>
             </div>
           </div>
 
@@ -489,7 +490,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
             </Button>
             <Button
               asChild
-              className="flex items-center justify-center w-full sm:w-auto order-1 sm:order-2 bg-green-600 hover:bg-green-700"
+              className="flex items-center justify-center w-full sm:w-auto order-1 sm:order-2 rounded-xl border border-emerald-400/30 bg-emerald-600 text-white hover:bg-emerald-500"
             >
               <a
                 href={generateWhatsAppMessage()}
@@ -524,7 +525,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
                       : 'bg-muted text-muted-foreground'
                   }`}
                 >
-                  {i < step ? <Check size={10} className="sm:size-14" /> : i + 1}
+                  {i < step ? <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={3} /> : i + 1}
                 </div>
                 {i < totalSteps - 1 && (
                   <div
@@ -538,7 +539,7 @@ ${selectedFeatures ? `• ${selectedFeatures}` : 'None'}
           </div>
         </div>
         <div className="text-center px-2">
-          <h2 className="text-sm sm:text-base font-medium">
+          <h2 className="text-sm sm:text-base font-medium text-white">
             {step === 1 && "Client Information"}
             {step === 2 && "Select Services"}
             {step === 3 && "Additional Features"}

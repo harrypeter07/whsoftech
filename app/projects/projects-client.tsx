@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ProjectCard } from '@/components/ProjectCard';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const projects = [
   {
@@ -85,39 +87,42 @@ const categories = ['All', 'Web', 'Mobile', 'AI', 'Design'];
 export function ProjectsClient() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const filteredProjects = selectedCategory === 'All'
-    ? projects
-    : projects.filter((p) => p.category === selectedCategory);
+  const filteredProjects =
+    selectedCategory === 'All'
+      ? projects
+      : projects.filter((p) => p.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl sm:text-6xl font-bold text-foreground mb-6 text-balance">
-            Our Portfolio of
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"> Success</span>
+      <section className="border-b border-white/10 px-4 pb-12 pt-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
+            Portfolio
+          </span>
+          <h1 className="mb-4 text-balance text-4xl font-bold text-white sm:text-5xl md:text-6xl">
+            Our portfolio of{' '}
+            <span className="gradient-text">success</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore projects that showcase our expertise across web, mobile, AI, and design.
+          <p className="mx-auto max-w-2xl text-lg text-slate-400">
+            Explore projects across web, mobile, AI, and design — built with clarity and performance.
           </p>
         </div>
       </section>
 
-      {/* Filter Section */}
-      <section className="py-8 border-b border-border sticky top-16 bg-background/95 backdrop-blur-sm z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-3">
+      <section className="sticky top-16 z-40 border-b border-white/10 bg-[#071426]/90 py-4 backdrop-blur-md supports-[backdrop-filter]:bg-[#071426]/80">
+        <div className="section-shell">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {categories.map((category) => (
               <button
                 key={category}
+                type="button"
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                className={`rounded-full border px-5 py-2 text-sm font-medium transition-[background-color,border-color,color] duration-200 ${
                   selectedCategory === category
-                    ? 'bg-primary text-primary-foreground shadow-lg'
-                    : 'border border-border text-foreground hover:border-primary hover:text-primary'
+                    ? 'border-primary bg-primary text-white shadow-lg shadow-primary/20'
+                    : 'border-white/20 bg-white/[0.04] text-slate-200 hover:border-primary/40 hover:text-white'
                 }`}
               >
                 {category}
@@ -127,10 +132,9 @@ export function ProjectsClient() {
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-16 md:py-20">
+        <div className="section-shell">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredProjects.map((project) => (
               <ProjectCard
                 key={project.id}
@@ -145,48 +149,50 @@ export function ProjectsClient() {
           </div>
 
           {filteredProjects.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-lg text-muted-foreground">No projects found in this category.</p>
+            <div className="py-16 text-center">
+              <p className="text-lg text-slate-400">No projects found in this category.</p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <p className="text-5xl font-bold text-primary mb-2">500+</p>
-              <p className="text-lg text-muted-foreground">Projects Delivered</p>
+      <section className="border-t border-white/10 bg-[#050f1c]/60 py-16 md:py-20">
+        <div className="section-shell">
+          <div className="grid grid-cols-1 gap-10 text-center md:grid-cols-3 md:gap-8">
+            <div className="rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8">
+              <p className="mb-2 text-4xl font-bold text-sky-300 md:text-5xl">500+</p>
+              <p className="text-slate-400">Projects delivered</p>
             </div>
-            <div>
-              <p className="text-5xl font-bold text-primary mb-2">99.9%</p>
-              <p className="text-lg text-muted-foreground">Client Satisfaction</p>
+            <div className="rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8">
+              <p className="mb-2 text-4xl font-bold text-sky-300 md:text-5xl">99.9%</p>
+              <p className="text-slate-400">Client satisfaction</p>
             </div>
-            <div>
-              <p className="text-5xl font-bold text-primary mb-2">12+</p>
-              <p className="text-lg text-muted-foreground">Years of Excellence</p>
+            <div className="rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8">
+              <p className="mb-2 text-4xl font-bold text-sky-300 md:text-5xl">12+</p>
+              <p className="text-slate-400">Years of excellence</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-accent">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-primary-foreground mb-6">
-            Ready to Start Your Project?
-          </h2>
-          <p className="text-lg text-primary-foreground/90 mb-8">
-            Let's discuss how we can help you achieve your goals with our proven expertise.
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-          >
-            Get in Touch
-          </a>
+      <section className="border-t border-white/10 py-16 md:py-20">
+        <div className="section-shell">
+          <div className="premium-gradient rounded-2xl border border-white/20 px-6 py-12 text-center shadow-xl shadow-primary/20 md:px-12 md:py-16">
+            <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+              Ready to start your project?
+            </h2>
+            <p className="mx-auto mb-8 max-w-xl text-lg text-white/90">
+              Let&apos;s discuss how we can help you ship faster with a focused engineering partner.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="rounded-xl border-white/40 bg-white text-primary hover:bg-white/95"
+            >
+              <Link href="/contact">Get in touch</Link>
+            </Button>
+          </div>
         </div>
       </section>
 

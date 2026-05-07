@@ -1,30 +1,25 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 export function Preloader() {
 	const [isLoading, setIsLoading] = useState(true);
-	const videoRef = useRef<HTMLVideoElement>(null);
+	const reducedMotion = useReducedMotion();
 
 	useEffect(() => {
-		// Prevent scrolling during loading
 		document.body.style.overflow = "hidden";
-
-		// Stop loading after 7 seconds
-		const timer = setTimeout(() => {
+		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const ms = mq.matches ? 200 : 900;
+		const id = window.setTimeout(() => {
 			setIsLoading(false);
-			document.body.style.overflow = "auto";
-		}, 7000);
-
-		if (videoRef.current) {
-			videoRef.current.playbackRate = 1.0;
-		}
-
+			document.body.style.overflow = "";
+		}, ms);
 		return () => {
-			clearTimeout(timer);
-			document.body.style.overflow = "auto";
+			clearTimeout(id);
+			document.body.style.overflow = "";
 		};
 	}, []);
 
@@ -34,56 +29,39 @@ export function Preloader() {
 				<motion.div
 					initial={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					transition={{ duration: 0.8, ease: "easeInOut" }}
-					className="fixed inset-0 z-[9999] flex items-center justify-center bg-black overflow-hidden"
+					transition={{ duration: reducedMotion ? 0.15 : 0.4, ease: "easeInOut" }}
+					className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#071426] overflow-hidden border-b border-white/15"
+					aria-busy="true"
+					aria-label="Loading"
 				>
-					{/* Video background */}
-					<div className="relative w-full h-full flex items-center justify-center">
-						<video
-							ref={videoRef}
-							autoPlay
-							muted
-							playsInline
-							onEnded={() => setIsLoading(false)}
-							className="absolute min-w-[100vh] min-h-[100vw] object-cover rotate-90 pointer-events-none"
-						>
-							<source
-								src="/db3435e8a2cac0cae1a59dc55dc7ad80.mp4"
-								type="video/mp4"
-							/>
-							Your browser does not support the video tag.
-						</video>
-					</div>
-
-					{/* Centered Logo */}
+					<div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(37,99,235,0.35),transparent)] pointer-events-none" />
 					<motion.div
-						initial={{ scale: 0.8, opacity: 0 }}
-						animate={{ scale: 1, opacity: 1 }}
-						transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
-						className="absolute z-10 flex flex-col items-center justify-center"
+						initial={reducedMotion ? false : { opacity: 0, scale: 0.96 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ duration: reducedMotion ? 0 : 0.45, ease: "easeOut" }}
+						className="relative z-10 flex flex-col items-center gap-5 px-6"
 					>
-						{/* Light Glow/Blur background */}
-						<div className="absolute w-96 h-96 md:w-[40rem] md:h-[40rem] bg-white/40 rounded-full blur-[100px] md:blur-[150px]" />
-						<div className="absolute w-64 h-64 md:w-[25rem] md:h-[25rem] bg-white/30 rounded-full blur-[60px] md:blur-[100px]" />
-
-						<div className="relative w-64 h-64 md:w-96 md:h-96 z-10">
+						<div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-2xl border border-white/25 bg-white/[0.06] p-3 shadow-xl shadow-black/40 backdrop-blur-md">
 							<Image
 								src="/logo.png"
-								alt="whsofttech logo"
+								alt=""
 								fill
-								className="object-contain"
+								className="object-contain p-1"
 								priority
 							/>
 						</div>
+						<p className="text-sm font-medium tracking-wide text-slate-300">
+							WH SoftTech
+						</p>
 					</motion.div>
-
-					{/* Progress indicator */}
-					<motion.div
-						initial={{ width: 0 }}
-						animate={{ width: "100%" }}
-						transition={{ duration: 7, ease: "linear" }}
-						className="absolute bottom-0 left-0 h-1 bg-primary z-20"
-					/>
+					{!reducedMotion && (
+						<motion.div
+							initial={{ scaleX: 0 }}
+							animate={{ scaleX: 1 }}
+							transition={{ duration: 0.85, ease: "easeInOut" }}
+							className="absolute bottom-0 left-0 right-0 h-0.5 origin-left bg-gradient-to-r from-primary via-sky-400 to-primary"
+						/>
+					)}
 				</motion.div>
 			)}
 		</AnimatePresence>

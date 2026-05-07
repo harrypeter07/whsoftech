@@ -4,27 +4,33 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Futuristic SaaS Palette */
-  --background: #020617;
-  --foreground: #FFFFFF;
-  --card: rgba(255, 255, 255, 0.06);
-  --card-foreground: #FFFFFF;
-  --popover: #020617;
-  --popover-foreground: #FFFFFF;
-  --primary: #0B1CFF;
-  --primary-foreground: #FFFFFF;
-  --secondary: #1E3A8A;
-  --secondary-foreground: #CBD5F5;
-  --muted: #1e293b;
-  --muted-foreground: #94A3B8;
-  --accent: #FF7A18;
-  --accent-foreground: #FFFFFF;
+  /* Bold modern blue — high contrast text on dark surfaces */
+  --background: #071426;
+  --foreground: #f8fafc;
+  --card: rgba(15, 38, 71, 0.85);
+  --card-foreground: #f1f5f9;
+  --popover: #0c1e36;
+  --popover-foreground: #f8fafc;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #1e3a5f;
+  --secondary-foreground: #e2e8f0;
+  --muted: rgba(30, 58, 95, 0.55);
+  --muted-foreground: #94a3b8;
+  --accent: #38bdf8;
+  --accent-foreground: #0f172a;
   --destructive: #ef4444;
-  --destructive-foreground: #FFFFFF;
-  --border: rgba(255, 255, 255, 0.12);
-  --input: rgba(255, 255, 255, 0.1);
-  --ring: #3B82F6;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.22);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: #60a5fa;
   --radius: 14px;
+  --surface: rgba(12, 30, 54, 0.72);
+  --surface-elevated: rgba(20, 48, 82, 0.92);
+}
+
+.dark {
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -44,50 +50,77 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', var(--font-epilogue), sans-serif;
-    background: radial-gradient(circle at 50% 0%, #1E3A8A 0%, #0B1CFF 25%, #020617 100%);
+    font-family: var(--font-inter), var(--font-epilogue), system-ui, sans-serif;
+    background-color: var(--background);
+    background-image:
+      radial-gradient(ellipse 120% 80% at 50% -20%, rgba(37, 99, 235, 0.35) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 50% at 100% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+      linear-gradient(180deg, #071426 0%, #050f1c 100%);
     background-attachment: fixed;
   }
 
+  /* Reusable layout / panels */
+  .section-shell {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .panel-card {
+    @apply rounded-xl border border-white/20 bg-[var(--surface)] text-card-foreground shadow-lg shadow-black/20 backdrop-blur-md;
+  }
+
+  .panel-card-elevated {
+    @apply rounded-xl border border-white/25 bg-[var(--surface-elevated)] text-card-foreground shadow-xl shadow-black/25 backdrop-blur-md;
+  }
+
   .glass-card {
-    @apply backdrop-blur-[20px] bg-white/5 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.4)];
+    @apply backdrop-blur-xl bg-white/[0.06] border border-white/20 shadow-[0_12px_40px_rgba(0,0,0,0.35)];
   }
 
   .glass-card-hover {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-primary/50 hover:shadow-[0_20px_40px_rgba(11,28,255,0.2)] hover:bg-white/10;
+    @apply transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_50px_rgba(37,99,235,0.18)] hover:bg-white/[0.09];
   }
 
   .premium-gradient {
-    background: linear-gradient(135deg, #0B1CFF 0%, #3B82F6 100%);
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 45%, #38bdf8 100%);
   }
 
   .premium-text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-sky-300;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-300 via-blue-200 to-white;
   }
 
   .glow-soft {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 40px rgba(37, 99, 235, 0.25);
   }
 
   .grid-pattern {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     background-size: 40px 40px;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 }
 
-/* Blob animations */
+/* Blob + marquee — toned down; disabled when user prefers reduced motion */
 @keyframes blob {
   0%, 100% {
     transform: translate(0, 0) scale(1);
   }
   33% {
-    transform: translate(30px, -50px) scale(1.1);
+    transform: translate(18px, -28px) scale(1.04);
   }
   66% {
-    transform: translate(-20px, 20px) scale(0.9);
+    transform: translate(-14px, 14px) scale(0.98);
   }
 }
 
@@ -96,10 +129,10 @@
     transform: translate(0, 0) scale(1);
   }
   33% {
-    transform: translate(-30px, 50px) scale(0.9);
+    transform: translate(-18px, 24px) scale(0.98);
   }
   66% {
-    transform: translate(20px, -20px) scale(1.1);
+    transform: translate(14px, -14px) scale(1.04);
   }
 }
 
@@ -108,23 +141,23 @@
     transform: translate(0, 0) scale(1);
   }
   33% {
-    transform: translate(20px, 30px) scale(1.05);
+    transform: translate(12px, 18px) scale(1.02);
   }
   66% {
-    transform: translate(-30px, -20px) scale(0.95);
+    transform: translate(-18px, -12px) scale(0.99);
   }
 }
 
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 10s ease-in-out infinite;
 }
 
 .animate-blob-slow {
-  animation: blob-slow 8s infinite;
+  animation: blob-slow 12s ease-in-out infinite;
 }
 
 .animate-blob-delayed {
-  animation: blob-delayed 9s infinite 1s;
+  animation: blob-delayed 14s ease-in-out infinite 1s;
 }
 
 @keyframes marquee {
@@ -137,5 +170,14 @@
 }
 
 .animate-marquee {
-  animation: marquee 20s linear infinite;
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-blob-slow,
+  .animate-blob-delayed,
+  .animate-marquee {
+    animation: none !important;
+  }
 }
