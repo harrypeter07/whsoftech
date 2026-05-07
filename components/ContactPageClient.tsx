@@ -46,7 +46,7 @@ export function ContactPageClient() {
               <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
                 Quote builder
               </span>
-              <h1 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
+              <h1 className="mb-3 text-3xl font-bold text-white sm:text-4xl scroll-fade-up hover-text-shift">
                 Build your <span className="gradient-text">estimate</span>
               </h1>
               <p className="text-slate-400">
@@ -103,7 +103,7 @@ export function ContactPageClient() {
           <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
             Contact
           </span>
-          <h1 className="mb-4 text-balance text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+          <h1 className="mb-4 text-balance text-3xl font-bold text-white sm:text-4xl md:text-5xl scroll-fade-up hover-text-shift">
             Let&apos;s work <span className="gradient-text">together</span>
           </h1>
           <p className="text-slate-400">
@@ -127,7 +127,7 @@ export function ContactPageClient() {
                 {contactInfo.map((item, index) => (
                   <Card
                     key={index}
-                    className="transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-lg"
+                    className="card-hover-premium scroll-fade-up transition-[border-color,box-shadow,transform] duration-300 hover:border-primary/35 hover:shadow-lg"
                   >
                     <CardContent className="p-4">
                       <a href={item.link} className="flex gap-4">
@@ -160,7 +160,7 @@ export function ContactPageClient() {
                       type="button"
                       onClick={() => setShowQuoteBuilder(true)}
                       variant="outline"
-                      className="shrink-0 border-white/30 bg-white/10 text-white hover:bg-white/20"
+                      className="shrink-0 border-white/30 bg-white/10 text-white hover:bg-white/20 btn-magnetic"
                     >
                       Build quote
                     </Button>
@@ -192,7 +192,7 @@ export function ContactPageClient() {
           <p className="mb-6 text-sm text-slate-400">
             Tell us about timelines, stack, and goals — we&apos;ll propose a path.
           </p>
-          <Button asChild variant="outline" size="lg" className="rounded-xl border-white/25">
+          <Button asChild variant="outline" size="lg" className="rounded-xl border-white/25 btn-magnetic">
             <Link href="/projects">View portfolio</Link>
           </Button>
         </div>

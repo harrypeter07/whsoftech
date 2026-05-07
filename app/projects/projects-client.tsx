@@ -101,7 +101,7 @@ export function ProjectsClient() {
           <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
             Portfolio
           </span>
-          <h1 className="mb-4 text-balance text-4xl font-bold text-white sm:text-5xl md:text-6xl">
+          <h1 className="mb-4 text-balance text-4xl font-bold text-white sm:text-5xl md:text-6xl scroll-fade-up hover-text-shift">
             Our portfolio of{' '}
             <span className="gradient-text">success</span>
           </h1>
@@ -119,7 +119,7 @@ export function ProjectsClient() {
                 key={category}
                 type="button"
                 onClick={() => setSelectedCategory(category)}
-                className={`rounded-full border px-5 py-2 text-sm font-medium transition-[background-color,border-color,color] duration-200 ${
+                className={`rounded-full border px-5 py-2 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-0.5 ${
                   selectedCategory === category
                     ? 'border-primary bg-primary text-white shadow-lg shadow-primary/20'
                     : 'border-white/20 bg-white/[0.04] text-slate-200 hover:border-primary/40 hover:text-white'
@@ -159,15 +159,15 @@ export function ProjectsClient() {
       <section className="border-t border-white/10 bg-[#050f1c]/60 py-16 md:py-20">
         <div className="section-shell">
           <div className="grid grid-cols-1 gap-10 text-center md:grid-cols-3 md:gap-8">
-            <div className="rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8">
+            <div className="card-hover-premium rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8 scroll-fade-up">
               <p className="mb-2 text-4xl font-bold text-sky-300 md:text-5xl">500+</p>
               <p className="text-slate-400">Projects delivered</p>
             </div>
-            <div className="rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8">
+            <div className="card-hover-premium rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8 scroll-fade-up">
               <p className="mb-2 text-4xl font-bold text-sky-300 md:text-5xl">99.9%</p>
               <p className="text-slate-400">Client satisfaction</p>
             </div>
-            <div className="rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8">
+            <div className="card-hover-premium rounded-2xl border border-white/15 bg-white/[0.04] px-6 py-8 scroll-fade-up">
               <p className="mb-2 text-4xl font-bold text-sky-300 md:text-5xl">12+</p>
               <p className="text-slate-400">Years of excellence</p>
             </div>
@@ -188,7 +188,7 @@ export function ProjectsClient() {
               asChild
               size="lg"
               variant="outline"
-              className="rounded-xl border-white/40 bg-white text-primary hover:bg-white/95"
+              className="rounded-xl border-white/40 bg-white text-primary hover:bg-white/95 btn-magnetic"
             >
               <Link href="/contact">Get in touch</Link>
             </Button>

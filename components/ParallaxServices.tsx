@@ -172,7 +172,7 @@ export function ParallaxServices() {
           <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
             What we do
           </span>
-          <h1 className="mb-4 text-balance text-4xl font-bold text-white sm:text-5xl md:text-6xl">
+          <h1 className="mb-4 text-balance text-4xl font-bold text-white sm:text-5xl md:text-6xl scroll-fade-up hover-text-shift">
             Services built for{' '}
             <span className="gradient-text">real outcomes</span>
           </h1>
@@ -190,15 +190,15 @@ export function ParallaxServices() {
                 type="button"
                 id={service.id}
                 onClick={() => setSelected(service)}
-                className="group text-left transition-[transform,box-shadow] duration-300 md:hover:-translate-y-0.5"
+                className="group text-left transition-[transform,box-shadow] duration-300 md:hover:-translate-y-1"
               >
-                <div className="panel-card overflow-hidden transition-[border-color] duration-300 hover:border-primary/35">
+                <div className="panel-card card-hover-premium overflow-hidden transition-[border-color,box-shadow,transform] duration-300 hover:border-primary/35 scroll-fade-up">
                   <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10">
                     <Image
                       src={service.image}
                       alt={service.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.08]"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/90 via-transparent to-transparent" />
@@ -222,10 +222,10 @@ export function ParallaxServices() {
         </div>
 
         <div className="mt-12 flex flex-wrap justify-center gap-4">
-          <Button asChild size="lg" className="rounded-xl px-8">
+          <Button asChild size="lg" className="rounded-xl px-8 btn-magnetic">
             <Link href="/contact">Start a project</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-xl px-8">
+          <Button asChild size="lg" variant="outline" className="rounded-xl px-8 btn-magnetic">
             <Link href="/projects">See portfolio</Link>
           </Button>
         </div>

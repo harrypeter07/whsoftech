@@ -94,7 +94,7 @@ function ServiceCard({
     <motion.div
       layout
       onClick={onClick}
-      className={`group shrink-0 cursor-pointer overflow-hidden rounded-2xl border-2 bg-[var(--surface)] shadow-lg transition-[border-color,box-shadow,transform] duration-300 ${
+      className={`group card-hover-premium shrink-0 cursor-pointer overflow-hidden rounded-2xl border-2 bg-[var(--surface)] shadow-lg transition-[border-color,box-shadow,transform] duration-300 ${
         isActive
           ? "border-primary shadow-xl shadow-primary/15 ring-1 ring-white/10"
           : "border-white/15 hover:border-primary/35 hover:shadow-xl md:hover:-translate-y-0.5"
@@ -107,7 +107,7 @@ function ServiceCard({
         <img
           src={service.image}
           alt={service.title}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.1]"
           loading="lazy"
           onError={(e) => {
             e.currentTarget.onerror = null;
@@ -182,7 +182,7 @@ export function ServicesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl scroll-fade-up"
+            className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl scroll-fade-up hover-text-shift"
           >
             Software solutions that drive growth
           </motion.h2>
@@ -265,7 +265,7 @@ export function ServicesSection() {
           transition={{ delay: 0.15 }}
           className="mt-10 text-center"
         >
-          <Button asChild size="lg" className="rounded-xl px-8">
+          <Button asChild size="lg" className="rounded-xl px-8 btn-magnetic">
             <Link href="/services" className="flex items-center gap-2">
               View all services
               <ArrowRight className="h-4 w-4" />

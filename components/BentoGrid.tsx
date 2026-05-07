@@ -43,7 +43,7 @@ export function BentoGrid() {
           <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
             Why choose us
           </span>
-          <h2 className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+          <h2 className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl scroll-fade-up hover-text-shift">
             Why choose whsofttech
           </h2>
           <p className="mx-auto max-w-2xl text-slate-400">
@@ -58,7 +58,7 @@ export function BentoGrid() {
             return (
               <div
                 key={i}
-                className={`panel-card group relative overflow-hidden p-5 md:p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 ${item.className}`}
+                className={`panel-card card-hover-premium group relative overflow-hidden p-5 md:p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-xl hover:shadow-primary/10 scroll-fade-up ${item.className}`}
               >
                 {item.image && (
                   <>

@@ -29,7 +29,7 @@ export default function AboutPage() {
               About whsofttech
             </span>
           </div>
-          <h1 className="text-5xl sm:text-7xl font-bold text-foreground mb-8 text-balance leading-tight">
+          <h1 className="text-5xl sm:text-7xl font-bold text-foreground mb-8 text-balance leading-tight scroll-fade-up hover-text-shift">
             Transform Your Business With
             <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mt-2"> Innovative Software</span>
           </h1>
@@ -48,7 +48,7 @@ export default function AboutPage() {
               From a small team to a powerhouse of innovation
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center scroll-fade-up">
             {/* Left - Content */}
             <div className="space-y-6">
               <div className="space-y-4">
@@ -66,15 +66,15 @@ export default function AboutPage() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 pt-8">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">12+</div>
+                <div className="text-3xl font-bold text-primary mb-1 hover-text-shift">12+</div>
                   <div className="text-sm text-muted-foreground">Years</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">500+</div>
+                <div className="text-3xl font-bold text-primary mb-1 hover-text-shift">500+</div>
                   <div className="text-sm text-muted-foreground">Projects</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">50+</div>
+                <div className="text-3xl font-bold text-primary mb-1 hover-text-shift">50+</div>
                   <div className="text-sm text-muted-foreground">Experts</div>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export default function AboutPage() {
               },
             ].map((value, index) => (
               <div key={index} className="group relative">
-                <div className="panel-card hover:border-primary/40 transition-[border-color,box-shadow,transform] duration-300 hover:shadow-xl hover:-translate-y-0.5 p-8 rounded-2xl">
+                <div className="panel-card card-hover-premium hover:border-primary/40 transition-[border-color,box-shadow,transform] duration-300 hover:shadow-xl hover:-translate-y-0.5 p-8 rounded-2xl scroll-fade-up">
                   <div className="text-4xl mb-4">{value.icon}</div>
                   <h3 className="text-xl font-semibold text-foreground mb-3">{value.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
@@ -182,7 +182,7 @@ export default function AboutPage() {
                 description: 'For all our deployments',
               },
             ].map((achievement, index) => (
-              <div key={index} className="group panel-card text-center p-8 rounded-2xl hover:border-primary/40 transition-[border-color,box-shadow,transform] duration-300 hover:shadow-xl hover:-translate-y-0.5">
+              <div key={index} className="group panel-card card-hover-premium text-center p-8 rounded-2xl hover:border-primary/40 transition-[border-color,box-shadow,transform] duration-300 hover:shadow-xl hover:-translate-y-0.5 scroll-fade-up">
                 <div className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
                   {achievement.number}
                 </div>
@@ -269,7 +269,7 @@ export default function AboutPage() {
               'Quality-first development approach',
               'Long-term partnership mindset',
             ].map((reason, index) => (
-              <div key={index} className="flex gap-4 items-start panel-card p-4 rounded-xl hover:border-primary/40 transition-[border-color] duration-300 group">
+              <div key={index} className="flex gap-4 items-start panel-card card-hover-premium p-4 rounded-xl hover:border-primary/40 transition-[border-color] duration-300 group scroll-fade-up">
                 <CheckCircle2 className="w-6 h-6 text-sky-400 flex-shrink-0 mt-0.5" />
                 <span className="text-foreground font-medium">{reason}</span>
               </div>

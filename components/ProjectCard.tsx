@@ -16,13 +16,13 @@ interface ProjectCardProps {
 
 export function ProjectCard({ title, description, image, category, tags, href }: ProjectCardProps) {
   const content = (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-white/20 bg-[var(--surface)] shadow-lg transition-[border-color,box-shadow,transform] duration-300 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 md:hover:-translate-y-1">
+    <article className="group card-hover-premium relative flex h-full flex-col overflow-hidden rounded-xl border border-white/20 bg-[var(--surface)] shadow-lg transition-[border-color,box-shadow,transform] duration-300 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 md:hover:-translate-y-1 scroll-fade-up">
       <div className="relative h-48 overflow-hidden bg-muted">
         <Image
           src={image || '/placeholder.svg'}
           alt={title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.08]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/85 via-transparent to-transparent opacity-90" />
       </div>
@@ -32,7 +32,7 @@ export function ProjectCard({ title, description, image, category, tags, href }:
           {category}
         </div>
 
-        <h3 className="mb-2 text-lg font-semibold text-white transition-colors group-hover:text-sky-200">
+        <h3 className="mb-2 text-lg font-semibold text-white transition-colors group-hover:text-sky-200 hover-text-shift">
           {title}
         </h3>
 
