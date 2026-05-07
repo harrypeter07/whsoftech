@@ -38,7 +38,7 @@ export function Preloader() {
 						autoPlay
 						muted
 						playsInline
-						className="absolute inset-0 h-full w-full object-cover object-center sm:object-center"
+						className="absolute inset-0 h-full w-full object-contain sm:object-cover object-center"
 					>
 						<source src="/db3435e8a2cac0cae1a59dc55dc7ad80.mp4" type="video/mp4" />
 					</video>
