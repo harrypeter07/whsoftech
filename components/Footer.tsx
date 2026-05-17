@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
+import { LOGO_ALT, LOGO_HEIGHT, LOGO_ON_DARK_SRC, LOGO_WIDTH } from '@/lib/brand';
 
 export function Footer() {
   return (
@@ -12,16 +13,14 @@ export function Footer() {
       <div className="section-shell relative z-10 py-12 sm:py-16">
         <div className="mb-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="mb-4 flex items-center gap-3">
-              <div className="relative h-14 w-14 shrink-0 rounded-xl border border-white/20 bg-white/[0.06] p-1">
-                <Image
-                  src="/logo.png"
-                  alt=""
-                  fill
-                  className="object-contain p-1"
-                />
-              </div>
-              <h3 className="text-lg font-bold text-white">whsofttech</h3>
+            <div className="mb-4">
+              <Image
+                src={LOGO_ON_DARK_SRC}
+                alt={LOGO_ALT}
+                width={LOGO_WIDTH}
+                height={LOGO_HEIGHT}
+                className="h-14 w-auto max-w-[280px] object-contain object-left sm:h-16"
+              />
             </div>
             <p className="text-sm leading-relaxed text-slate-400">
               Software solutions that scale — web, mobile, and AI.

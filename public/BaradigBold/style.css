@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Baradig';
+    src: local('Baradig Bold'), local('Baradig-Bold'),
+        url('BaradigBold.woff2') format('woff2'),
+        url('BaradigBold.woff') format('woff'),
+        url('BaradigBold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }

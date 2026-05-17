@@ -7,10 +7,49 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import {
+	PRELOADER_DONE_EVENT,
+	hasPreloaderCompleted,
+} from "@/lib/preloader-events";
+import {
+	LOGO_ALT,
+	LOGO_HEIGHT,
+	LOGO_PANEL_BG,
+	LOGO_SRC,
+	LOGO_WIDTH,
+} from "@/lib/brand";
+
+const LOGO_ZONE_MIN = "6rem";
+const expandEase = [0.16, 1, 0.3, 1] as const;
+
+const navLinkClass =
+	"group relative px-1 py-2 text-base font-semibold tracking-wide text-white sm:text-lg";
+
+function NavLink({
+	href,
+	label,
+	onClick,
+}: {
+	href: string;
+	label: string;
+	onClick?: () => void;
+}) {
+	return (
+		<Link href={href} onClick={onClick} className={navLinkClass}>
+			{label}
+			<span
+				className="absolute bottom-0 left-0 h-[2px] w-0 bg-white transition-[width] duration-300 ease-out group-hover:w-full"
+				aria-hidden
+			/>
+		</Link>
+	);
+}
 
 export function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
-	const mobilePanelRef = useRef<HTMLDivElement>(null);
+	const [pageVisible, setPageVisible] = useState(false);
+	const [hasExpanded, setHasExpanded] = useState(false);
+	const navRef = useRef<HTMLDivElement>(null);
 	const reducedMotion = useReducedMotion();
 
 	const navLinks = [
@@ -22,11 +61,26 @@ export function Navbar() {
 	];
 
 	useEffect(() => {
+		const showNav = () => setPageVisible(true);
+		if (hasPreloaderCompleted()) showNav();
+		window.addEventListener(PRELOADER_DONE_EVENT, showNav);
+		const fallback = window.setTimeout(showNav, 11200);
+		return () => {
+			window.removeEventListener(PRELOADER_DONE_EVENT, showNav);
+			window.clearTimeout(fallback);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (reducedMotion && pageVisible) setHasExpanded(true);
+	}, [reducedMotion, pageVisible]);
+
+	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
 				isOpen &&
-				mobilePanelRef.current &&
-				!mobilePanelRef.current.contains(event.target as Node)
+				navRef.current &&
+				!navRef.current.contains(event.target as Node)
 			) {
 				setIsOpen(false);
 			}
@@ -42,89 +96,176 @@ export function Navbar() {
 		};
 	}, [isOpen]);
 
-	const transition = reducedMotion
+	const menuTransition = reducedMotion
 		? { duration: 0 }
 		: { duration: 0.25, ease: [0.22, 0.61, 0.36, 1] as const };
 
-	return (
-		<nav className="fixed top-0 left-0 right-0 z-[100] w-full border-b border-white/20 bg-[#071426]/85 backdrop-blur-xl supports-[backdrop-filter]:bg-[#071426]/75">
-			<div className="section-shell">
-				<div className="flex h-24 sm:h-28 items-center justify-between">
-					<Link
-						href="/"
-						className="flex items-center gap-3 sm:gap-4 group"
-						aria-label="whsofttech Home"
-					>
-						<div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl border border-white/20 bg-white/[0.06] p-1.5 transition-transform duration-200 group-hover:scale-[1.03]">
-							<Image
-								src="/logo.png"
-								alt=""
-								fill
-								className="object-contain p-0.5"
-							/>
-						</div>
-						<span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-							whsofttech
-						</span>
-					</Link>
+	const expandTransition = reducedMotion
+		? { duration: 0.2, ease: expandEase }
+		: { duration: 1.1, ease: expandEase };
 
-					<div className="hidden md:flex items-center gap-8">
-						{navLinks.map((link) => (
-							<Link
-								key={link.href}
-								href={link.href}
-								className="text-sm font-medium text-slate-300 transition-colors hover:text-white relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-sky-400 after:transition-all hover:after:w-full hover:text-glow"
-							>
-								{link.label}
-							</Link>
-						))}
-						<Button asChild size="default" className="rounded-xl px-5">
-							<Link href="/contact">Get Started</Link>
-						</Button>
+	return (
+		<header className="fixed top-0 left-0 right-0 z-[200] px-1.5 pt-2 sm:px-2 sm:pt-3 pointer-events-none">
+			<div
+				ref={navRef}
+				className="pointer-events-auto mx-auto w-full max-w-[min(98vw,96rem)]"
+			>
+				<motion.nav
+					aria-label="Main navigation"
+					className="relative flex overflow-hidden rounded-none border border-white/25 shadow-[0_0_32px_rgba(255,255,255,0.12),0_8px_32px_rgba(0,0,0,0.12)]"
+					initial={false}
+					animate={{
+						width: pageVisible || reducedMotion ? "100%" : LOGO_ZONE_MIN,
+					}}
+					transition={expandTransition}
+					onAnimationComplete={() => {
+						if (pageVisible) setHasExpanded(true);
+					}}
+					style={{ maxWidth: "100%" }}
+				>
+					<div
+						className="relative flex h-[4.25rem] w-[10%] min-w-[6rem] max-w-[8.5rem] shrink-0 items-center justify-center px-2 sm:h-[4.75rem] sm:px-3"
+						style={{ backgroundColor: LOGO_PANEL_BG }}
+					>
+						<Link
+							href="/"
+							className="group flex items-center transition-transform duration-200 hover:scale-[1.02]"
+							aria-label="WH SoftTech Home"
+						>
+							<Image
+								src={LOGO_SRC}
+								alt={LOGO_ALT}
+								width={LOGO_WIDTH}
+								height={LOGO_HEIGHT}
+								className="h-10 w-auto max-w-full object-contain object-center sm:h-[3.15rem]"
+								priority
+							/>
+						</Link>
 					</div>
 
-					<button
-						type="button"
-						onClick={() => setIsOpen(!isOpen)}
-						className="md:hidden flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-white/[0.06] text-white transition-colors hover:border-primary/40 hover:bg-white/[0.1]"
-						aria-expanded={isOpen}
-						aria-label={isOpen ? "Close menu" : "Open menu"}
-					>
-						{isOpen ? <X size={22} /> : <Menu size={22} />}
-					</button>
-				</div>
-			</div>
-
-			<AnimatePresence>
-				{isOpen && (
 					<motion.div
-						ref={mobilePanelRef}
-						initial={reducedMotion ? false : { opacity: 0, y: -8 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={reducedMotion ? undefined : { opacity: 0, y: -8 }}
-						transition={transition}
-						className="md:hidden absolute left-0 right-0 top-full border-b border-white/15 bg-[#0c1e36]/95 backdrop-blur-xl shadow-xl shadow-black/40"
+						className="flex min-w-0 flex-1 flex-col border-l border-white/15 bg-white/[0.08] backdrop-blur-2xl backdrop-saturate-150 supports-[backdrop-filter]:bg-white/[0.05]"
+						initial={false}
+						animate={{ opacity: pageVisible || reducedMotion ? 1 : 0 }}
+						transition={
+							reducedMotion
+								? { duration: 0.2 }
+								: { duration: 0.5, delay: pageVisible ? 0.35 : 0 }
+						}
 					>
-						<div className="section-shell flex flex-col gap-1 py-4 pb-6">
-							{navLinks.map((link) => (
-								<Link
-									key={link.href}
-									href={link.href}
-									onClick={() => setIsOpen(false)}
-									className="rounded-xl border border-transparent px-4 py-3 text-base font-medium text-slate-200 transition-colors hover:border-white/15 hover:bg-white/[0.06] hover:text-white"
+						<div className="flex h-[4.25rem] items-center justify-between gap-4 px-4 sm:h-[4.75rem] sm:gap-6 sm:px-8">
+							<motion.div
+								className="hidden md:flex flex-1 items-center justify-center gap-9 lg:gap-11"
+								initial={false}
+								animate={
+									hasExpanded || reducedMotion
+										? { opacity: 1, x: 0 }
+										: { opacity: 0, x: -16 }
+								}
+								transition={
+									reducedMotion
+										? { duration: 0.15 }
+										: { duration: 0.5, delay: 0.12, ease: expandEase }
+								}
+							>
+								{navLinks.map((link, i) => (
+									<motion.div
+										key={link.href}
+										initial={false}
+										animate={
+											hasExpanded || reducedMotion
+												? { opacity: 1, y: 0 }
+												: { opacity: 0, y: 8 }
+										}
+										transition={
+											reducedMotion
+												? { duration: 0.15 }
+												: {
+														duration: 0.4,
+														delay: 0.2 + i * 0.06,
+														ease: expandEase,
+													}
+										}
+									>
+										<NavLink href={link.href} label={link.label} />
+									</motion.div>
+								))}
+							</motion.div>
+
+							<motion.div
+								className="hidden md:block shrink-0"
+								initial={false}
+								animate={
+									hasExpanded || reducedMotion
+										? { opacity: 1, scale: 1 }
+										: { opacity: 0, scale: 0.9 }
+								}
+								transition={
+									reducedMotion
+										? { duration: 0.15 }
+										: { duration: 0.45, delay: 0.55, ease: expandEase }
+								}
+							>
+								<Button
+									asChild
+									size="lg"
+									className="rounded-none px-6 text-base shadow-lg shadow-primary/25"
 								>
-									{link.label}
-								</Link>
-							))}
-							<Button asChild className="mt-3 w-full rounded-xl">
-								<Link href="/contact" onClick={() => setIsOpen(false)}>
-									Get Started
-								</Link>
-							</Button>
+									<Link href="/contact">Get Started</Link>
+								</Button>
+							</motion.div>
+
+							<button
+								type="button"
+								onClick={() => setIsOpen(!isOpen)}
+								className="md:hidden ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-none border border-white/25 bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-white/15"
+								aria-expanded={isOpen}
+								aria-label={isOpen ? "Close menu" : "Open menu"}
+							/>
 						</div>
+
+						<AnimatePresence>
+							{isOpen && (
+								<motion.div
+									initial={
+										reducedMotion ? false : { opacity: 0, height: 0 }
+									}
+									animate={{ opacity: 1, height: "auto" }}
+									exit={
+										reducedMotion
+											? undefined
+											: { opacity: 0, height: 0 }
+									}
+									transition={menuTransition}
+									className="md:hidden overflow-hidden border-t border-white/15"
+								>
+									<div className="flex flex-col gap-1 p-4">
+										{navLinks.map((link) => (
+											<NavLink
+												key={link.href}
+												href={link.href}
+												label={link.label}
+												onClick={() => setIsOpen(false)}
+											/>
+										))}
+										<Button
+											asChild
+											className="mt-2 w-full rounded-none text-base"
+										>
+											<Link
+												href="/contact"
+												onClick={() => setIsOpen(false)}
+											>
+												Get Started
+											</Link>
+										</Button>
+									</div>
+								</motion.div>
+							)}
+						</AnimatePresence>
 					</motion.div>
-				)}
-			</AnimatePresence>
-		</nav>
+				</motion.nav>
+			</div>
+		</header>
 	);
 }

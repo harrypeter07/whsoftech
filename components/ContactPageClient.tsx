@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/ContactForm";
 import { QuoteBuilder } from "@/components/QuoteBuilder";
@@ -30,7 +29,6 @@ export function ContactPageClient() {
   if (showQuoteBuilder) {
     return (
       <div className="min-h-screen bg-background">
-        <Navbar />
         <section className="border-b border-white/10 px-4 pb-16 pt-24 sm:px-6 lg:px-8">
           <div className="section-shell max-w-3xl">
             <Button
@@ -96,8 +94,6 @@ export function ContactPageClient() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
-
       <section className="border-b border-white/10 px-4 pb-10 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">

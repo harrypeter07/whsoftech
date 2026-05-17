@@ -1,6 +1,18 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face {
+  font-family: 'Baradig';
+  src:
+    local('Baradig Bold'),
+    local('Baradig-Bold'),
+    url('/fonts/Baradig-Bold.woff2') format('woff2'),
+    url('/fonts/Baradig-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -83,6 +95,13 @@
   /* Reusable layout / panels */
   .section-shell {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .font-hero-display {
+    font-family: 'Baradig', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   .panel-card {
@@ -287,4 +306,17 @@
   .animate-marquee {
     animation: none !important;
   }
+}
+
+/* Preloader: true edge-to-edge on mobile + desktop (incl. dynamic viewport) */
+.preloader-screen {
+  width: 100vw;
+  height: 100dvh;
+  min-height: 100svh;
+  min-width: 100vw;
+}
+
+/* Pointy-top hexagon — matches inner hex in loading video */
+.preloader-hex-clip {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }

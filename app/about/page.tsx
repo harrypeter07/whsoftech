@@ -1,4 +1,3 @@
-import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { TeamMember } from '@/components/TeamMember';
 import { CheckCircle2 } from 'lucide-react';
@@ -12,8 +11,6 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
-
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background decoration */}

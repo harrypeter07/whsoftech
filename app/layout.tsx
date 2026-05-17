@@ -4,6 +4,7 @@ import { Epilogue, Noto_Serif, Inter, Bungee, Jockey_One } from 'next/font/googl
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Preloader } from "@/components/Preloader"
+import { Navbar } from "@/components/Navbar"
 
 const epilogue = Epilogue({ 
   subsets: ["latin"],
@@ -36,6 +37,12 @@ const jockeyOne = Jockey_One({
   variable: '--font-jockey-one',
   display: 'swap',
 });
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover" as const,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://whsofttech.in"),
@@ -88,6 +95,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning={true}>
       <head>
+        <link
+          rel="preload"
+          href="/fonts/Baradig-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
@@ -106,6 +120,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${epilogue.variable} ${notoSerif.variable} ${bungee.variable} ${jockeyOne.variable} font-sans antialiased bg-background text-foreground`} style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }} suppressHydrationWarning={true}>
         <Preloader />
+        <Navbar />
         {children}
         <Analytics />
       </body>

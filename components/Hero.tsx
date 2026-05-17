@@ -24,12 +24,6 @@ export function Hero() {
 		if (reduced || !heroRef.current) return;
 
 		const ctx = gsap.context(() => {
-			gsap.from(".hero-badge", {
-				duration: 0.45,
-				opacity: 0,
-				y: -8,
-				ease: "power2.out",
-			});
 			if (titleRef.current) {
 				gsap.from(titleRef.current, {
 					duration: 0.55,
@@ -76,20 +70,19 @@ export function Hero() {
 	return (
 		<section
 			ref={heroRef}
-			className="min-h-[calc(100vh-4rem)] pt-24 pb-16 md:pt-28 md:pb-24"
+			className="min-h-[calc(100vh-4rem)] pt-28 pb-16 md:pt-32 md:pb-24"
 		>
 			<div className="section-shell">
 				<div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
 					<div className="order-2 text-center lg:order-1 lg:text-left">
-						<span className="hero-badge mb-6 inline-block rounded-full border border-white/25 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">
-							WH SoftTech
-						</span>
 						<h1
 							ref={titleRef}
-							className="mb-6 text-balance text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl scroll-fade-up"
+							className="font-hero-display mb-6 text-balance text-2xl leading-[1.08] text-white sm:text-3xl md:text-4xl lg:text-[2.75rem] scroll-fade-up"
 						>
 							Transform your business with{" "}
-							<span className="gradient-text hover-text-shift">innovative software</span>
+							<span className="gradient-text hover-text-shift">
+								innovative software
+							</span>
 						</h1>
 						<p className="hero-sub mx-auto mb-8 max-w-xl text-lg text-slate-400 lg:mx-0 scroll-fade-up">
 							Custom development, AI, web & mobile. We build solutions that scale

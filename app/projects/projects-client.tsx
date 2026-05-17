@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ProjectCard } from '@/components/ProjectCard';
 import Link from 'next/link';
@@ -94,8 +93,6 @@ export function ProjectsClient() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
-
       <section className="border-b border-white/10 px-4 pb-12 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <span className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300">

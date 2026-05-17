@@ -1,4 +1,3 @@
-import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ParallaxServices } from '@/components/ParallaxServices';
 import type { Metadata } from 'next';
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
       <ParallaxServices />
       <Footer />
     </div>
