@@ -1,271 +1,207 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
-import { useReducedMotion } from "@/lib/useReducedMotion";
-import {
-	PRELOADER_DONE_EVENT,
-	hasPreloaderCompleted,
-} from "@/lib/preloader-events";
-import {
-	LOGO_ALT,
-	LOGO_HEIGHT,
-	LOGO_PANEL_BG,
-	LOGO_SRC,
-	LOGO_WIDTH,
-} from "@/lib/brand";
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
-const LOGO_ZONE_MIN = "6rem";
-const expandEase = [0.16, 1, 0.3, 1] as const;
+const NAV_LINKS = [
+  { label: 'Home', href: 'home' },
+  { label: 'Services', href: 'services' },
+  { label: 'Industries', href: 'industries' },
+  { label: 'Portfolio', href: 'portfolio' },
+  { label: 'Process', href: 'process' },
+  { label: 'About', href: 'about' },
+  { label: 'Contact', href: 'contact' },
+];
 
-const navLinkClass =
-	"group relative px-1 py-2 text-base font-semibold tracking-wide text-white sm:text-lg";
-
-function NavLink({
-	href,
-	label,
-	onClick,
-}: {
-	href: string;
-	label: string;
-	onClick?: () => void;
-}) {
-	return (
-		<Link href={href} onClick={onClick} className={navLinkClass}>
-			{label}
-			<span
-				className="absolute bottom-0 left-0 h-[2px] w-0 bg-white transition-[width] duration-300 ease-out group-hover:w-full"
-				aria-hidden
-			/>
-		</Link>
-	);
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 export function Navbar() {
-	const [isOpen, setIsOpen] = useState(false);
-	const [pageVisible, setPageVisible] = useState(false);
-	const [hasExpanded, setHasExpanded] = useState(false);
-	const navRef = useRef<HTMLDivElement>(null);
-	const reducedMotion = useReducedMotion();
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState('home');
+  const clickLocked = useRef(false);
+  const lockTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-	const navLinks = [
-		{ href: "/", label: "Home" },
-		{ href: "/about", label: "About" },
-		{ href: "/services", label: "Services" },
-		{ href: "/projects", label: "Portfolio" },
-		{ href: "/contact", label: "Contact" },
-	];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-	useEffect(() => {
-		const showNav = () => setPageVisible(true);
-		if (hasPreloaderCompleted()) showNav();
-		window.addEventListener(PRELOADER_DONE_EVENT, showNav);
-		const fallback = window.setTimeout(showNav, 11200);
-		return () => {
-			window.removeEventListener(PRELOADER_DONE_EVENT, showNav);
-			window.clearTimeout(fallback);
-		};
-	}, []);
+  // Intersection observer — but only update when not click-locked
+  useEffect(() => {
+    const sections = NAV_LINKS.map((l) => document.getElementById(l.href)).filter(Boolean) as HTMLElement[];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (clickLocked.current) return;
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
-	useEffect(() => {
-		if (reducedMotion && pageVisible) setHasExpanded(true);
-	}, [reducedMotion, pageVisible]);
+  const handleNav = (href: string) => {
+    // Lock intersection observer for 1.2s so click state persists
+    clickLocked.current = true;
+    if (lockTimer.current) clearTimeout(lockTimer.current);
+    lockTimer.current = setTimeout(() => { clickLocked.current = false; }, 1200);
 
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				isOpen &&
-				navRef.current &&
-				!navRef.current.contains(event.target as Node)
-			) {
-				setIsOpen(false);
-			}
-		};
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, [isOpen]);
+    setActive(href);
+    setOpen(false);
+    scrollTo(href);
+  };
 
-	useEffect(() => {
-		document.body.style.overflow = isOpen ? "hidden" : "";
-		return () => {
-			document.body.style.overflow = "";
-		};
-	}, [isOpen]);
+  return (
+    <>
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        style={{
+          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+          transition: 'background 0.4s ease, border-color 0.4s ease, padding 0.3s ease',
+          background: scrolled ? 'rgba(7,11,20,0.95)' : 'rgba(7,11,20,0.3)',
+          backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
+          padding: scrolled ? '0.75rem 1.5rem' : '1.25rem 1.5rem',
+        }}
+      >
+        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          {/* Logo */}
+          <button onClick={() => handleNav('home')} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+            <Image
+              src="/newlogo-tight-transparent.png"
+              alt="WHS SoftTech"
+              width={160}
+              height={52}
+              style={{ objectFit: 'contain', height: '44px', width: 'auto', filter: 'brightness(0) invert(1)' }}
+              priority
+            />
+          </button>
 
-	const menuTransition = reducedMotion
-		? { duration: 0 }
-		: { duration: 0.25, ease: [0.22, 0.61, 0.36, 1] as const };
+          {/* Desktop Nav */}
+          <nav style={{ display: 'flex', alignItems: 'center', gap: '0.125rem' }}>
+            {NAV_LINKS.map((link) => {
+              const isActive = active === link.href;
+              return (
+                <button
+                  key={link.href}
+                  onClick={() => handleNav(link.href)}
+                  className="lg-show"
+                  style={{
+                    position: 'relative',
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    padding: '0.5rem 0.875rem', borderRadius: '0.5rem',
+                    color: isActive ? '#8B5CF6' : '#94A3B8',
+                    fontSize: '0.875rem', fontWeight: isActive ? 600 : 500,
+                    fontFamily: 'Inter, sans-serif',
+                    transition: 'color 0.25s ease',
+                    display: 'none',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) (e.currentTarget as HTMLElement).style.color = 'white';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) (e.currentTarget as HTMLElement).style.color = '#94A3B8';
+                  }}
+                >
+                  {link.label}
+                  {/* Active underline indicator */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-indicator"
+                      style={{
+                        position: 'absolute', bottom: '2px', left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '18px', height: '2px', borderRadius: '9999px',
+                        background: 'linear-gradient(90deg, #8B5CF6, #06B6D4)',
+                      }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
 
-	const expandTransition = reducedMotion
-		? { duration: 0.2, ease: expandEase }
-		: { duration: 1.1, ease: expandEase };
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button
+              onClick={() => handleNav('contact')}
+              className="lg-show"
+              style={{
+                display: 'none', alignItems: 'center', gap: '0.5rem',
+                padding: '0.625rem 1.25rem', borderRadius: '0.75rem',
+                background: 'linear-gradient(135deg, #8B5CF6, #6366F1)',
+                color: 'white', fontWeight: 600, fontSize: '0.875rem',
+                border: 'none', cursor: 'pointer', transition: 'all 0.3s ease',
+                whiteSpace: 'nowrap', fontFamily: 'inherit',
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 25px rgba(139,92,246,0.45)'; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
+            >
+              Book Free Consultation <ArrowRight size={15} />
+            </button>
+            <button
+              onClick={() => setOpen(!open)} aria-label="Toggle menu"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </motion.header>
 
-	return (
-		<header className="fixed top-0 left-0 right-0 z-[200] px-1.5 pt-2 sm:px-2 sm:pt-3 pointer-events-none">
-			<div
-				ref={navRef}
-				className="pointer-events-auto mx-auto w-full max-w-[min(98vw,96rem)]"
-			>
-				<motion.nav
-					aria-label="Main navigation"
-					className="relative flex overflow-hidden rounded-none border border-white/25 shadow-[0_0_32px_rgba(255,255,255,0.12),0_8px_32px_rgba(0,0,0,0.12)]"
-					initial={false}
-					animate={{
-						width: pageVisible || reducedMotion ? "100%" : LOGO_ZONE_MIN,
-					}}
-					transition={expandTransition}
-					onAnimationComplete={() => {
-						if (pageVisible) setHasExpanded(true);
-					}}
-					style={{ maxWidth: "100%" }}
-				>
-					<div
-						className="relative flex h-[4.25rem] w-[10%] min-w-[6rem] max-w-[8.5rem] shrink-0 items-center justify-center px-2 sm:h-[4.75rem] sm:px-3"
-						style={{ backgroundColor: LOGO_PANEL_BG }}
-					>
-						<Link
-							href="/"
-							className="group flex items-center transition-transform duration-200 hover:scale-[1.02]"
-							aria-label="WH SoftTech Home"
-						>
-							<Image
-								src={LOGO_SRC}
-								alt={LOGO_ALT}
-								width={LOGO_WIDTH}
-								height={LOGO_HEIGHT}
-								className="h-10 w-auto max-w-full object-contain object-center sm:h-[3.15rem]"
-								priority
-							/>
-						</Link>
-					</div>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            style={{ position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(7,11,20,0.98)', backdropFilter: 'blur(24px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}
+          >
+            <button onClick={() => setOpen(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <X size={20} />
+            </button>
+            <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem' }}>
+              <Image
+                src="/newlogo-tight-transparent.png"
+                alt="WHS SoftTech"
+                width={140}
+                height={46}
+                style={{ objectFit: 'contain', height: '40px', width: 'auto', filter: 'brightness(0) invert(1)' }}
+              />
+            </div>
+            {NAV_LINKS.map((link, i) => (
+              <motion.button key={link.href}
+                initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                transition={{ delay: i * 0.06, duration: 0.3 }}
+                onClick={() => handleNav(link.href)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.875rem 2rem', color: active === link.href ? '#8B5CF6' : 'white', fontSize: '1.375rem', fontWeight: 700, fontFamily: 'Space Grotesk, sans-serif', transition: 'color 0.2s', width: '100%', textAlign: 'center' }}
+              >
+                {link.label}
+              </motion.button>
+            ))}
+            <motion.button initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} transition={{ delay: 0.45 }}
+              onClick={() => handleNav('contact')}
+              style={{ marginTop: '1.5rem', padding: '1rem 3rem', borderRadius: '0.875rem', background: 'linear-gradient(135deg, #8B5CF6, #6366F1)', color: 'white', fontWeight: 700, fontSize: '1rem', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>
+              Book Free Consultation
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-					<motion.div
-						className="flex min-w-0 flex-1 flex-col border-l border-white/15 bg-white/[0.08] backdrop-blur-2xl backdrop-saturate-150 supports-[backdrop-filter]:bg-white/[0.05]"
-						initial={false}
-						animate={{ opacity: pageVisible || reducedMotion ? 1 : 0 }}
-						transition={
-							reducedMotion
-								? { duration: 0.2 }
-								: { duration: 0.5, delay: pageVisible ? 0.35 : 0 }
-						}
-					>
-						<div className="flex h-[4.25rem] items-center justify-between gap-4 px-4 sm:h-[4.75rem] sm:gap-6 sm:px-8">
-							<motion.div
-								className="hidden md:flex flex-1 items-center justify-center gap-9 lg:gap-11"
-								initial={false}
-								animate={
-									hasExpanded || reducedMotion
-										? { opacity: 1, x: 0 }
-										: { opacity: 0, x: -16 }
-								}
-								transition={
-									reducedMotion
-										? { duration: 0.15 }
-										: { duration: 0.5, delay: 0.12, ease: expandEase }
-								}
-							>
-								{navLinks.map((link, i) => (
-									<motion.div
-										key={link.href}
-										initial={false}
-										animate={
-											hasExpanded || reducedMotion
-												? { opacity: 1, y: 0 }
-												: { opacity: 0, y: 8 }
-										}
-										transition={
-											reducedMotion
-												? { duration: 0.15 }
-												: {
-														duration: 0.4,
-														delay: 0.2 + i * 0.06,
-														ease: expandEase,
-													}
-										}
-									>
-										<NavLink href={link.href} label={link.label} />
-									</motion.div>
-								))}
-							</motion.div>
-
-							<motion.div
-								className="hidden md:block shrink-0"
-								initial={false}
-								animate={
-									hasExpanded || reducedMotion
-										? { opacity: 1, scale: 1 }
-										: { opacity: 0, scale: 0.9 }
-								}
-								transition={
-									reducedMotion
-										? { duration: 0.15 }
-										: { duration: 0.45, delay: 0.55, ease: expandEase }
-								}
-							>
-								<Button
-									asChild
-									size="lg"
-									className="rounded-none px-6 text-base shadow-lg shadow-primary/25"
-								>
-									<Link href="/contact">Get Started</Link>
-								</Button>
-							</motion.div>
-
-							<button
-								type="button"
-								onClick={() => setIsOpen(!isOpen)}
-								className="md:hidden ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-none border border-white/25 bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-white/15"
-								aria-expanded={isOpen}
-								aria-label={isOpen ? "Close menu" : "Open menu"}
-							/>
-						</div>
-
-						<AnimatePresence>
-							{isOpen && (
-								<motion.div
-									initial={
-										reducedMotion ? false : { opacity: 0, height: 0 }
-									}
-									animate={{ opacity: 1, height: "auto" }}
-									exit={
-										reducedMotion
-											? undefined
-											: { opacity: 0, height: 0 }
-									}
-									transition={menuTransition}
-									className="md:hidden overflow-hidden border-t border-white/15"
-								>
-									<div className="flex flex-col gap-1 p-4">
-										{navLinks.map((link) => (
-											<NavLink
-												key={link.href}
-												href={link.href}
-												label={link.label}
-												onClick={() => setIsOpen(false)}
-											/>
-										))}
-										<Button
-											asChild
-											className="mt-2 w-full rounded-none text-base"
-										>
-											<Link
-												href="/contact"
-												onClick={() => setIsOpen(false)}
-											>
-												Get Started
-											</Link>
-										</Button>
-									</div>
-								</motion.div>
-							)}
-						</AnimatePresence>
-					</motion.div>
-				</motion.nav>
-			</div>
-		</header>
-	);
+      <style>{`
+        @media (min-width: 1024px) {
+          .lg-show { display: inline-flex !important; }
+        }
+      `}</style>
+    </>
+  );
 }

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "title": "HealthSync — Clinic Management Platform",
+    "description": "A comprehensive clinic management system with appointment booking, patient records, billing, and doctor dashboard for a multi-specialty clinic chain.",
+    "industry": "Healthcare",
+    "tags": ["Next.js", "Node.js", "PostgreSQL", "Stripe"],
+    "image": "/placeholder.jpg",
+    "results": "300% increase in online appointments",
+    "featured": true,
+    "size": "large"
+  },
+  {
+    "id": "2",
+    "title": "EduLearn — LMS Portal",
+    "description": "Full-featured learning management system with live classes, recorded lectures, assignments, and student progress tracking.",
+    "industry": "Education",
+    "tags": ["React", "Django", "AWS", "WebRTC"],
+    "image": "/placeholder.jpg",
+    "results": "5,000+ students onboarded",
+    "featured": true,
+    "size": "medium"
+  },
+  {
+    "id": "3",
+    "title": "ShopMax — E-Commerce Platform",
+    "description": "Custom e-commerce platform with inventory management, multi-vendor support, and advanced analytics dashboard.",
+    "industry": "E-Commerce",
+    "tags": ["Next.js", "Shopify API", "Stripe", "Redis"],
+    "image": "/placeholder.jpg",
+    "results": "2x revenue in 6 months",
+    "featured": true,
+    "size": "medium"
+  },
+  {
+    "id": "4",
+    "title": "PropVista — Real Estate Platform",
+    "description": "Modern real estate platform with property listings, virtual tours, agent portals, and automated lead capture.",
+    "industry": "Real Estate",
+    "tags": ["React", "Node.js", "MongoDB", "Mapbox"],
+    "image": "/placeholder.jpg",
+    "results": "150% more leads generated",
+    "featured": false,
+    "size": "small"
+  },
+  {
+    "id": "5",
+    "title": "AutoAI — AI Chatbot for Dealerships",
+    "description": "Intelligent AI chatbot for automobile dealerships that handles customer queries, schedules test drives, and qualifies leads 24/7.",
+    "industry": "Automobile",
+    "tags": ["Python", "OpenAI", "FastAPI", "React"],
+    "image": "/placeholder.jpg",
+    "results": "60% reduction in support costs",
+    "featured": true,
+    "size": "small"
+  },
+  {
+    "id": "6",
+    "title": "RestaurantPro — Ordering & POS",
+    "description": "Complete restaurant management system with online ordering, table management, kitchen display, and analytics.",
+    "industry": "Restaurant",
+    "tags": ["React Native", "Node.js", "Firebase"],
+    "image": "/placeholder.jpg",
+    "results": "40% increase in online orders",
+    "featured": false,
+    "size": "small"
+  }
+]

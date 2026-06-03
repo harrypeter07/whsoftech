@@ -1,129 +1,87 @@
-import React from "react"
-import type { Metadata } from 'next'
-import { Epilogue, Noto_Serif, Inter, Bungee, Jockey_One } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
-import { Preloader } from "@/components/Preloader"
-import { Navbar } from "@/components/Navbar"
+import type { Metadata } from 'next';
+import { Inter, Space_Grotesk } from 'next/font/google';
+import './globals.css';
 
-const epilogue = Epilogue({ 
-  subsets: ["latin"],
-  variable: '--font-epilogue',
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
   display: 'swap',
 });
 
-const notoSerif = Noto_Serif({ 
-  subsets: ["latin"],
-  variable: '--font-noto-serif',
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
   display: 'swap',
 });
-
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const bungee = Bungee({ 
-  subsets: ["latin"],
-  weight: "400",
-  variable: '--font-bungee',
-  display: 'swap',
-});
-
-const jockeyOne = Jockey_One({ 
-  subsets: ["latin"],
-  weight: "400",
-  variable: '--font-jockey-one',
-  display: 'swap',
-});
-
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-  viewportFit: "cover" as const,
-};
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://whsofttech.in"),
-  title: "WH SoftTech | Web Development, AI & Digital Solutions",
+  metadataBase: new URL('https://whssofttech.com'),
+  title: {
+    default: 'WHS SoftTech | Custom Software, AI & Digital Solutions',
+    template: '%s | WHS SoftTech',
+  },
   description:
-    "WH SoftTech provides modern web development, AI-powered applications, and digital solutions to help businesses grow faster.",
+    'WHS SoftTech builds custom websites, mobile apps, AI systems, and automation solutions that help businesses grow faster. Trusted by startups, SMEs, healthcare, education, and enterprises.',
   keywords: [
-    "WH SoftTech",
-    "web development Nagpur",
-    "AI solutions India",
-    "software company WH SoftTech",
-    "full stack development",
-    "Next.js development",
+    'software development India',
+    'web development',
+    'mobile app development',
+    'AI solutions',
+    'business automation',
+    'WHS SoftTech',
+    'custom software',
+    'digital transformation',
+    'UI UX design',
+    'e-commerce development',
   ],
-  authors: [{ name: "WH SoftTech" }],
-  alternates: {
-    canonical: "/",
+  authors: [{ name: 'WHS SoftTech' }],
+  creator: 'WHS SoftTech',
+  icons: {
+    icon: [
+      { url: '/newlogo-tight.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/newlogo-tight.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/newlogo-tight.png',
   },
   openGraph: {
-    title: "WH SoftTech | Web Development & AI Solutions",
+    type: 'website',
+    locale: 'en_IN',
+    url: 'https://whssofttech.com',
+    siteName: 'WHS SoftTech',
+    title: 'WHS SoftTech | Custom Software, AI & Digital Solutions',
     description:
-      "Build fast, modern and scalable web applications with WH SoftTech",
-    url: "https://whsofttech.in",
-    type: "website",
+      'Custom websites, mobile apps, AI systems and automation solutions for businesses that want to grow faster.',
+    images: [{ url: '/newlogo-tight.png', width: 1200, height: 630, alt: 'WHS SoftTech' }],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "WH SoftTech",
-    description: "Web Development & AI Solutions",
+    card: 'summary_large_image',
+    title: 'WHS SoftTech | Custom Software, AI & Digital Solutions',
+    description:
+      'Custom websites, mobile apps, AI systems and automation solutions for businesses.',
+    images: ['/newlogo-tight.png'],
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-    shortcut: "/favicon.ico",
-  },
-}
-
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "WH SoftTech",
-  url: "https://whsofttech.in",
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning={true}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
-        <link
-          rel="preload"
-          href="/fonts/Baradig-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        <link rel="icon" type="image/png" href="/newlogo-tight.png" />
+        <link rel="apple-touch-icon" href="/newlogo-tight.png" />
+        <link rel="shortcut icon" href="/newlogo-tight.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jockey+One&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-        {/* Preload hero image so it is fetched before paint */}
-        <link
-          rel="preload"
-          as="image"
-          href="/heroimage.png"
-          imageSrcSet="/heroimage.png 1200w"
-          imageSizes="(max-width: 768px) 100vw, 50vw"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
       </head>
-      <body className={`${inter.variable} ${epilogue.variable} ${notoSerif.variable} ${bungee.variable} ${jockeyOne.variable} font-sans antialiased bg-background text-foreground`} style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }} suppressHydrationWarning={true}>
-        <Preloader />
-        <Navbar />
+      <body className={inter.className} suppressHydrationWarning>
         {children}
-        <Analytics />
       </body>
     </html>
-  )
+  );
 }

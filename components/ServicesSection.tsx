@@ -1,276 +1,70 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
-import {
-  ArrowRight,
-  Code2,
-  Brain,
-  Globe,
-  Smartphone,
-  Palette,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { useReducedMotion } from "@/lib/useReducedMotion";
+import { motion } from 'framer-motion';
+import { Globe, Layers, Smartphone, Brain, Zap, Palette, ShoppingCart, Search, ArrowRight } from 'lucide-react';
 
-const servicesList = [
-  {
-    id: 1,
-    title: "Custom Software",
-    desc: "Tailored applications built for your business needs.",
-    icon: Code2,
-    href: "/services",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop",
-  },
-  {
-    id: 2,
-    title: "AI & ML",
-    desc: "Intelligent solutions that learn and adapt.",
-    icon: Brain,
-    href: "/services",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=340&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Web Development",
-    desc: "Fast, scalable web apps with modern tech.",
-    icon: Globe,
-    href: "/services",
-    image: "https://images.unsplash.com/photo-1504639725590-34d98db2dd5a?w=600&h=340&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Mobile Apps",
-    desc: "Native and cross-platform mobile solutions.",
-    icon: Smartphone,
-    href: "/services",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop",
-  },
-  {
-    id: 5,
-    title: "UI/UX Design",
-    desc: "User-centered design that converts.",
-    icon: Palette,
-    href: "/services",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=340&fit=crop",
-  },
+const SERVICES = [
+  { icon: Globe, title: 'Website Development', desc: 'High-performance, SEO-optimized websites that convert visitors into clients. Custom designs built to scale with your business.', color: '#8B5CF6', tags: ['Custom Design', 'SEO Optimized', 'CMS Integration', 'Fast Loading'] },
+  { icon: Layers, title: 'Web Applications', desc: 'Complex web platforms, SaaS products, dashboards and enterprise applications built for real-world scale.', color: '#06B6D4', tags: ['React / Next.js', 'Real-time Data', 'API Integration', 'Cloud Hosted'] },
+  { icon: Smartphone, title: 'Mobile App Development', desc: 'Native and cross-platform mobile apps for iOS and Android that deliver exceptional user experiences.', color: '#10B981', tags: ['iOS & Android', 'React Native', 'Push Notifications', 'Offline Mode'] },
+  { icon: Brain, title: 'AI Solutions', desc: 'Custom AI chatbots, ML models, recommendation systems and intelligent automation powered by cutting-edge AI.', color: '#F59E0B', tags: ['ChatGPT API', 'Custom Models', 'NLP Systems', 'AI Automation'] },
+  { icon: Zap, title: 'Business Automation', desc: 'Eliminate manual tasks with intelligent workflow automation. Connect tools, automate processes, save hours every day.', color: '#EF4444', tags: ['Workflow Automation', 'API Integration', 'CRM Automation', 'Analytics'] },
+  { icon: Palette, title: 'UI/UX Design', desc: 'Research-driven design that balances aesthetics with usability — from wireframes to pixel-perfect interfaces.', color: '#EC4899', tags: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems'] },
+  { icon: ShoppingCart, title: 'E-Commerce Solutions', desc: 'Complete online stores with inventory management, payment processing, and multi-channel selling capabilities.', color: '#8B5CF6', tags: ['Custom Store', 'Payment Gateway', 'Inventory Mgmt', 'Analytics'] },
+  { icon: Search, title: 'SEO & Digital Growth', desc: 'Data-driven SEO strategies, content marketing, and digital campaigns that drive qualified traffic and leads.', color: '#06B6D4', tags: ['On-Page SEO', 'Technical SEO', 'Content Strategy', 'Link Building'] },
 ];
 
-const services = servicesList;
-const LEN = services.length;
-const extendedServices = [
-  services[LEN - 1],
-  ...services,
-  ...services,
-  ...services,
-  services[0],
-];
-const START_INDEX = LEN + 1;
-const PREV_JUMP_TO = LEN * 2;
-const NEXT_JUMP_FROM = extendedServices.length - 1;
-const NEXT_JUMP_TO = LEN + 1;
-
-const AUTO_SLIDE_MS = 4500;
-const CARD_WIDTH = 340;
-const GAP = 24;
-
-type Service = (typeof services)[number];
-
-function ServiceCard({
-  service,
-  isActive,
-  onClick,
-}: {
-  service: Service;
-  isActive: boolean;
-  onClick: () => void;
-}) {
-  const Icon = service.icon;
-  const reducedMotion = useReducedMotion();
-  return (
-    <motion.div
-      layout
-      onClick={onClick}
-      className={`group card-hover-premium shrink-0 cursor-pointer overflow-hidden rounded-2xl border-2 bg-[var(--surface)] shadow-lg transition-[border-color,box-shadow,transform] duration-300 ${
-        isActive
-          ? "border-primary shadow-xl shadow-primary/15 ring-1 ring-white/10"
-          : "border-white/15 hover:border-primary/35 hover:shadow-xl md:hover:-translate-y-0.5"
-      }`}
-      style={{ width: CARD_WIDTH }}
-      whileHover={reducedMotion ? undefined : { y: -2 }}
-      transition={{ duration: 0.2 }}
-    >
-      <div className="relative h-44 overflow-hidden">
-        <img
-          src={service.image}
-          alt={service.title}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.1]"
-          loading="lazy"
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "/heroimage.png";
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/90 via-transparent to-transparent" />
-        <div className="absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-[#071426]/80 backdrop-blur-sm">
-          <Icon className="h-6 w-6 text-sky-300" />
-        </div>
-      </div>
-      <div className="p-5">
-        <h3 className="mb-2 text-lg font-bold text-white hover-text-shift">{service.title}</h3>
-        <p className="mb-4 line-clamp-2 text-sm text-slate-400">{service.desc}</p>
-        <Link
-          href={service.href}
-          className="inline-flex items-center gap-1 text-sm font-semibold text-sky-300 transition-colors hover:text-sky-200"
-          onClick={(e) => e.stopPropagation()}
-        >
-          Learn more
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-    </motion.div>
-  );
-}
+const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.07 } } };
+const card = { hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
 export function ServicesSection() {
-  const [activeIndex, setActiveIndex] = useState(START_INDEX);
-  const isJumpingRef = useRef(false);
-
-  const logicalIndex = (((activeIndex - 1 + LEN) % LEN) + LEN) % LEN;
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActiveIndex((prev) => prev + 1);
-    }, AUTO_SLIDE_MS);
-    return () => clearInterval(id);
-  }, []);
-
-  const handleJumpIfNeeded = () => {
-    if (activeIndex === NEXT_JUMP_FROM + 1) {
-      isJumpingRef.current = true;
-      setActiveIndex(NEXT_JUMP_TO);
-    } else if (activeIndex === -1) {
-      isJumpingRef.current = true;
-      setActiveIndex(PREV_JUMP_TO);
-    }
-  };
-
-  useEffect(() => {
-    isJumpingRef.current = false;
-  });
-
-  const handlePrev = () => setActiveIndex((prev) => prev - 1);
-  const handleNext = () => setActiveIndex((prev) => prev + 1);
-
   return (
-    <section className="overflow-hidden border-t border-white/10 py-14 md:py-20">
-      <div className="section-shell">
-        <div className="mb-10 text-center md:mb-12">
-          <motion.span
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-4 inline-block rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sky-300"
-          >
-            Our Services
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.05 }}
-            className="mb-3 text-2xl font-bold text-white sm:text-3xl md:text-4xl scroll-fade-up hover-text-shift"
-          >
-            Software solutions that drive growth
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mx-auto max-w-2xl text-base text-slate-400 md:text-lg"
-          >
-            From custom development to AI integration, we deliver end-to-end solutions.
-          </motion.p>
-        </div>
+    <section id="services" style={{ background: 'rgba(16,24,39,0.25)', padding: '5rem 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
-        <div className="relative">
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-6 md:overflow-visible"
-              style={{ paddingLeft: `calc(50% - ${CARD_WIDTH / 2}px)` }}
-              animate={{ x: -activeIndex * (CARD_WIDTH + GAP) }}
-              transition={
-                isJumpingRef.current
-                  ? { duration: 0 }
-                  : { duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }
-              }
-              onAnimationComplete={handleJumpIfNeeded}
-            >
-              {extendedServices.map((service, idx) => (
-                <ServiceCard
-                  key={`${service.id}-${idx}`}
-                  service={service}
-                  isActive={idx === activeIndex}
-                  onClick={() => {
-                    const logI = (((idx - 1 + LEN) % LEN) + LEN) % LEN;
-                    setActiveIndex(START_INDEX + logI);
-                  }}
-                />
-              ))}
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <span style={{ display: 'inline-block', padding: '0.375rem 1rem', borderRadius: '9999px', background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.3)', color: '#8B5CF6', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>Our Services</span>
+          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', fontWeight: 800, color: 'white', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+            Everything You Need to{' '}
+            <span style={{ background: 'linear-gradient(135deg, #8B5CF6, #06B6D4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Dominate Your Market</span>
+          </h2>
+          <p style={{ color: '#94A3B8', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>
+            End-to-end digital solutions designed for businesses that want to grow faster than their competition.
+          </p>
+        </motion.div>
+
+        <motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
+          {SERVICES.map((s) => (
+            <motion.div key={s.title} variants={card}
+              whileHover={{ y: -6 }}
+              style={{ background: 'rgba(16,24,39,0.85)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '1.25rem', padding: '1.75rem', cursor: 'default', position: 'relative', overflow: 'hidden', transition: 'border-color 0.3s, box-shadow 0.3s' }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = `${s.color}35`; (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 60px ${s.color}12`; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
+              {/* Top gradient line */}
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: `linear-gradient(90deg, transparent, ${s.color}, transparent)`, opacity: 0.7 }} />
+              {/* Icon */}
+              <div style={{ width: '48px', height: '48px', borderRadius: '0.875rem', background: `${s.color}18`, border: `1px solid ${s.color}22`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <s.icon size={22} color={s.color} />
+              </div>
+              <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.075rem', fontWeight: 700, color: 'white', marginBottom: '0.625rem' }}>{s.title}</h3>
+              <p style={{ color: '#94A3B8', fontSize: '0.875rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>{s.desc}</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem' }}>
+                {s.tags.map((t) => (
+                  <span key={t} style={{ padding: '0.25rem 0.625rem', borderRadius: '0.375rem', background: `${s.color}12`, border: `1px solid ${s.color}20`, color: s.color, fontSize: '0.68rem', fontWeight: 600 }}>{t}</span>
+                ))}
+              </div>
             </motion.div>
-          </div>
-
-          <button
-            type="button"
-            onClick={handlePrev}
-            aria-label="Previous"
-            className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-x-2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[var(--surface)] text-slate-200 shadow-md transition-colors hover:border-primary/40 hover:bg-white/[0.08] md:-translate-x-4"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            onClick={handleNext}
-            aria-label="Next"
-            className="absolute right-0 top-1/2 z-10 flex h-10 w-10 translate-x-2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[var(--surface)] text-slate-200 shadow-md transition-colors hover:border-primary/40 hover:bg-white/[0.08] md:translate-x-4"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-
-        <div className="mt-8 flex justify-center gap-2">
-          {services.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setActiveIndex(START_INDEX + i)}
-              className={`h-2.5 rounded-full transition-[width,background-color] duration-300 ${
-                i === logicalIndex
-                  ? "w-8 bg-primary"
-                  : "w-2.5 bg-white/20 hover:bg-white/35"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
           ))}
-        </div>
+        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.15 }}
-          className="mt-10 text-center"
-        >
-          <Button asChild size="lg" className="rounded-xl px-8 btn-magnetic">
-            <Link href="/services" className="flex items-center gap-2">
-              View all services
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center' }}>
+          <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.9375rem 2.5rem', borderRadius: '0.75rem', background: 'linear-gradient(135deg, #8B5CF6, #6366F1)', color: 'white', fontWeight: 700, fontSize: '1rem', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', fontFamily: 'inherit', boxShadow: '0 4px 20px rgba(139,92,246,0.3)' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 40px rgba(139,92,246,0.5)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(139,92,246,0.3)'; }}>
+            Discuss Your Project <ArrowRight size={18} />
+          </button>
         </motion.div>
       </div>
     </section>

@@ -1,136 +1,131 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
-import { LOGO_ALT, LOGO_HEIGHT, LOGO_ON_DARK_SRC, LOGO_WIDTH } from '@/lib/brand';
+import { Mail, Phone, MapPin, Github, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react';
+
+const QUICK_LINKS = ['Home', 'Services', 'Industries', 'Portfolio', 'Process', 'About', 'Contact'];
+const SERVICES = ['Website Development', 'Web Applications', 'Mobile Apps', 'AI Solutions', 'Automation', 'UI/UX Design', 'E-Commerce', 'SEO & Growth'];
+const INDUSTRIES = ['Healthcare', 'Education', 'E-Commerce', 'Real Estate', 'Restaurant', 'Manufacturing', 'Corporate', 'Travel'];
 
 export function Footer() {
-  return (
-    <footer className="relative overflow-hidden border-t border-white/20 bg-[#050f1c] text-slate-200">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(37,99,235,0.12),transparent)]" />
+  const scrollTo = (id: string) => document.getElementById(id.toLowerCase().replace(/\s/g, '-'))?.scrollIntoView({ behavior: 'smooth' });
+  const year = new Date().getFullYear();
 
-      <div className="section-shell relative z-10 py-12 sm:py-16">
-        <div className="mb-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+  return (
+    <footer style={{ background: 'rgba(7,11,20,0.98)', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '4rem' }}>
+      {/* Top gradient line */}
+      <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent, #8B5CF6 30%, #06B6D4 70%, transparent)', marginBottom: '0', position: 'absolute', left: 0, right: 0, marginTop: '-2px', opacity: 0.6 }} />
+
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
+        {/* Top section */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', marginBottom: '3.5rem' }}>
+
+          {/* Brand column */}
           <div>
-            <div className="mb-4">
+            <div style={{ marginBottom: '1.25rem' }}>
               <Image
-                src={LOGO_ON_DARK_SRC}
-                alt={LOGO_ALT}
-                width={LOGO_WIDTH}
-                height={LOGO_HEIGHT}
-                className="h-14 w-auto max-w-[280px] object-contain object-left sm:h-16"
+                src="/newlogo-tight-transparent.png"
+                alt="WHS SoftTech"
+                width={180}
+                height={60}
+                style={{ objectFit: 'contain', height: '52px', width: 'auto', filter: 'brightness(0) invert(1)' }}
               />
             </div>
-            <p className="text-sm leading-relaxed text-slate-400">
-              Software solutions that scale — web, mobile, and AI.
+            <p style={{ color: '#94A3B8', fontSize: '0.9rem', lineHeight: 1.75, maxWidth: '340px', marginBottom: '1.5rem' }}>
+              We build custom software, AI solutions, and digital products that help businesses across India grow faster, operate smarter, and compete confidently.
             </p>
-          </div>
-
-          <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-sky-300/90">
-              Services
-            </h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li>
-                <Link href="/services#software" className="transition-colors hover:text-white">
-                  Software
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#ai" className="transition-colors hover:text-white">
-                  AI
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#web" className="transition-colors hover:text-white">
-                  Web
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#mobile" className="transition-colors hover:text-white">
-                  Mobile
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-sky-300/90">
-              Company
-            </h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li>
-                <Link href="/about" className="transition-colors hover:text-white">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="transition-colors hover:text-white">
-                  Portfolio
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="transition-colors hover:text-white">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-sky-300/90">
-              Contact
-            </h4>
-            <ul className="space-y-3 text-sm text-slate-400">
-              <li className="flex items-start gap-2">
-                <Mail size={16} className="mt-0.5 shrink-0 text-sky-400" />
-                <a href="mailto:whssfottech2026@gmail.com" className="hover:text-white hover:underline">
-                  whssfottech2026@gmail.com
+            {/* Social */}
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              {[
+                { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+                { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+                { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+                { icon: Github, href: 'https://github.com', label: 'GitHub' },
+              ].map(({ icon: Icon, href, label }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                  style={{ width: '40px', height: '40px', borderRadius: '0.625rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94A3B8', transition: 'all 0.2s', textDecoration: 'none' }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(139,92,246,0.15)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.35)'; (e.currentTarget as HTMLElement).style.color = '#8B5CF6'; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLElement).style.color = '#94A3B8'; }}>
+                  <Icon size={17} />
                 </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone size={16} className="shrink-0 text-sky-400" />
-                <a href="tel:+918208065506" className="hover:text-white hover:underline">
-                  +91 8208065506
+              ))}
+            </div>
+          </div>
+
+          {/* Link columns */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem' }}>
+            {/* Quick Links */}
+            <div>
+              <h4 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.875rem', fontWeight: 700, color: 'white', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Quick Links</h4>
+              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+                {QUICK_LINKS.map((l) => (
+                  <li key={l}>
+                    <button onClick={() => scrollTo(l)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', fontSize: '0.875rem', padding: 0, transition: 'color 0.2s', fontFamily: 'inherit', textAlign: 'left' }}
+                      onMouseEnter={(e) => { (e.target as HTMLElement).style.color = '#8B5CF6'; }}
+                      onMouseLeave={(e) => { (e.target as HTMLElement).style.color = '#94A3B8'; }}>{l}</button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.875rem', fontWeight: 700, color: 'white', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Services</h4>
+              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+                {SERVICES.map((s) => (
+                  <li key={s}><button onClick={() => scrollTo('services')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', fontSize: '0.875rem', padding: 0, transition: 'color 0.2s', fontFamily: 'inherit', textAlign: 'left' }}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = '#8B5CF6'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = '#94A3B8'; }}>{s}</button></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem' }}>
+            {/* Industries */}
+            <div>
+              <h4 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.875rem', fontWeight: 700, color: 'white', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Industries</h4>
+              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+                {INDUSTRIES.map((i) => (
+                  <li key={i}><button onClick={() => scrollTo('industries')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', fontSize: '0.875rem', padding: 0, transition: 'color 0.2s', fontFamily: 'inherit', textAlign: 'left' }}
+                    onMouseEnter={(e) => { (e.target as HTMLElement).style.color = '#06B6D4'; }}
+                    onMouseLeave={(e) => { (e.target as HTMLElement).style.color = '#94A3B8'; }}>{i}</button></li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.875rem', fontWeight: 700, color: 'white', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Contact</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+                {[
+                  { icon: Phone, text: '+91 98765 43210' },
+                  { icon: Mail, text: 'hello@whssofttech.com' },
+                  { icon: MapPin, text: 'India (Remote-First)' },
+                ].map(({ icon: Icon, text }) => (
+                  <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', color: '#94A3B8', fontSize: '0.875rem' }}>
+                    <Icon size={15} color="#8B5CF6" style={{ flexShrink: 0 }} />
+                    {text}
+                  </div>
+                ))}
+                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem', padding: '0.625rem 1rem', borderRadius: '0.5rem', background: 'rgba(37,211,102,0.1)', border: '1px solid rgba(37,211,102,0.2)', color: '#25D366', fontSize: '0.8rem', fontWeight: 600, textDecoration: 'none', transition: 'all 0.2s' }}>
+                  WhatsApp Us <ArrowRight size={14} />
                 </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin size={16} className="shrink-0 text-sky-400" />
-                <span>India</span>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/15 pt-8 sm:flex-row">
-          <p className="text-xs text-slate-500 sm:text-sm">
-            &copy; {new Date().getFullYear()} whsofttech. All rights reserved.
-          </p>
-          <div className="flex gap-2">
-            <a
-              href="https://linkedin.com/in/whsofttech"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/15 p-2 text-slate-400 transition-colors hover:border-sky-400/40 hover:text-sky-300"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={18} />
-            </a>
-            <a
-              href="#"
-              className="rounded-lg border border-white/15 p-2 text-slate-400 transition-colors hover:border-sky-400/40 hover:text-sky-300"
-              aria-label="GitHub"
-            >
-              <Github size={18} />
-            </a>
-            <a
-              href="#"
-              className="rounded-lg border border-white/15 p-2 text-slate-400 transition-colors hover:border-sky-400/40 hover:text-sky-300"
-              aria-label="Twitter"
-            >
-              <Twitter size={18} />
-            </a>
+        {/* Bottom bar */}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '1.5rem 0', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+          <p style={{ color: '#94A3B8', fontSize: '0.825rem' }}>© {year} WHS SoftTech. All rights reserved.</p>
+          <div style={{ display: 'flex', gap: '1.5rem' }}>
+            {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((l) => (
+              <a key={l} href="#" style={{ color: '#94A3B8', fontSize: '0.825rem', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'white'; }}
+                onMouseLeave={(e) => { (e.target as HTMLElement).style.color = '#94A3B8'; }}>{l}</a>
+            ))}
           </div>
         </div>
       </div>

@@ -1,66 +1,55 @@
-import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
-import { getContactEmailHtml } from "./email-template";
+import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
-// Gmail SMTP transporter using App Password (recommended for company Gmail)
-function getTransporter() {
-	const user = process.env.GMAIL_USER?.trim();
-	// App Password must have no spaces (Google shows it as "xxxx xxxx xxxx xxxx")
-	const pass = process.env.GMAIL_APP_PASSWORD?.replace(/\s/g, "").trim();
-	if (!user || !pass) {
-		throw new Error("GMAIL_USER and GMAIL_APP_PASSWORD must be set in .env");
-	}
-	return nodemailer.createTransport({
-		service: "gmail",
-		auth: { user, pass },
-	});
-}
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const { name, company, email, phone, service, message } = body;
 
-export async function POST(request: NextRequest) {
-	try {
-		const body = await request.json();
-		const { name, email, company, message, service } = body;
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
 
-		if (!name || !email || !message) {
-			return NextResponse.json(
-				{ error: "Missing required fields" },
-				{ status: 400 },
-			);
-		}
+    // If email credentials are configured, send email
+    const emailUser = process.env.EMAIL_USER;
+    const emailPass = process.env.EMAIL_PASS;
+    const toEmail = process.env.CONTACT_EMAIL || 'hello@whssofttech.com';
 
-		const transporter = getTransporter();
-		const toEmail =
-			process.env.CONTACT_TO_EMAIL ||
-			process.env.GMAIL_USER ||
-			"whssfottech2026@gmail.com";
+    if (emailUser && emailPass) {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: emailUser, pass: emailPass },
+      });
 
-		const html = getContactEmailHtml({
-			name,
-			email,
-			company: company || undefined,
-			message,
-			service: service || "general",
-		});
+      await transporter.sendMail({
+        from: `"WHS SoftTech Contact" <${emailUser}>`,
+        to: toEmail,
+        subject: `New Lead: ${name} — ${service || 'General Inquiry'}`,
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #8B5CF6; border-bottom: 2px solid #8B5CF6; padding-bottom: 12px;">New Lead from WHS SoftTech Website</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr><td style="padding: 8px; color: #666; width: 140px;"><strong>Name:</strong></td><td style="padding: 8px;">${name}</td></tr>
+              <tr style="background: #f9f9f9;"><td style="padding: 8px; color: #666;"><strong>Company:</strong></td><td style="padding: 8px;">${company || 'N/A'}</td></tr>
+              <tr><td style="padding: 8px; color: #666;"><strong>Email:</strong></td><td style="padding: 8px;"><a href="mailto:${email}">${email}</a></td></tr>
+              <tr style="background: #f9f9f9;"><td style="padding: 8px; color: #666;"><strong>Phone:</strong></td><td style="padding: 8px;">${phone || 'N/A'}</td></tr>
+              <tr><td style="padding: 8px; color: #666;"><strong>Service:</strong></td><td style="padding: 8px; color: #8B5CF6; font-weight: bold;">${service || 'Not specified'}</td></tr>
+              <tr style="background: #f9f9f9;"><td style="padding: 8px; color: #666; vertical-align: top;"><strong>Message:</strong></td><td style="padding: 8px;">${message}</td></tr>
+            </table>
+            <p style="margin-top: 24px; padding: 12px; background: #f0f0ff; border-radius: 8px; color: #6366F1;">
+              📞 Reply to this lead within 2 hours for best conversion.
+            </p>
+          </div>
+        `,
+      });
+    }
 
-		await transporter.sendMail({
-			from: `"whsofttech" <${process.env.GMAIL_USER}>`,
-			to: toEmail,
-			replyTo: email,
-			subject: `New Contact – ${service || "General Inquiry"} | whsofttech`,
-			html,
-		});
+    // Always log the lead (useful when email not configured)
+    console.log('New lead received:', { name, company, email, phone, service, message });
 
-		return NextResponse.json(
-			{ message: "Email sent successfully" },
-			{ status: 200 },
-		);
-	} catch (error) {
-		console.error("Contact form error:", error);
-		return NextResponse.json(
-			{
-				error: error instanceof Error ? error.message : "Failed to send email",
-			},
-			{ status: 500 },
-		);
-	}
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Contact form error:', error);
+    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
+  }
 }
