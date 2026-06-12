@@ -202,7 +202,7 @@ export function ScrollStorySection() {
   return (
     <div ref={containerRef} style={{ height: '350vh', position: 'relative' }}>
       {/* Sticky canvas */}
-      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', background: '#070B14', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', background: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {/* Background grid glow */}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(139,92,246,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 

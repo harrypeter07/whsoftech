@@ -79,7 +79,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning style={{ background: '#0a0a0f', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
         {children}
       </body>
     </html>

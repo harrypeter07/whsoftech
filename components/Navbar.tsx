@@ -68,13 +68,13 @@ export function Navbar() {
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
           transition: 'background 0.4s ease, border-color 0.4s ease, padding 0.3s ease',
-          background: scrolled ? 'rgba(7,11,20,0.95)' : 'rgba(7,11,20,0.3)',
+          background: scrolled ? 'rgba(10,10,15,0.97)' : 'rgba(10,10,15,0.4)',
           backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
           borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
           padding: scrolled ? '0.75rem 1.5rem' : '1.25rem 1.5rem',
         }}
       >
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
           <button onClick={() => handleNav('home')} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
             <Image
@@ -164,7 +164,7 @@ export function Navbar() {
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            style={{ position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(7,11,20,0.98)', backdropFilter: 'blur(24px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}
+            style={{ position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(10,10,15,0.98)', backdropFilter: 'blur(24px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}
           >
             <button onClick={() => setOpen(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <X size={20} />
