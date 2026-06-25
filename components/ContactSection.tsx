@@ -16,7 +16,7 @@ interface ContactData {
 
 const DEFAULT_CONTACT: ContactData = {
   phone: '+91 98765 43210',
-  email: 'hello@whssofttech.com',
+  email: 'whsofttech26@gmail.com',
   location: 'India (Remote-First Team)',
   hours: 'Mon–Sat, 9 AM – 7 PM IST',
   whatsapp: '919876543210',
@@ -47,11 +47,11 @@ export function ContactSection() {
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem',
     background: 'rgba(37,99,235,0.03)', border: '1px solid #bfdbfe',
-    color: '#1e3a5f', fontSize: '0.9375rem', fontFamily: 'inherit', outline: 'none',
+    color: '#e2e8ff', fontSize: '0.9375rem', fontFamily: 'inherit', outline: 'none',
     transition: 'border-color 0.2s', boxSizing: 'border-box',
   };
   const labelStyle: React.CSSProperties = {
-    display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#4a6fa5',
+    display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#94a3b8',
     marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.06em',
   };
   const focus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -67,7 +67,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" style={{ background: '#f8faff', padding: '5.5rem 0', borderTop: '1px solid rgba(37,99,235,0.05)' }}>
+    <section id="contact" style={{ background: '#0d1f38', padding: '5.5rem 0', borderTop: '1px solid rgba(37,99,235,0.05)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <motion.div
@@ -84,7 +84,7 @@ export function ContactSection() {
           <h2 style={{
             fontFamily: 'Space Grotesk, sans-serif',
             fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
-            fontWeight: 800, color: '#1e3a5f',
+            fontWeight: 800, color: '#e2e8ff',
             marginBottom: '1rem', letterSpacing: '-0.02em',
           }}>
             Let&apos;s Start Your{' '}
@@ -93,7 +93,7 @@ export function ContactSection() {
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             }}>Project Today</span>
           </h2>
-          <p style={{ color: '#4a6fa5', fontSize: '1.05rem', maxWidth: '500px', margin: '0 auto' }}>
+          <p style={{ color: '#94a3b8', fontSize: '1.05rem', maxWidth: '500px', margin: '0 auto' }}>
             Tell us about your project. We&apos;ll get back to you within 2 hours with a plan.
           </p>
         </motion.div>
@@ -113,7 +113,7 @@ export function ContactSection() {
                   style={{
                     display: 'flex', alignItems: 'center', gap: '1rem',
                     padding: '1.25rem 1.5rem', borderRadius: '1rem',
-                    background: '#ffffff', border: '1px solid #bfdbfe',
+                    background: '#0f2341', border: '1px solid #bfdbfe',
                     textDecoration: 'none', transition: 'all 0.2s',
                     boxShadow: '0 2px 16px rgba(37,99,235,0.06)',
                   }}
@@ -128,8 +128,8 @@ export function ContactSection() {
                     <Icon size={20} color={color} />
                   </div>
                   <div>
-                    <div style={{ fontSize: '0.75rem', color: '#4a6fa5', marginBottom: '0.2rem', fontWeight: 500 }}>{label}</div>
-                    <div style={{ color: '#1e3a5f', fontWeight: 600, fontSize: '0.9375rem' }}>{value}</div>
+                    <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.2rem', fontWeight: 500 }}>{label}</div>
+                    <div style={{ color: '#e2e8ff', fontWeight: 600, fontSize: '0.9375rem' }}>{value}</div>
                   </div>
                 </a>
               ))}
@@ -157,14 +157,14 @@ export function ContactSection() {
             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div style={{ background: '#ffffff', border: '1px solid #bfdbfe', borderRadius: '1.25rem', padding: '2.5rem', boxShadow: '0 8px 40px rgba(37,99,235,0.08)' }}>
-              <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.35rem', fontWeight: 700, color: '#1e3a5f', marginBottom: '2rem' }}>Send Us a Message</h3>
+            <div style={{ background: '#0f2341', border: '1px solid #bfdbfe', borderRadius: '1.25rem', padding: '2.5rem', boxShadow: '0 8px 40px rgba(37,99,235,0.08)' }}>
+              <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.35rem', fontWeight: 700, color: '#e2e8ff', marginBottom: '2rem' }}>Send Us a Message</h3>
 
               {status === 'success' ? (
                 <div style={{ textAlign: 'center', padding: '2rem' }}>
                   <CheckCircle2 size={56} color="#10B981" style={{ margin: '0 auto 1rem' }} />
-                  <h4 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.25rem', color: '#1e3a5f', marginBottom: '0.75rem' }}>Message Sent!</h4>
-                  <p style={{ color: '#4a6fa5' }}>We&apos;ll get back to you within 2 hours during business hours.</p>
+                  <h4 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.25rem', color: '#e2e8ff', marginBottom: '0.75rem' }}>Message Sent!</h4>
+                  <p style={{ color: '#94a3b8' }}>We&apos;ll get back to you within 2 hours during business hours.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -200,8 +200,8 @@ export function ContactSection() {
                     <label style={labelStyle}>Service Required</label>
                     <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}
                       style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focus} onBlur={blur}>
-                      <option value="" style={{ background: '#f0f7ff', color: '#1e3a5f' }}>Select a service...</option>
-                      {SERVICES_LIST.map(s => <option key={s} value={s} style={{ background: '#f0f7ff', color: '#1e3a5f' }}>{s}</option>)}
+                      <option value="" style={{ background: '#f0f7ff', color: '#e2e8ff' }}>Select a service...</option>
+                      {SERVICES_LIST.map(s => <option key={s} value={s} style={{ background: '#f0f7ff', color: '#e2e8ff' }}>{s}</option>)}
                     </select>
                   </div>
                   <div>
@@ -231,7 +231,7 @@ export function ContactSection() {
                   >
                     {status === 'sending' ? 'Sending...' : <><Send size={18} /> Send Message</>}
                   </button>
-                  <p style={{ textAlign: 'center', color: '#4a6fa5', fontSize: '0.8rem' }}>✓ We respond within 2 hours during business hours</p>
+                  <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.8rem' }}>✓ We respond within 2 hours during business hours</p>
                 </form>
               )}
             </div>

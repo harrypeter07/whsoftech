@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     // If email credentials are configured, send email
     const emailUser = process.env.EMAIL_USER;
     const emailPass = process.env.EMAIL_PASS;
-    const toEmail = process.env.CONTACT_EMAIL || 'hello@whssofttech.com';
+    const toEmail = process.env.CONTACT_EMAIL || 'whsofttech26@gmail.com';
 
     if (emailUser && emailPass) {
       const transporter = nodemailer.createTransport({

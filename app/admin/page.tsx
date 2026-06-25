@@ -407,7 +407,7 @@ function ContactTab() {
         </button>
       </div>
       <div style={{ ...card, display:'grid', gap:'1rem' }}>
-        {([['phone','Phone Number','+91 98765 43210'],['email','Email Address','hello@whssofttech.com'],['location','Location / Office','India (Remote-First Team)'],['hours','Business Hours','Mon–Sat, 9 AM – 7 PM IST'],['whatsapp','WhatsApp Number (with country code)','919876543210']] as const).map(([field,label,ph])=>(
+        {([['phone','Phone Number','+91 98765 43210'],['email','Email Address','whsofttech26@gmail.com'],['location','Location / Office','India (Remote-First Team)'],['hours','Business Hours','Mon–Sat, 9 AM – 7 PM IST'],['whatsapp','WhatsApp Number (with country code)','919876543210']] as const).map(([field,label,ph])=>(
           <div key={field}>
             <label style={lbl}>{label}</label>
             <input style={inp} value={(data as Record<string, string>)[field] || ''} onChange={e=>setData({...data,[field]:e.target.value})} placeholder={ph} />
