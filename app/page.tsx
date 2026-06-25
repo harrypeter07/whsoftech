@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main style={{ background: '#0a0a0f', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
+    <main style={{ background: '#07070f', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
       <Navbar />
       <Hero />
       <ScrollStorySection />
