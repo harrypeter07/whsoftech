@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
+import { ScrollStorySection } from '@/components/ScrollStorySection';
 import { IndustriesSection } from '@/components/IndustriesSection';
 import { ServicesSection } from '@/components/ServicesSection';
 import { ProcessSection } from '@/components/ProcessSection';
@@ -22,9 +23,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main style={{ background: '#07070f', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
+    <main style={{ background: '#030311', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
       <Navbar />
       <Hero />
+      <ScrollStorySection />
       <IndustriesSection />
       <ServicesSection />
       <ProcessSection />

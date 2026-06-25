@@ -16,13 +16,6 @@ interface Project {
   size: 'large' | 'medium' | 'small';
 }
 
-const TAG_COLORS: Record<string, string> = {
-  'Next.js': '#000', 'React': '#61DAFB', 'Node.js': '#68A063', 'PostgreSQL': '#336791',
-  'Stripe': '#635BFF', 'Django': '#0C4B33', 'AWS': '#FF9900', 'WebRTC': '#333',
-  'MongoDB': '#10AA50', 'Mapbox': '#4264FB', 'Firebase': '#FFCA28', 'Python': '#3776AB',
-  'OpenAI': '#00A67E', 'FastAPI': '#009688', 'Redis': '#DC382D',
-};
-
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [hovered, setHovered] = useState(false);
 
@@ -36,15 +29,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         position: 'relative', overflow: 'hidden', borderRadius: '1.125rem',
-        background: 'rgba(16,24,39,0.9)', border: '1px solid rgba(255,255,255,0.07)',
+        background: '#0e0e2a', border: '1px solid rgba(59,130,246,0.1)',
         transition: 'all 0.35s ease', cursor: 'default',
         transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
-        boxShadow: hovered ? '0 24px 60px rgba(139,92,246,0.18)' : 'none',
-        borderColor: hovered ? 'rgba(139,92,246,0.3)' : 'rgba(255,255,255,0.07)',
+        boxShadow: hovered ? '0 24px 60px rgba(59,130,246,0.15)' : 'none',
+        borderColor: hovered ? 'rgba(59,130,246,0.3)' : 'rgba(59,130,246,0.1)',
       }}
     >
       {/* Image area */}
-      <div style={{ position: 'relative', height: project.size === 'large' ? '220px' : '160px', overflow: 'hidden', background: 'linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.15))' }}>
+      <div style={{ position: 'relative', height: project.size === 'large' ? '220px' : '160px', overflow: 'hidden', background: 'linear-gradient(135deg, rgba(37,99,235,0.15), rgba(6,182,212,0.1))' }}>
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
@@ -55,14 +48,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
         {/* Hover overlay */}
         <motion.div animate={{ opacity: hovered ? 1 : 0 }} transition={{ duration: 0.2 }}
-          style={{ position: 'absolute', inset: 0, background: 'rgba(7,11,20,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.625rem 1.25rem', borderRadius: '0.625rem', background: 'rgba(139,92,246,0.2)', border: '1px solid rgba(139,92,246,0.4)', color: '#8B5CF6', fontSize: '0.875rem', fontWeight: 600 }}>
+          style={{ position: 'absolute', inset: 0, background: 'rgba(3,3,17,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.625rem 1.25rem', borderRadius: '0.625rem', background: 'rgba(59,130,246,0.2)', border: '1px solid rgba(59,130,246,0.4)', color: '#60a5fa', fontSize: '0.875rem', fontWeight: 600 }}>
             <ExternalLink size={15} /> View Case Study
           </div>
         </motion.div>
         {/* Featured badge */}
         {project.featured && (
-          <div style={{ position: 'absolute', top: '0.875rem', left: '0.875rem', padding: '0.25rem 0.75rem', borderRadius: '9999px', background: 'rgba(139,92,246,0.2)', border: '1px solid rgba(139,92,246,0.4)', color: '#8B5CF6', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.05em' }}>
+          <div style={{ position: 'absolute', top: '0.875rem', left: '0.875rem', padding: '0.25rem 0.75rem', borderRadius: '9999px', background: 'rgba(59,130,246,0.2)', border: '1px solid rgba(59,130,246,0.4)', color: '#60a5fa', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.05em' }}>
             FEATURED
           </div>
         )}
@@ -70,17 +63,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
       {/* Content */}
       <div style={{ padding: '1.375rem' }}>
-        <div style={{ fontSize: '0.7rem', color: '#06B6D4', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>{project.industry}</div>
-        <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'white', marginBottom: '0.625rem', lineHeight: 1.3 }}>{project.title}</h3>
-        <p style={{ color: '#94A3B8', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: '1rem' }}>{project.description}</p>
+        <div style={{ fontSize: '0.7rem', color: '#06b6d4', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>{project.industry}</div>
+        <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1rem', fontWeight: 700, color: '#e2e8ff', marginBottom: '0.625rem', lineHeight: 1.3 }}>{project.title}</h3>
+        <p style={{ color: '#7b8db0', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: '1rem' }}>{project.description}</p>
         {/* Result */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.875rem', borderRadius: '0.5rem', background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.18)', marginBottom: '1rem' }}>
-          <span style={{ fontSize: '0.7rem', color: '#10B981', fontWeight: 700 }}>📈 {project.results}</span>
+          <span style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 700 }}>📈 {project.results}</span>
         </div>
         {/* Tags */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem' }}>
           {project.tags.map((tag) => (
-            <span key={tag} style={{ padding: '0.2rem 0.5rem', borderRadius: '0.3rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#94A3B8', fontSize: '0.65rem', fontWeight: 600 }}>{tag}</span>
+            <span key={tag} style={{ padding: '0.2rem 0.5rem', borderRadius: '0.3rem', background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.15)', color: '#7b8db0', fontSize: '0.65rem', fontWeight: 600 }}>{tag}</span>
           ))}
         </div>
       </div>
@@ -93,7 +86,6 @@ export function PortfolioSection() {
 
   useEffect(() => {
     fetch('/api/admin/projects').then((r) => r.json()).then(setProjects).catch(() => {
-      // fallback
       setProjects([
         { id: '1', title: 'HealthSync — Clinic Management', description: 'Comprehensive clinic management with appointment booking, patient records, and billing.', industry: 'Healthcare', tags: ['Next.js', 'Node.js', 'PostgreSQL'], image: '', results: '300% more appointments', featured: true, size: 'large' },
         { id: '2', title: 'EduLearn — LMS Portal', description: 'Full LMS with live classes, recorded lectures, and student tracking.', industry: 'Education', tags: ['React', 'Django', 'AWS'], image: '', results: '5,000+ students onboarded', featured: true, size: 'medium' },
@@ -106,32 +98,30 @@ export function PortfolioSection() {
   }, []);
 
   return (
-    <section id="portfolio" style={{ background: '#070B14', padding: '5rem 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
+    <section id="portfolio" style={{ background: '#07071e', padding: '6rem 0', borderTop: '1px solid rgba(59,130,246,0.06)' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
 
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <span style={{ display: 'inline-block', padding: '0.375rem 1rem', borderRadius: '9999px', background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.3)', color: '#8B5CF6', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>Our Portfolio</span>
-          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', fontWeight: 800, color: 'white', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+          <span className="s-label">Our Portfolio</span>
+          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#e2e8ff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
             Work That Speaks{' '}
-            <span style={{ background: 'linear-gradient(135deg, #8B5CF6, #06B6D4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>For Itself</span>
+            <span className="grad">For Itself</span>
           </h2>
-          <p style={{ color: '#94A3B8', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>
+          <p style={{ color: '#7b8db0', fontSize: '1.05rem', maxWidth: '520px', margin: '0 auto' }}>
             Real projects, real results. See how we&apos;ve helped businesses across industries transform their digital presence.
           </p>
         </motion.div>
 
-        {/* Bento grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
+        <div className="portfolio-grid" style={{ marginBottom: '3rem' }}>
           {projects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center' }}>
-          <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.9375rem 2.5rem', borderRadius: '0.75rem', background: 'linear-gradient(135deg, #8B5CF6, #6366F1)', color: 'white', fontWeight: 700, fontSize: '1rem', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 40px rgba(139,92,246,0.5)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
+          <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary"
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 40px rgba(37,99,235,0.5)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(37,99,235,0.35)'; }}>
             Start Your Project <ArrowRight size={18} />
           </button>
         </motion.div>

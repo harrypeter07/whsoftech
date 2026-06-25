@@ -1,8 +1,7 @@
 'use client';
-
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, MessageCircle, CheckCircle } from 'lucide-react';
+import { ArrowRight, MessageCircle, CheckCircle, TrendingUp, Users, Award } from 'lucide-react';
 import { ParticleSphere } from './ParticleSphere';
 
 const STATS = [
@@ -10,13 +9,6 @@ const STATS = [
   { value: 16, suffix: '+', label: 'Industries Served' },
   { value: 40, suffix: '+', label: 'Happy Clients' },
   { value: 98, suffix: '%', label: 'Satisfaction Rate' },
-];
-
-const WINS = [
-  'Fast, on-time delivery',
-  'Full source code ownership',
-  'Post-launch support included',
-  'Free consultation — no commitment',
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -42,262 +34,133 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-export function Hero() {
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-
+function FloatCard({ style, icon: Icon, label, value, color, delay = 0 }: {
+  style?: React.CSSProperties; icon: React.ElementType; label: string; value: string; color: string; delay?: number;
+}) {
   return (
-    <section
-      id="home"
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, delay }}
       style={{
-        position: 'relative',
-        overflow: 'hidden',
-        background: '#07070f',
-        paddingTop: '7rem',
-        paddingBottom: '3.5rem',
-        width: '100%',
+        position: 'absolute',
+        background: 'rgba(7,7,30,0.92)',
+        border: `1px solid ${color}30`,
+        borderRadius: '12px',
+        padding: '0.75rem 1rem',
+        backdropFilter: 'blur(16px)',
+        boxShadow: `0 8px 32px ${color}18`,
+        animation: 'float 5s ease-in-out infinite',
+        animationDelay: `${delay}s`,
+        zIndex: 2,
+        ...style,
       }}
     >
-      {/* Dot grid */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)',
-        backgroundSize: '30px 30px',
-      }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: `${color}18`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon size={14} color={color} />
+        </div>
+        <div>
+          <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1rem', fontWeight: 800, color: color, lineHeight: 1 }}>{value}</div>
+          <div style={{ fontSize: '0.65rem', color: '#7b8db0', fontWeight: 500 }}>{label}</div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
-      {/* Ambient glow — purple left */}
-      <div style={{
-        position: 'absolute', top: '-15%', left: '-8%',
-        width: '55%', height: '85%',
-        background: 'radial-gradient(ellipse, rgba(124,58,237,0.11) 0%, transparent 65%)',
-        pointerEvents: 'none',
-      }} />
-      {/* Saffron glow — right */}
-      <div style={{
-        position: 'absolute', top: '10%', right: '-15%',
-        width: '55%', height: '75%',
-        background: 'radial-gradient(ellipse, rgba(255,122,47,0.06) 0%, transparent 65%)',
-        pointerEvents: 'none',
-      }} />
+export function Hero() {
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  return (
+    <section id="home" style={{ position: 'relative', overflow: 'hidden', background: '#030311', paddingTop: '7rem', paddingBottom: '3.5rem', width: '100%' }}>
+      {/* Dot grid */}
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'radial-gradient(rgba(59,130,246,0.08) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+      {/* Blue glow left */}
+      <div style={{ position: 'absolute', top: '-15%', left: '-10%', width: '55%', height: '85%', background: 'radial-gradient(ellipse, rgba(37,99,235,0.1) 0%, transparent 65%)', pointerEvents: 'none' }} />
+      {/* Saffron glow right */}
+      <div style={{ position: 'absolute', top: '20%', right: '-15%', width: '50%', height: '70%', background: 'radial-gradient(ellipse, rgba(249,115,22,0.05) 0%, transparent 65%)', pointerEvents: 'none' }} />
 
       <div className="wrap" style={{ position: 'relative', zIndex: 1 }}>
-
-        {/* ── Two column hero grid ── */}
         <div className="hero-grid">
 
-          {/* LEFT — text content */}
+          {/* LEFT */}
           <div>
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              style={{ marginBottom: '1.5rem' }}
-            >
-              <span style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                padding: '0.35rem 1rem', borderRadius: '99px',
-                background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.25)',
-                color: '#a78bfa', fontSize: '0.775rem', fontWeight: 600, letterSpacing: '0.07em',
-              }}>
-                <span style={{
-                  width: '6px', height: '6px', borderRadius: '50%', background: '#a78bfa',
-                  animation: 'dot-blink 2s ease-in-out infinite',
-                }} />
-                Software Agency · India
+            {/* Availability badge */}
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ marginBottom: '1.5rem' }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 1rem', borderRadius: '99px', background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.22)', color: '#60a5fa', fontSize: '0.775rem', fontWeight: 600, letterSpacing: '0.07em' }}>
+                <span className="anim-dot" style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981', flexShrink: 0 }} />
+                Available for new projects · India
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              style={{
-                fontSize: 'clamp(2.1rem, 4.5vw, 3.9rem)',
-                fontWeight: 800, lineHeight: 1.08,
-                letterSpacing: '-0.03em', color: '#f1f5f9',
-                marginBottom: '1.25rem',
-              }}
-            >
-              We Build Software
-              <br />
-              <span style={{
-                background: 'linear-gradient(120deg, #a78bfa 0%, #7c3aed 40%, #ff7a2f 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                That Grows Businesses
-              </span>
+            {/* H1 */}
+            <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
+              style={{ fontSize: 'clamp(2.25rem, 4.5vw, 4.25rem)', fontWeight: 800, lineHeight: 1.06, letterSpacing: '-0.035em', color: '#e2e8ff', marginBottom: '1.25rem' }}>
+              We Build Software<br />
+              <span className="grad">That Transforms</span><br />
+              Your Business
             </motion.h1>
 
-            {/* Subtext */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              style={{
-                color: '#94a3b8', fontSize: '1.05rem', lineHeight: 1.8,
-                marginBottom: '1.75rem', maxWidth: '520px',
-              }}
-            >
-              WHS SoftTech delivers custom websites, mobile apps, AI systems, and business
-              automation for startups, SMEs, and enterprises across India.
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
+              style={{ color: '#7b8db0', fontSize: '1.0625rem', lineHeight: 1.8, marginBottom: '2rem', maxWidth: '520px' }}>
+              WHS SoftTech delivers custom websites, mobile apps, AI systems, and automation for startups, SMEs, and enterprises across India.
             </motion.p>
 
-            {/* Wins */}
-            <motion.ul
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2rem' }}
-            >
-              {WINS.map((w) => (
-                <li key={w} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', color: '#d1d5db', fontSize: '0.9rem' }}>
-                  <CheckCircle size={15} color="#10b981" style={{ flexShrink: 0 }} />
-                  {w}
-                </li>
+            {/* Trust row */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}
+              style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+              {[
+                { icon: CheckCircle, text: 'Free consultation', color: '#10b981' },
+                { icon: CheckCircle, text: 'Full code ownership', color: '#10b981' },
+                { icon: CheckCircle, text: 'Post-launch support', color: '#10b981' },
+              ].map(({ icon: Icon, text, color }) => (
+                <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#94a3b8', fontSize: '0.875rem' }}>
+                  <Icon size={14} color={color} /> {text}
+                </div>
               ))}
-            </motion.ul>
+            </motion.div>
 
             {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap', alignItems: 'center' }}
-            >
-              <button
-                onClick={() => scrollTo('contact')}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                  padding: '0.9rem 2rem', borderRadius: '10px',
-                  background: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
-                  color: 'white', fontWeight: 700, fontSize: '0.9375rem',
-                  border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-                  boxShadow: '0 4px 20px rgba(124,58,237,0.35)',
-                  transition: 'all 0.25s ease',
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.transform = 'translateY(-2px)';
-                  el.style.boxShadow = '0 12px 35px rgba(124,58,237,0.55)';
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.transform = 'translateY(0)';
-                  el.style.boxShadow = '0 4px 20px rgba(124,58,237,0.35)';
-                }}
-              >
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}
+              style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <button onClick={() => scrollTo('contact')} className="btn-primary">
                 Book Free Consultation <ArrowRight size={16} />
               </button>
-
-              <a
-                href="https://wa.me/919876543210?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project"
-                target="_blank" rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                  padding: '0.9rem 1.75rem', borderRadius: '10px',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: '#d1d5db', fontWeight: 600, fontSize: '0.9375rem',
-                  textDecoration: 'none', fontFamily: 'inherit',
-                  transition: 'all 0.25s ease',
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.background = 'rgba(255,255,255,0.08)';
-                  el.style.borderColor = 'rgba(37,211,102,0.3)';
-                  el.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.background = 'rgba(255,255,255,0.04)';
-                  el.style.borderColor = 'rgba(255,255,255,0.1)';
-                  el.style.transform = 'translateY(0)';
-                }}
-              >
+              <a href="https://wa.me/919876543210?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener noreferrer" className="btn-ghost">
                 <MessageCircle size={16} color="#25D366" /> WhatsApp Us
               </a>
             </motion.div>
           </div>
 
-          {/* RIGHT — 3D particle sphere (desktop only) */}
-          <motion.div
-            className="hero-sphere-wrapper"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.35 }}
-          >
-            {/* Outer dashed orbit ring */}
-            <div style={{
-              position: 'absolute',
-              width: '460px', height: '460px',
-              borderRadius: '50%',
-              border: '1px dashed rgba(124,58,237,0.18)',
-              animation: 'spin-slow 35s linear infinite',
-            }} />
-            {/* Inner dashed orbit ring */}
-            <div style={{
-              position: 'absolute',
-              width: '340px', height: '340px',
-              borderRadius: '50%',
-              border: '1px dashed rgba(255,122,47,0.12)',
-              animation: 'spin-slow 22s linear infinite reverse',
-            }} />
-            {/* Glow behind sphere */}
-            <div style={{
-              position: 'absolute',
-              width: '300px', height: '300px',
-              borderRadius: '50%',
-              background: 'radial-gradient(ellipse, rgba(124,58,237,0.15) 0%, transparent 70%)',
-              filter: 'blur(20px)',
-            }} />
-            {/* Purple orbit dot */}
-            <div style={{
-              position: 'absolute',
-              width: '10px', height: '10px',
-              borderRadius: '50%',
-              background: '#a78bfa',
-              boxShadow: '0 0 12px 4px rgba(167,139,250,0.5)',
-              animation: 'orbit 18s linear infinite',
-              transformOrigin: 'center',
-            }} />
-            {/* Saffron orbit dot */}
-            <div style={{
-              position: 'absolute',
-              width: '7px', height: '7px',
-              borderRadius: '50%',
-              background: '#ff7a2f',
-              boxShadow: '0 0 10px 3px rgba(255,122,47,0.5)',
-              animation: 'orbit-rev 26s linear infinite',
-              transformOrigin: 'center',
-            }} />
+          {/* RIGHT — sphere + floating cards */}
+          <motion.div className="hero-sphere-wrapper" initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.1, delay: 0.35 }}>
+            {/* Orbit rings */}
+            <div style={{ position: 'absolute', width: '470px', height: '470px', borderRadius: '50%', border: '1px dashed rgba(59,130,246,0.15)', animation: 'spin-slow 35s linear infinite' }} />
+            <div style={{ position: 'absolute', width: '350px', height: '350px', borderRadius: '50%', border: '1px dashed rgba(249,115,22,0.1)', animation: 'spin-slow 22s linear infinite reverse' }} />
+            {/* Glow */}
+            <div style={{ position: 'absolute', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(37,99,235,0.15) 0%, transparent 70%)', filter: 'blur(20px)' }} />
+            {/* Orbit dots */}
+            <div style={{ position: 'absolute', width: '10px', height: '10px', borderRadius: '50%', background: '#60a5fa', boxShadow: '0 0 12px 4px rgba(96,165,250,0.5)', animation: 'orbit 18s linear infinite' }} />
+            <div style={{ position: 'absolute', width: '7px', height: '7px', borderRadius: '50%', background: '#f97316', boxShadow: '0 0 10px 3px rgba(249,115,22,0.5)', animation: 'orbit-rev 26s linear infinite' }} />
+
+            {/* Floating metric cards */}
+            <FloatCard icon={TrendingUp} label="Projects Delivered" value="50+" color="#3b82f6" style={{ top: '8%', left: '-8%' }} delay={0.8} />
+            <FloatCard icon={Users} label="Happy Clients" value="40+" color="#06b6d4" style={{ bottom: '12%', right: '-5%' }} delay={1.0} />
+            <FloatCard icon={Award} label="Satisfaction" value="98%" color="#10b981" style={{ top: '55%', left: '-12%' }} delay={1.2} />
+
             <ParticleSphere size={400} />
           </motion.div>
         </div>
 
-        {/* ── Stats strip ── */}
-        <motion.div
-          className="stats-strip"
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-        >
-          {STATS.map((s) => (
-            <div
-              key={s.label}
-              style={{
-                background: '#0d0d1a',
-                padding: '1.5rem 1.25rem',
-                textAlign: 'center',
-              }}
-            >
-              <div style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: 'clamp(1.6rem, 2.5vw, 2.25rem)',
-                fontWeight: 800, lineHeight: 1, marginBottom: '0.3rem',
-                background: 'linear-gradient(120deg, #a78bfa, #0ea5e9)',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}>
+        {/* Stats strip */}
+        <motion.div className="stats-strip" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.6 }}>
+          {STATS.map(s => (
+            <div key={s.label} style={{ background: '#07071e', padding: '1.5rem 1.25rem', textAlign: 'center' }}>
+              <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.6rem, 2.5vw, 2.25rem)', fontWeight: 800, lineHeight: 1, marginBottom: '0.3rem', background: 'linear-gradient(135deg, #60a5fa, #06b6d4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 <Counter value={s.value} suffix={s.suffix} />
               </div>
-              <div style={{ color: '#6b7280', fontSize: '0.75rem', fontWeight: 500 }}>{s.label}</div>
+              <div style={{ color: '#4b5e80', fontSize: '0.75rem', fontWeight: 500 }}>{s.label}</div>
             </div>
           ))}
         </motion.div>
