@@ -11,60 +11,81 @@ const TESTIMONIALS = [
   { name: 'Deepak Joshi',   role: 'Owner',     company: 'AutoEdge Showroom',              text: 'Our AI chatbot handles 200+ customer queries daily without any human intervention. Test drive bookings are up 80%. WHS SoftTech delivered beyond our expectations.', rating: 5, avatar: 'DJ', color: '#ef4444' },
 ];
 
-export function TestimonialsSection() {
+function TestimonialCard({ t }: { t: typeof TESTIMONIALS[0] }) {
   return (
-    <section style={{ background: '#07071e', padding: '6rem 0', borderTop: '1px solid rgba(59,130,246,0.06)' }}>
+    <div style={{
+      width: '320px',
+      flexShrink: 0,
+      background: '#ffffff',
+      border: '1px solid #bfdbfe',
+      borderRadius: '16px',
+      padding: '1.5rem',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+      {/* Quote icon watermark */}
+      <div style={{ position: 'absolute', top: '1rem', right: '1.25rem', opacity: 0.07 }}>
+        <Quote size={48} color={t.color} fill={t.color} />
+      </div>
+
+      {/* Stars */}
+      <div style={{ display: 'flex', gap: '0.25rem', marginBottom: '1.125rem' }}>
+        {Array.from({ length: t.rating }).map((_, si) => <Star key={si} size={14} fill="#f59e0b" color="#f59e0b" />)}
+      </div>
+
+      <p style={{ color: '#4a6fa5', fontSize: '0.875rem', lineHeight: 1.75, marginBottom: '1.5rem', fontStyle: 'italic' }}>
+        &ldquo;{t.text}&rdquo;
+      </p>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+        <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: `${t.color}18`, border: `2px solid ${t.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '0.8rem', color: t.color, flexShrink: 0 }}>
+          {t.avatar}
+        </div>
+        <div>
+          <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.9rem', fontWeight: 700, color: '#1e3a5f' }}>{t.name}</div>
+          <div style={{ fontSize: '0.75rem', color: '#7090c0' }}>{t.role} · {t.company}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function TestimonialsSection() {
+  // Duplicate items for infinite loop
+  const doubled = [...TESTIMONIALS, ...TESTIMONIALS];
+
+  return (
+    <section style={{ background: '#f0f7ff', padding: '6rem 0', borderTop: '1px solid #bfdbfe' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <span className="s-label">Client Reviews</span>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#e2e8ff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#1e3a5f', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
             Loved by{' '}
             <span className="grad">Our Clients</span>
           </h2>
-          <p style={{ color: '#7b8db0', fontSize: '1.05rem', maxWidth: '480px', margin: '0 auto' }}>
+          <p style={{ color: '#4a6fa5', fontSize: '1.05rem', maxWidth: '480px', margin: '0 auto' }}>
             Don&apos;t take our word for it — hear from the businesses we&apos;ve helped grow.
           </p>
         </motion.div>
 
-        <div className="testimonials-grid">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.div key={t.name}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              style={{ background: '#0e0e2a', border: '1px solid rgba(59,130,246,0.1)', borderRadius: '18px', padding: '2rem', position: 'relative', overflow: 'hidden', transition: 'border-color 0.25s, box-shadow 0.3s, transform 0.2s', cursor: 'default' }}
-              whileHover={{ y: -4 }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = `${t.color}30`; (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 50px ${t.color}12`; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(59,130,246,0.1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
-            >
-              {/* Quote icon watermark */}
-              <div style={{ position: 'absolute', top: '1rem', right: '1.25rem', opacity: 0.06 }}>
-                <Quote size={48} color={t.color} fill={t.color} />
-              </div>
+      </div>
 
-              {/* Stars */}
-              <div style={{ display: 'flex', gap: '0.25rem', marginBottom: '1.125rem' }}>
-                {Array.from({ length: t.rating }).map((_, si) => <Star key={si} size={14} fill="#f59e0b" color="#f59e0b" />)}
-              </div>
-
-              <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.75, marginBottom: '1.75rem', fontStyle: 'italic' }}>
-                &ldquo;{t.text}&rdquo;
-              </p>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-                <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: `${t.color}18`, border: `2px solid ${t.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: '0.8rem', color: t.color, flexShrink: 0 }}>
-                  {t.avatar}
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.9rem', fontWeight: 700, color: '#e2e8ff' }}>{t.name}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#4b5e80' }}>{t.role} · {t.company}</div>
-                </div>
-              </div>
-            </motion.div>
+      {/* Full-width carousel — outside the max-width container */}
+      <div style={{ overflow: 'hidden', position: 'relative' }}>
+        {/* Left fade */}
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(to right, #f0f7ff, transparent)', zIndex: 2, pointerEvents: 'none' }} />
+        {/* Right fade */}
+        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(to left, #f0f7ff, transparent)', zIndex: 2, pointerEvents: 'none' }} />
+        <motion.div
+          style={{ display: 'flex', gap: '1.5rem', width: 'max-content', padding: '1rem 1.5rem' }}
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
+        >
+          {doubled.map((t, i) => (
+            <TestimonialCard key={i} t={t} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

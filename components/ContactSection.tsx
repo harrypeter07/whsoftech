@@ -1,14 +1,38 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle, CheckCircle2 } from 'lucide-react';
 
 const SERVICES_LIST = ['Website Development', 'Web Application', 'Mobile App', 'AI Solutions', 'Business Automation', 'UI/UX Design', 'E-Commerce', 'SEO & Growth', 'Other'];
 
+interface ContactData {
+  phone: string;
+  email: string;
+  location: string;
+  hours: string;
+  whatsapp: string;
+}
+
+const DEFAULT_CONTACT: ContactData = {
+  phone: '+91 98765 43210',
+  email: 'hello@whssofttech.com',
+  location: 'India (Remote-First Team)',
+  hours: 'Mon–Sat, 9 AM – 7 PM IST',
+  whatsapp: '919876543210',
+};
+
 export function ContactSection() {
-  const [form, setForm]     = useState({ name: '', company: '', email: '', phone: '', service: '', message: '' });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [form, setForm]           = useState({ name: '', company: '', email: '', phone: '', service: '', message: '' });
+  const [status, setStatus]       = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [contactData, setContactData] = useState<ContactData>(DEFAULT_CONTACT);
+
+  useEffect(() => {
+    fetch('/api/admin/contact')
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then((data: ContactData) => setContactData(data))
+      .catch(() => setContactData(DEFAULT_CONTACT));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,21 +46,28 @@ export function ContactSection() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem',
-    background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)',
-    color: 'white', fontSize: '0.9375rem', fontFamily: 'inherit', outline: 'none',
+    background: 'rgba(37,99,235,0.03)', border: '1px solid #bfdbfe',
+    color: '#1e3a5f', fontSize: '0.9375rem', fontFamily: 'inherit', outline: 'none',
     transition: 'border-color 0.2s', boxSizing: 'border-box',
   };
   const labelStyle: React.CSSProperties = {
-    display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#94A3B8',
+    display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#4a6fa5',
     marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.06em',
   };
   const focus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    { (e.target as HTMLElement).style.borderColor = 'rgba(124,58,237,0.5)'; };
+    { (e.target as HTMLElement).style.borderColor = '#93c5fd'; };
   const blur  = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    { (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; };
+    { (e.target as HTMLElement).style.borderColor = '#bfdbfe'; };
+
+  const contactItems = [
+    { icon: Phone,  label: 'Phone / WhatsApp', value: contactData.phone,    href: `tel:${contactData.phone.replace(/\s/g, '')}`,              color: '#8B5CF6' },
+    { icon: Mail,   label: 'Email',             value: contactData.email,    href: `mailto:${contactData.email}`,                              color: '#06B6D4' },
+    { icon: MapPin, label: 'Location',          value: contactData.location, href: '#',                                                       color: '#10B981' },
+    { icon: Clock,  label: 'Business Hours',    value: contactData.hours,    href: '#',                                                       color: '#F59E0B' },
+  ];
 
   return (
-    <section id="contact" style={{ background: '#07070f', padding: '5.5rem 0', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <section id="contact" style={{ background: '#f8faff', padding: '5.5rem 0', borderTop: '1px solid rgba(37,99,235,0.05)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <motion.div
@@ -53,7 +84,7 @@ export function ContactSection() {
           <h2 style={{
             fontFamily: 'Space Grotesk, sans-serif',
             fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
-            fontWeight: 800, color: '#f1f5f9',
+            fontWeight: 800, color: '#1e3a5f',
             marginBottom: '1rem', letterSpacing: '-0.02em',
           }}>
             Let&apos;s Start Your{' '}
@@ -62,7 +93,7 @@ export function ContactSection() {
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             }}>Project Today</span>
           </h2>
-          <p style={{ color: '#94A3B8', fontSize: '1.05rem', maxWidth: '500px', margin: '0 auto' }}>
+          <p style={{ color: '#4a6fa5', fontSize: '1.05rem', maxWidth: '500px', margin: '0 auto' }}>
             Tell us about your project. We&apos;ll get back to you within 2 hours with a plan.
           </p>
         </motion.div>
@@ -76,22 +107,18 @@ export function ContactSection() {
             viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
-              {[
-                { icon: Phone,  label: 'Phone / WhatsApp', value: '+91 98765 43210',       href: 'tel:+919876543210',              color: '#8B5CF6' },
-                { icon: Mail,   label: 'Email',             value: 'hello@whssofttech.com',   href: 'mailto:hello@whssofttech.com',  color: '#06B6D4' },
-                { icon: MapPin, label: 'Location',          value: 'India (Remote-First Team)', href: '#',                          color: '#10B981' },
-                { icon: Clock,  label: 'Business Hours',    value: 'Mon–Sat, 9 AM – 7 PM IST', href: '#',                          color: '#F59E0B' },
-              ].map(({ icon: Icon, label, value, href, color }) => (
+              {contactItems.map(({ icon: Icon, label, value, href, color }) => (
                 <a
                   key={label} href={href}
                   style={{
                     display: 'flex', alignItems: 'center', gap: '1rem',
                     padding: '1.25rem 1.5rem', borderRadius: '1rem',
-                    background: '#0d0d1a', border: '1px solid rgba(255,255,255,0.07)',
+                    background: '#ffffff', border: '1px solid #bfdbfe',
                     textDecoration: 'none', transition: 'all 0.2s',
+                    boxShadow: '0 2px 16px rgba(37,99,235,0.06)',
                   }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = `${color}30`; el.style.transform = 'translateX(4px)'; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.07)'; el.style.transform = 'translateX(0)'; }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = `${color}40`; el.style.transform = 'translateX(4px)'; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#bfdbfe'; el.style.transform = 'translateX(0)'; }}
                 >
                   <div style={{
                     width: '44px', height: '44px', borderRadius: '0.75rem',
@@ -101,15 +128,15 @@ export function ContactSection() {
                     <Icon size={20} color={color} />
                   </div>
                   <div>
-                    <div style={{ fontSize: '0.75rem', color: '#94A3B8', marginBottom: '0.2rem', fontWeight: 500 }}>{label}</div>
-                    <div style={{ color: '#f1f5f9', fontWeight: 600, fontSize: '0.9375rem' }}>{value}</div>
+                    <div style={{ fontSize: '0.75rem', color: '#4a6fa5', marginBottom: '0.2rem', fontWeight: 500 }}>{label}</div>
+                    <div style={{ color: '#1e3a5f', fontWeight: 600, fontSize: '0.9375rem' }}>{value}</div>
                   </div>
                 </a>
               ))}
             </div>
 
             <a
-              href="https://wa.me/919876543210?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project"
+              href={`https://wa.me/${contactData.whatsapp}?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project`}
               target="_blank" rel="noopener noreferrer"
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -130,14 +157,14 @@ export function ContactSection() {
             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div style={{ background: '#0d0d1a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '1.25rem', padding: '2.5rem' }}>
-              <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.35rem', fontWeight: 700, color: '#f1f5f9', marginBottom: '2rem' }}>Send Us a Message</h3>
+            <div style={{ background: '#ffffff', border: '1px solid #bfdbfe', borderRadius: '1.25rem', padding: '2.5rem', boxShadow: '0 8px 40px rgba(37,99,235,0.08)' }}>
+              <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.35rem', fontWeight: 700, color: '#1e3a5f', marginBottom: '2rem' }}>Send Us a Message</h3>
 
               {status === 'success' ? (
                 <div style={{ textAlign: 'center', padding: '2rem' }}>
                   <CheckCircle2 size={56} color="#10B981" style={{ margin: '0 auto 1rem' }} />
-                  <h4 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.25rem', color: '#f1f5f9', marginBottom: '0.75rem' }}>Message Sent!</h4>
-                  <p style={{ color: '#94A3B8' }}>We&apos;ll get back to you within 2 hours during business hours.</p>
+                  <h4 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.25rem', color: '#1e3a5f', marginBottom: '0.75rem' }}>Message Sent!</h4>
+                  <p style={{ color: '#4a6fa5' }}>We&apos;ll get back to you within 2 hours during business hours.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -173,8 +200,8 @@ export function ContactSection() {
                     <label style={labelStyle}>Service Required</label>
                     <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}
                       style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focus} onBlur={blur}>
-                      <option value="" style={{ background: '#101827' }}>Select a service...</option>
-                      {SERVICES_LIST.map(s => <option key={s} value={s} style={{ background: '#101827' }}>{s}</option>)}
+                      <option value="" style={{ background: '#f0f7ff', color: '#1e3a5f' }}>Select a service...</option>
+                      {SERVICES_LIST.map(s => <option key={s} value={s} style={{ background: '#f0f7ff', color: '#1e3a5f' }}>{s}</option>)}
                     </select>
                   </div>
                   <div>
@@ -204,7 +231,7 @@ export function ContactSection() {
                   >
                     {status === 'sending' ? 'Sending...' : <><Send size={18} /> Send Message</>}
                   </button>
-                  <p style={{ textAlign: 'center', color: '#94A3B8', fontSize: '0.8rem' }}>✓ We respond within 2 hours during business hours</p>
+                  <p style={{ textAlign: 'center', color: '#4a6fa5', fontSize: '0.8rem' }}>✓ We respond within 2 hours during business hours</p>
                 </form>
               )}
             </div>

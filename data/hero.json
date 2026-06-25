@@ -1,0 +1,13 @@
+{
+  "headline": "We Build Software",
+  "headlineAccent": "That Transforms",
+  "headlineSuffix": "Your Business",
+  "subtext": "WHS SoftTech delivers custom websites, mobile apps, AI systems, and automation for startups, SMEs, and enterprises across India.",
+  "badge": "Available for new projects · India",
+  "stats": [
+    { "value": 50, "suffix": "+", "label": "Projects Delivered" },
+    { "value": 16, "suffix": "+", "label": "Industries Served" },
+    { "value": 40, "suffix": "+", "label": "Happy Clients" },
+    { "value": 98, "suffix": "%", "label": "Satisfaction Rate" }
+  ]
+}

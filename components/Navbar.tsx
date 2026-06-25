@@ -73,9 +73,9 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-          background: scrolled ? 'rgba(7,7,15,0.97)' : 'rgba(7,7,15,0.4)',
+          background: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.6)',
           backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
+          borderBottom: scrolled ? '1px solid #bfdbfe' : '1px solid transparent',
           padding: scrolled ? '0.75rem 1.5rem' : '1.15rem 1.5rem',
           transition: 'background 0.4s ease, border-color 0.4s ease, padding 0.3s ease',
         }}
@@ -91,7 +91,7 @@ export function Navbar() {
               src="/newlogo-tight-transparent.png"
               alt="WHS SoftTech"
               width={160} height={52}
-              style={{ objectFit: 'contain', height: '44px', width: 'auto', filter: 'brightness(0) invert(1)' }}
+              style={{ objectFit: 'contain', height: '44px', width: 'auto' }}
               priority
             />
           </button>
@@ -108,13 +108,13 @@ export function Navbar() {
                     position: 'relative',
                     background: 'none', border: 'none', cursor: 'pointer',
                     padding: '0.5rem 0.9rem', borderRadius: '0.5rem',
-                    color: isActive ? '#a78bfa' : '#94a3b8',
+                    color: isActive ? '#a78bfa' : '#4a6fa5',
                     fontSize: '0.875rem', fontWeight: isActive ? 600 : 500,
                     fontFamily: 'Inter, sans-serif',
                     transition: 'color 0.2s ease',
                   }}
-                  onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'white'; }}
-                  onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = '#94a3b8'; }}
+                  onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = '#1e3a5f'; }}
+                  onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = '#4a6fa5'; }}
                 >
                   {link.label}
                   {isActive && (
@@ -160,9 +160,9 @@ export function Navbar() {
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
               style={{
-                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                background: 'rgba(30,58,95,0.06)', border: '1px solid #bfdbfe',
                 borderRadius: '0.5rem', padding: '0.5rem', cursor: 'pointer',
-                color: 'white', alignItems: 'center', justifyContent: 'center',
+                color: '#1e3a5f', alignItems: 'center', justifyContent: 'center',
               }}
             >
               {open ? <X size={20} /> : <Menu size={20} />}
@@ -171,7 +171,7 @@ export function Navbar() {
         </div>
       </motion.header>
 
-      {/* Mobile overlay */}
+      {/* Mobile overlay — intentionally dark for full-screen UX */}
       <AnimatePresence>
         {open && (
           <motion.div

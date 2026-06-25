@@ -18,17 +18,23 @@ const FAQS = [
 
 function FAQItem({ faq, isOpen, onToggle, color = '#3b82f6' }: { faq: { q: string; a: string }; isOpen: boolean; onToggle: () => void; color?: string }) {
   return (
-    <div style={{ background: '#0e0e2a', border: `1px solid ${isOpen ? color + '30' : 'rgba(59,130,246,0.1)'}`, borderRadius: '14px', overflow: 'hidden', transition: 'border-color 0.3s' }}>
+    <div style={{ background: '#ffffff', border: `1px solid ${isOpen ? color + '40' : '#bfdbfe'}`, borderRadius: '14px', overflow: 'hidden', transition: 'border-color 0.3s', boxShadow: '0 2px 16px rgba(37,99,235,0.06)' }}>
       <button onClick={onToggle} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', padding: '1.25rem 1.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-        <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.9375rem', fontWeight: 600, color: isOpen ? color : '#e2e8ff', lineHeight: 1.4, transition: 'color 0.3s' }}>{faq.q}</span>
-        <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: isOpen ? `${color}15` : 'rgba(59,130,246,0.06)', border: `1px solid ${isOpen ? color + '35' : 'rgba(59,130,246,0.15)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.3s' }}>
-          {isOpen ? <Minus size={14} color={color} /> : <Plus size={14} color="#7b8db0" />}
+        <span style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.9375rem', fontWeight: 600, color: isOpen ? color : '#1e3a5f', lineHeight: 1.4, transition: 'color 0.3s' }}>{faq.q}</span>
+        <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: isOpen ? `${color}15` : 'rgba(37,99,235,0.05)', border: `1px solid ${isOpen ? color + '35' : '#bfdbfe'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.3s' }}>
+          {isOpen ? <Minus size={14} color={color} /> : <Plus size={14} color="#4a6fa5" />}
         </div>
       </button>
       <AnimatePresence>
         {isOpen && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: 'easeOut' }} style={{ overflow: 'hidden' }}>
-            <div style={{ padding: '0 1.5rem 1.25rem', color: '#7b8db0', fontSize: '0.9rem', lineHeight: 1.75, borderTop: '1px solid rgba(59,130,246,0.06)', paddingTop: '1rem' }}>{faq.a}</div>
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+            style={{ overflow: 'hidden' }}
+          >
+            <div style={{ padding: '0 1.5rem 1.25rem', color: '#4a6fa5', fontSize: '0.9rem', lineHeight: 1.75, borderTop: '1px solid #bfdbfe', paddingTop: '1rem' }}>{faq.a}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -43,37 +49,37 @@ export function FAQSection() {
   const right = FAQS.slice(half);
 
   return (
-    <section id="faq" style={{ background: '#030311', padding: '6rem 0', borderTop: '1px solid rgba(59,130,246,0.06)' }}>
+    <section id="faq" style={{ background: '#f0f7ff', padding: '6rem 0', borderTop: '1px solid rgba(37,99,235,0.05)' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <span className="s-label">FAQ</span>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#e2e8ff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#1e3a5f', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
             Common Questions,{' '}
             <span className="grad">Straight Answers</span>
           </h2>
-          <p style={{ color: '#7b8db0', fontSize: '1.05rem' }}>Everything you need to know before starting your project.</p>
+          <p style={{ color: '#4a6fa5', fontSize: '1.05rem' }}>Everything you need to know before starting your project.</p>
         </motion.div>
 
         <div className="faq-grid">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {left.map((faq, i) => (
               <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}>
-                <FAQItem faq={faq} isOpen={open === i} onToggle={() => setOpen(open === i ? null : i)} color="#3b82f6" />
+                <FAQItem faq={faq} isOpen={open === i} onToggle={() => setOpen(open === i ? null : i)} color="#2563eb" />
               </motion.div>
             ))}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {right.map((faq, i) => (
               <motion.div key={i + half} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}>
-                <FAQItem faq={faq} isOpen={open === i + half} onToggle={() => setOpen(open === i + half ? null : i + half)} color="#06b6d4" />
+                <FAQItem faq={faq} isOpen={open === i + half} onToggle={() => setOpen(open === i + half ? null : i + half)} color="#0ea5e9" />
               </motion.div>
             ))}
           </div>
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <p style={{ color: '#7b8db0', marginBottom: '1.25rem' }}>Still have questions? We&apos;re happy to answer them personally.</p>
+          <p style={{ color: '#4a6fa5', marginBottom: '1.25rem' }}>Still have questions? We&apos;re happy to answer them personally.</p>
           <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn-ghost">Ask Your Question</button>
         </motion.div>
       </div>

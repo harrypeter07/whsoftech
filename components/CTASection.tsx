@@ -1,22 +1,27 @@
 'use client';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
 
 export function CTASection() {
+  const ctaRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ctaRef, offset: ['start end', 'end start'] });
+  const gradX = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+
   return (
-    <section style={{ padding: '6rem 0', background: '#07071e', borderTop: '1px solid rgba(59,130,246,0.06)' }}>
+    <section ref={ctaRef} style={{ padding: '6rem 0', background: '#e8f4ff', borderTop: '1px solid rgba(37,99,235,0.05)' }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 1.5rem' }}>
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
           style={{ position: 'relative', borderRadius: '24px', overflow: 'hidden', padding: 'clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem)', textAlign: 'center' }}>
 
           {/* Multi-layer background */}
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(14,14,42,0.95) 50%, rgba(6,182,212,0.12) 100%)' }} />
-          <div style={{ position: 'absolute', inset: 0, border: '1px solid rgba(59,130,246,0.2)', borderRadius: 'inherit' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(240,247,255,0.97) 50%, rgba(6,182,212,0.06) 100%)' }} />
+          <div style={{ position: 'absolute', inset: 0, border: '1px solid #bfdbfe', borderRadius: 'inherit' }} />
           {/* Grid overlay */}
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px)', backgroundSize: '48px 48px', opacity: 0.8 }} />
-          {/* Glow blobs */}
-          <div style={{ position: 'absolute', top: '-30%', left: '-10%', width: '50%', height: '160%', background: 'radial-gradient(circle, rgba(37,99,235,0.18), transparent 70%)', pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', bottom: '-30%', right: '-10%', width: '50%', height: '160%', background: 'radial-gradient(circle, rgba(6,182,212,0.12), transparent 70%)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px)', backgroundSize: '48px 48px', opacity: 0.8 }} />
+          {/* Glow blobs — scroll-driven via gradX */}
+          <motion.div style={{ position: 'absolute', top: '-30%', left: gradX, width: '50%', height: '160%', background: 'radial-gradient(circle, rgba(37,99,235,0.10), transparent 70%)', pointerEvents: 'none' }} />
+          <motion.div style={{ position: 'absolute', bottom: '-30%', right: gradX, width: '50%', height: '160%', background: 'radial-gradient(circle, rgba(6,182,212,0.07), transparent 70%)', pointerEvents: 'none' }} />
 
           <div style={{ position: 'relative', zIndex: 1 }}>
             <motion.div initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: '1.5rem' }}>
@@ -25,12 +30,12 @@ export function CTASection() {
               </span>
             </motion.div>
 
-            <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 4vw, 3.5rem)', fontWeight: 800, color: '#e2e8ff', marginBottom: '1.25rem', letterSpacing: '-0.025em', lineHeight: 1.1 }}>
+            <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 4vw, 3.5rem)', fontWeight: 800, color: '#1e3a5f', marginBottom: '1.25rem', letterSpacing: '-0.025em', lineHeight: 1.1 }}>
               Ready to Transform Your{' '}
               <span className="grad">Business With Technology?</span>
             </h2>
 
-            <p style={{ color: '#7b8db0', fontSize: 'clamp(1rem, 2vw, 1.15rem)', maxWidth: '560px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+            <p style={{ color: '#4a6fa5', fontSize: 'clamp(1rem, 2vw, 1.15rem)', maxWidth: '560px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
               Join 40+ businesses that trusted WHS SoftTech to build their digital future. Free consultation — no commitment, no pressure.
             </p>
 
@@ -49,7 +54,7 @@ export function CTASection() {
 
             <div style={{ marginTop: '2rem', display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               {['Free consultation', 'No commitment required', 'Response within 2 hours'].map(item => (
-                <span key={item} style={{ color: '#4b5e80', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                <span key={item} style={{ color: '#7090c0', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
                   <span style={{ color: '#10b981' }}>✓</span> {item}
                 </span>
               ))}

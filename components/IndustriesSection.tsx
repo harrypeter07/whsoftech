@@ -35,15 +35,15 @@ export function IndustriesSection() {
   };
 
   return (
-    <section id="industries" style={{ background: '#07071e', padding: '6rem 0', borderTop: '1px solid rgba(59,130,246,0.06)' }}>
+    <section id="industries" style={{ background: '#f0f7ff', padding: '6rem 0', borderTop: '1px solid rgba(37,99,235,0.05)' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <span className="s-label">Industries We Serve</span>
-          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#e2e8ff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#1e3a5f', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
             Solutions for <span className="grad">Every Industry</span>
           </h2>
-          <p style={{ color: '#7b8db0', fontSize: '1.05rem', maxWidth: '520px', margin: '0 auto' }}>
+          <p style={{ color: '#4a6fa5', fontSize: '1.05rem', maxWidth: '520px', margin: '0 auto' }}>
             Click your industry to see exactly how we transform businesses like yours.
           </p>
         </motion.div>
@@ -60,12 +60,12 @@ export function IndustriesSection() {
                   style={{
                     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                     gap: '0.375rem', padding: '0.875rem 0.5rem', borderRadius: '0.875rem',
-                    background: selected.id === ind.id ? 'rgba(59,130,246,0.14)' : '#0e0e2a',
-                    border: selected.id === ind.id ? '1.5px solid rgba(59,130,246,0.5)' : '1px solid rgba(59,130,246,0.1)',
+                    background: selected.id === ind.id ? 'rgba(37,99,235,0.08)' : '#ffffff',
+                    border: selected.id === ind.id ? '1.5px solid #2563eb' : '1px solid #bfdbfe',
                     cursor: 'pointer', transition: 'all 0.2s ease',
                   }}>
                   <span style={{ fontSize: '1.375rem', lineHeight: 1 }}>{ind.emoji}</span>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 600, color: selected.id === ind.id ? '#60a5fa' : '#7b8db0', textAlign: 'center', lineHeight: 1.3, transition: 'color 0.2s' }}>{ind.name}</span>
+                  <span style={{ fontSize: '0.65rem', fontWeight: 600, color: selected.id === ind.id ? '#2563eb' : '#4a6fa5', textAlign: 'center', lineHeight: 1.3, transition: 'color 0.2s' }}>{ind.name}</span>
                 </motion.button>
               ))}
             </div>
@@ -75,23 +75,25 @@ export function IndustriesSection() {
           <div ref={contentRef}>
             <AnimatePresence mode="wait">
               <motion.div key={selected.id}
-                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                style={{ background: '#0e0e2a', border: '1px solid rgba(59,130,246,0.12)', borderRadius: '1.25rem', padding: '2.5rem', position: 'relative', overflow: 'hidden' }}>
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+                style={{ background: '#ffffff', border: '1px solid #bfdbfe', borderRadius: '1.25rem', padding: '2.5rem', position: 'relative', overflow: 'hidden', boxShadow: '0 8px 40px rgba(37,99,235,0.08)' }}>
                 {/* BG glow */}
-                <div style={{ position: 'absolute', top: '-40%', right: '-10%', width: '280px', height: '280px', background: 'radial-gradient(circle, rgba(59,130,246,0.07), transparent)', borderRadius: '50%', pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', top: '-40%', right: '-10%', width: '280px', height: '280px', background: 'radial-gradient(circle, rgba(37,99,235,0.04), transparent)', borderRadius: '50%', pointerEvents: 'none' }} />
 
                 {/* Header */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                  <div style={{ width: '52px', height: '52px', borderRadius: '0.875rem', background: 'linear-gradient(135deg, rgba(37,99,235,0.2), rgba(6,182,212,0.15))', border: '1px solid rgba(59,130,246,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.625rem', flexShrink: 0 }}>{selected.emoji}</div>
+                  <div style={{ width: '52px', height: '52px', borderRadius: '0.875rem', background: 'linear-gradient(135deg, rgba(37,99,235,0.1), rgba(6,182,212,0.08))', border: '1px solid #bfdbfe', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.625rem', flexShrink: 0 }}>{selected.emoji}</div>
                   <div>
                     <div style={{ fontSize: '0.7rem', color: '#60a5fa', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.2rem' }}>Industry Focus</div>
-                    <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#e2e8ff' }}>{selected.name}</div>
+                    <div style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.25rem', fontWeight: 700, color: '#1e3a5f' }}>{selected.name}</div>
                   </div>
                 </div>
 
-                <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.35rem', fontWeight: 700, color: '#e2e8ff', marginBottom: '0.875rem', lineHeight: 1.3 }}>{selected.title}</h3>
-                <p style={{ color: '#7b8db0', lineHeight: 1.75, marginBottom: '2rem', fontSize: '0.9375rem' }}>{selected.description}</p>
+                <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.35rem', fontWeight: 700, color: '#1e3a5f', marginBottom: '0.875rem', lineHeight: 1.3 }}>{selected.title}</h3>
+                <p style={{ color: '#4a6fa5', lineHeight: 1.75, marginBottom: '2rem', fontSize: '0.9375rem' }}>{selected.description}</p>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
                   {/* Benefits */}
@@ -99,7 +101,7 @@ export function IndustriesSection() {
                     <h4 style={{ fontSize: '0.75rem', fontWeight: 700, color: '#60a5fa', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>Key Features</h4>
                     <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
                       {selected.benefits.map((b) => (
-                        <li key={b} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem', color: '#e2e8ff', fontSize: '0.875rem', lineHeight: 1.5 }}>
+                        <li key={b} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem', color: '#1e3a5f', fontSize: '0.875rem', lineHeight: 1.5 }}>
                           <CheckCircle2 size={15} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />{b}
                         </li>
                       ))}
@@ -110,9 +112,9 @@ export function IndustriesSection() {
                     <h4 style={{ fontSize: '0.75rem', fontWeight: 700, color: '#06b6d4', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>Business Outcomes</h4>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                       {selected.outcomes.map((o) => (
-                        <div key={o} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', padding: '0.75rem', borderRadius: '0.625rem', background: 'rgba(6,182,212,0.07)', border: '1px solid rgba(6,182,212,0.15)' }}>
-                          <TrendingUp size={15} color="#06b6d4" />
-                          <span style={{ color: '#e2e8ff', fontSize: '0.875rem', fontWeight: 500 }}>{o}</span>
+                        <div key={o} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', padding: '0.75rem', borderRadius: '0.625rem', background: 'rgba(37,99,235,0.08)', border: '1px solid rgba(37,99,235,0.12)' }}>
+                          <TrendingUp size={15} color="#2563eb" />
+                          <span style={{ color: '#2563eb', fontSize: '0.875rem', fontWeight: 500 }}>{o}</span>
                         </div>
                       ))}
                     </div>

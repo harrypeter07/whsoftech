@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { SmoothScroll } from '@/components/SmoothScroll';
+import { VisitorTracker } from '@/components/VisitorTracker';
+import { ReadingProgress } from '@/components/ReadingProgress';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -80,7 +82,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className} suppressHydrationWarning style={{ background: '#07070f', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
+      <body className={inter.className} suppressHydrationWarning style={{ background: '#f0f7ff', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
+        <ReadingProgress />
+        <VisitorTracker />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
