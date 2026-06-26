@@ -8,7 +8,7 @@ export function ReadingProgress() {
     <motion.div
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, height: '3px',
-        background: 'linear-gradient(90deg, #2563eb, #0ea5e9, #3b82f6)',
+        background: 'linear-gradient(90deg, #db2777, #f472b6, #3b82f6)',
         scaleX, transformOrigin: 'left', zIndex: 9999,
       }}
     />

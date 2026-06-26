@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main style={{ background: '#f0f7ff', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
+    <main style={{ background: '#060f1e', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
       <Navbar />
       <Hero />
       <IndustriesSection />

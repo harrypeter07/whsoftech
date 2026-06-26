@@ -29,7 +29,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         position: 'relative', overflow: 'hidden', borderRadius: '1.125rem',
-        background: '#ffffff',
+        background: '#0f2341',
         border: hovered ? '1px solid #93c5fd' : '1px solid #bfdbfe',
         transition: 'all 0.35s ease', cursor: 'default',
         transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
@@ -43,7 +43,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
               {project.industry === 'Healthcare' ? '🏥' : project.industry === 'Education' ? '🎓' : project.industry === 'E-Commerce' ? '🛒' : project.industry === 'Real Estate' ? '🏠' : project.industry === 'Automobile' ? '🚗' : '🍽'}
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#4a6fa5', fontWeight: 500 }}>{project.industry}</div>
+            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 500 }}>{project.industry}</div>
           </div>
         </div>
         {/* Hover overlay */}
@@ -64,8 +64,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       {/* Content */}
       <div style={{ padding: '1.375rem' }}>
         <div style={{ fontSize: '0.7rem', color: '#06b6d4', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>{project.industry}</div>
-        <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1rem', fontWeight: 700, color: '#1e3a5f', marginBottom: '0.625rem', lineHeight: 1.3 }}>{project.title}</h3>
-        <p style={{ color: '#4a6fa5', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: '1rem' }}>{project.description}</p>
+        <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1rem', fontWeight: 700, color: '#e2e8ff', marginBottom: '0.625rem', lineHeight: 1.3 }}>{project.title}</h3>
+        <p style={{ color: '#94a3b8', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: '1rem' }}>{project.description}</p>
         {/* Result */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.875rem', borderRadius: '0.5rem', background: 'rgba(16,185,129,0.07)', border: '1px solid rgba(16,185,129,0.18)', marginBottom: '1rem' }}>
           <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>📈 {project.results}</span>
@@ -73,7 +73,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {/* Tags */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem' }}>
           {project.tags.map((tag) => (
-            <span key={tag} style={{ padding: '0.2rem 0.5rem', borderRadius: '0.3rem', background: 'rgba(37,99,235,0.06)', border: '1px solid #bfdbfe', color: '#4a6fa5', fontSize: '0.65rem', fontWeight: 600 }}>{tag}</span>
+            <span key={tag} style={{ padding: '0.2rem 0.5rem', borderRadius: '0.3rem', background: 'rgba(37,99,235,0.06)', border: '1px solid #bfdbfe', color: '#94a3b8', fontSize: '0.65rem', fontWeight: 600 }}>{tag}</span>
           ))}
         </div>
       </div>
@@ -98,16 +98,16 @@ export function PortfolioSection() {
   }, []);
 
   return (
-    <section id="portfolio" style={{ background: '#f0f7ff', padding: '6rem 0', borderTop: '1px solid #bfdbfe' }}>
+    <section id="portfolio" style={{ background: '#0a1628', padding: '6rem 0', borderTop: '1px solid #bfdbfe' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <span className="s-label">Our Portfolio</span>
-          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#1e3a5f', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#e2e8ff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
             Work That Speaks{' '}
             <span className="grad">For Itself</span>
           </h2>
-          <p style={{ color: '#4a6fa5', fontSize: '1.05rem', maxWidth: '520px', margin: '0 auto' }}>
+          <p style={{ color: '#94a3b8', fontSize: '1.05rem', maxWidth: '520px', margin: '0 auto' }}>
             Real projects, real results. See how we&apos;ve helped businesses across industries transform their digital presence.
           </p>
         </motion.div>

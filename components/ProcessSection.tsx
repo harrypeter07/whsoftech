@@ -14,7 +14,7 @@ const STEPS = [
 
 export function ProcessSection() {
   return (
-    <section id="process" style={{ background: '#f0f7ff', padding: '6rem 0', borderTop: '1px solid rgba(37,99,235,0.05)' }}>
+    <section id="process" style={{ background: '#0a1628', padding: '6rem 0', borderTop: '1px solid rgba(37,99,235,0.05)' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -38,7 +38,7 @@ export function ProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                style={{ background: '#ffffff', border: '1px solid #bfdbfe', borderRadius: '16px', padding: '1.5rem', position: 'relative', overflow: 'hidden', cursor: 'default', transition: 'border-color 0.25s, box-shadow 0.25s', boxShadow: '0 2px 16px rgba(37,99,235,0.06)' }}
+                style={{ background: '#0f2341', border: '1px solid #bfdbfe', borderRadius: '16px', padding: '1.5rem', position: 'relative', overflow: 'hidden', cursor: 'default', transition: 'border-color 0.25s, box-shadow 0.25s', boxShadow: '0 2px 16px rgba(37,99,235,0.06)' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = `${step.color}35`; (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 40px ${step.color}14`; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = '#bfdbfe'; (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 16px rgba(37,99,235,0.06)'; }}
               >
@@ -89,7 +89,7 @@ export function ProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: (i + 4) * 0.1 }}
-                style={{ background: '#ffffff', border: '1px solid #bfdbfe', borderRadius: '16px', padding: '1.5rem', position: 'relative', overflow: 'hidden', cursor: 'default', transition: 'border-color 0.25s, box-shadow 0.25s', boxShadow: '0 2px 16px rgba(37,99,235,0.06)' }}
+                style={{ background: '#0f2341', border: '1px solid #bfdbfe', borderRadius: '16px', padding: '1.5rem', position: 'relative', overflow: 'hidden', cursor: 'default', transition: 'border-color 0.25s, box-shadow 0.25s', boxShadow: '0 2px 16px rgba(37,99,235,0.06)' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = `${step.color}35`; (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 40px ${step.color}14`; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = '#bfdbfe'; (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 16px rgba(37,99,235,0.06)'; }}
               >

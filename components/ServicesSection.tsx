@@ -43,19 +43,19 @@ function TiltCard({ children, color, featured }: { children: React.ReactNode; co
   const onLeave = () => {
     const el = ref.current; if (!el) return;
     el.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-    el.style.borderColor = featured ? 'rgba(59,130,246,0.2)' : '#bfdbfe';
-    el.style.boxShadow = featured ? 'none' : '0 2px 16px rgba(37,99,235,0.06)';
+    el.style.borderColor = featured ? 'rgba(59,130,246,0.2)' : 'rgba(59,130,246,0.12)';
+    el.style.boxShadow = featured ? 'none' : '0 4px 20px rgba(0,0,0,0.3)';
   };
   return (
     <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} className="tilt-card"
       style={{
-        border: `1px solid ${featured ? 'rgba(59,130,246,0.2)' : '#bfdbfe'}`,
+        border: `1px solid ${featured ? 'rgba(59,130,246,0.25)' : 'rgba(59,130,246,0.12)'}`,
         borderRadius: '18px',
         overflow: 'hidden',
         height: '100%',
         cursor: 'default',
         transition: 'transform 0.12s ease, box-shadow 0.3s, border-color 0.25s',
-        boxShadow: featured ? 'none' : '0 2px 16px rgba(37,99,235,0.06)',
+        boxShadow: featured ? 'none' : '0 4px 20px rgba(0,0,0,0.3)',
       }}>
       {children}
     </div>
@@ -77,16 +77,16 @@ export function ServicesSection() {
   }, []);
 
   return (
-    <section id="services" style={{ background: '#f0f7ff', padding: '6rem 0', borderTop: '1px solid #bfdbfe' }}>
+    <section id="services" style={{ background: '#060f1e', padding: '6rem 0', borderTop: '1px solid rgba(219,39,119,0.08)' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.25rem' }}>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <span className="s-label">Our Services</span>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', fontWeight: 800, color: '#1e3a5f', marginBottom: '0.875rem', letterSpacing: '-0.025em' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', fontWeight: 800, color: '#e2e8ff', marginBottom: '0.875rem', letterSpacing: '-0.025em' }}>
             Everything You Need to{' '}
             <span className="grad">Grow Faster</span>
           </h2>
-          <p style={{ color: '#4a6fa5', fontSize: '1rem', maxWidth: '520px', margin: '0 auto' }}>
+          <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '520px', margin: '0 auto' }}>
             End-to-end digital solutions designed for businesses that want to outgrow their competition.
           </p>
         </motion.div>
@@ -132,14 +132,14 @@ export function ServicesSection() {
                     </div>
                   ) : (
                     /* Regular card — white bg on light page */
-                    <div style={{ background: '#ffffff', padding: '1.75rem', height: '100%', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ background: '#0f2341', padding: '1.75rem', height: '100%', position: 'relative', overflow: 'hidden' }}>
                       {/* Top accent line */}
                       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: `linear-gradient(90deg, transparent, ${s.color}, transparent)`, opacity: 0.6 }} />
                       <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: `${s.color}15`, border: `1px solid ${s.color}22`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.1rem' }}>
                         <IconComp size={20} color={s.color} />
                       </div>
-                      <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.9375rem', fontWeight: 700, color: '#1e3a5f', marginBottom: '0.5rem' }}>{s.title}</h3>
-                      <p style={{ color: '#4a6fa5', fontSize: '0.8375rem', lineHeight: 1.65, marginBottom: '1rem' }}>{s.desc}</p>
+                      <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.9375rem', fontWeight: 700, color: '#e2e8ff', marginBottom: '0.5rem' }}>{s.title}</h3>
+                      <p style={{ color: '#94a3b8', fontSize: '0.8375rem', lineHeight: 1.65, marginBottom: '1rem' }}>{s.desc}</p>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
                         {s.tags.map(t => (
                           <span key={t} style={{ padding: '0.2rem 0.55rem', borderRadius: '5px', background: `${s.color}10`, border: `1px solid ${s.color}1e`, color: s.color, fontSize: '0.65rem', fontWeight: 600 }}>{t}</span>
