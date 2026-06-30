@@ -157,7 +157,7 @@ export function Hero() {
               <button onClick={() => scrollTo('contact')} className="btn-primary">
                 Book Free Consultation <ArrowRight size={16} />
               </button>
-              <a href="https://wa.me/919876543210?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener noreferrer" className="btn-ghost">
+              <a href="https://wa.me/918208065506?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener noreferrer" className="btn-ghost">
                 <MessageCircle size={16} color="#25D366" /> WhatsApp Us
               </a>
             </motion.div>

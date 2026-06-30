@@ -44,7 +44,7 @@ export function CTASection() {
                 style={{ padding: '1rem 2.5rem', fontSize: '1rem' }}>
                 Book Free Consultation <ArrowRight size={18} />
               </button>
-              <a href="https://wa.me/919876543210?text=Hi%2C%20I%27m%20interested%20in%20WHS%20SoftTech%20services" target="_blank" rel="noopener noreferrer"
+              <a href="https://wa.me/918208065506?text=Hi%2C%20I%27m%20interested%20in%20WHS%20SoftTech%20services" target="_blank" rel="noopener noreferrer"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', padding: '1rem 2.5rem', borderRadius: '10px', background: 'rgba(37,211,102,0.1)', border: '1px solid rgba(37,211,102,0.25)', color: '#25D366', fontWeight: 700, fontSize: '1rem', textDecoration: 'none', transition: 'all 0.25s ease', fontFamily: 'inherit' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(37,211,102,0.2)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(37,211,102,0.1)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}>

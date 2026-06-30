@@ -19,7 +19,7 @@ const DEFAULT_CONTACT: ContactData = {
   email: 'whsofttech26@gmail.com',
   location: 'India (Remote-First Team)',
   hours: 'Mon–Sat, 9 AM – 7 PM IST',
-  whatsapp: '919876543210',
+  whatsapp: '918208065506',
 };
 
 export function ContactSection() {

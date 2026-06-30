@@ -24,7 +24,7 @@ export function FloatingCallButton() {
               transition={{ delay: 0.05, duration: 0.25 }} style={cardStyle('rgba(219,39,119,0.25)')}>
               <Mail size={16} color="#f472b6" /> whsofttech26@gmail.com
             </motion.a>
-            <motion.a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
+            <motion.a href="https://wa.me/918208065506" target="_blank" rel="noopener noreferrer"
               initial={{ opacity: 0, x: -20, scale: 0.8 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: -20, scale: 0.8 }}
               transition={{ delay: 0.1, duration: 0.25 }} style={cardStyle('rgba(37,211,102,0.3)')}>
               <MessageCircle size={16} color="#25D366" /> WhatsApp Us

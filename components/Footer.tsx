@@ -126,7 +126,7 @@ export function Footer() {
                 </div>
               ))}
               <a
-                href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
+                href="https://wa.me/918208065506" target="_blank" rel="noopener noreferrer"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                   marginTop: '0.5rem', padding: '0.625rem 1rem', borderRadius: '0.5rem',

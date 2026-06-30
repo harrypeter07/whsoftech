@@ -1,18 +1,20 @@
 import type { Metadata } from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Plus_Jakarta_Sans, Bricolage_Grotesque } from 'next/font/google';
 import './globals.css';
 import { SmoothScroll } from '@/components/SmoothScroll';
 import { VisitorTracker } from '@/components/VisitorTracker';
 import { ReadingProgress } from '@/components/ReadingProgress';
 
-const inter = Inter({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-sans',
   display: 'swap',
 });
 
-const spaceGrotesk = Space_Grotesk({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
   variable: '--font-display',
   display: 'swap',
 });
@@ -74,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${jakarta.variable} ${bricolage.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/png" href="/newlogo-tight.png" />
         <link rel="apple-touch-icon" href="/newlogo-tight.png" />
@@ -82,7 +84,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className} suppressHydrationWarning style={{ background: '#060f1e', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
+      <body className={jakarta.className} suppressHydrationWarning style={{ background: '#060f1e', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
         <ReadingProgress />
         <VisitorTracker />
         <SmoothScroll>{children}</SmoothScroll>
